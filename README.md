@@ -94,14 +94,22 @@ bool setEffect(HueEffect effect);
 ```
 All functions return a boolean indicating if the change was successful (`true`) or unsuccessful (`false`).
 
-For ```c++ setAlert(HueAlert alert)``` you have the option to use the following arguments:
+For
+```c++
+setAlert(HueAlert alert)
+```
+you have the option to use the following arguments:
 ```c++
 HueAlert::NoAlert
 HueAlert::BreatheSingle
 HueAlert::Breathe15Sec
 ````
 
-For ```c++ setEffect(HueEffect effect)``` you have the option to use the following arguments:
+For
+```c++
+setEffect(HueEffect effect)
+```
+you have the option to use the following arguments:
 ```c++
 HueEffect::NoEffect
 HueEffect::ColorLoop
