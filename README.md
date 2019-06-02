@@ -28,7 +28,11 @@ In your `main.cpp` file, add the following include:
 ```c++
 #include <HueLib/huelib.h>
 ```
-If you try compiling now, you will probably get a lot of errors about a missing `QNetworkAccessManager` file. This is because we must let Qt know that we will be needing access to the network classes. Open your `.pro` file and append `QT += network`. Now you should be good to go.
+If you try compiling now, you will probably get a lot of errors about a missing `QNetworkAccessManager` file. This is because we must let Qt know that we will be needing access to the network classes. Open your `.pro` file and append
+```qmake
+QT += network
+```
+Now you should be good to go.
 
 <a name="create"></a>
 ## 3. Creating a HueBridge object
