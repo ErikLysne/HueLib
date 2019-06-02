@@ -22,8 +22,8 @@
  * https://developers.meethue.com/develop/application-design-guidance/hue-system-performance/
  *
  */
-#ifndef BRIDGE_SLEEP_MILLISECONDS
-#define BRIDGE_SLEEP_MILLISECONDS 50
+#ifndef HUE_BRIDGE_SLEEP_MILLISECONDS
+#define HUE_BRIDGE_SLEEP_MILLISECONDS 50
 #endif
 
 
@@ -39,7 +39,7 @@ public:
         Unknown
     };
 
-    HueBridge(QNetworkAccessManager* nam, QString ip, QString username);
+    HueBridge(QString ip, QString username, QNetworkAccessManager* nam);
     HueBridge(QString ip, QString username);
     ~HueBridge();
 

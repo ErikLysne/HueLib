@@ -19,7 +19,97 @@ In your `main.cpp` file, add the following include:
 ```c++
 #include <HueLib/huelib.h>
 ```
-If you try compiling now, you will probably get a lot of errors about a missing `QNetworkAccessManager` file. This is because we must let Qt know that we will be needing access to the build in network classes. Open your `.pro` file and append `QT += network`. Now you should be good to go.
+If you try compiling now, you will probably get a lot of errors about a missing `QNetworkAccessManager` file. This is because we must let Qt know that we will be needing access to the network classes. Open your `.pro` file and append `QT += network`. Now you should be good to go.
 
 ## Creating a HueBridge object
-The first thing you must do
+To get access to the Hue network, you must first create a HueBridge object. To create this, you will need two things: the IP address of the bridge, and an authorized username. The easiest way to obtain these things is to head over to the [Philips Hue Get Started Page](https://developers.meethue.com/develop/get-started-2/) and follow their steps.
+
+Once you have the IP address and username, create a HueBridge object like this:
+```c++
+#include <QCoreApplication>
+
+#include <HueLib/huelib.h>
+#include <QtDebug>
+
+int main(int argc, char *argv[])
+{
+    QCoreApplication a(argc, argv);
+
+    HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df");
+
+    HueBridge::ConnectionStatus status;
+    bridge->testConnection(status);
+
+    if (status == HueBridge::ConnectionStatus::Success)
+        qDebug() << "Connected to bridge.";
+    else
+        qDebug() << "No connection to bridge.";
+
+    return a.exec();
+}
+```
+If `status` does not return with `Success`, verify that your IP address and username is correct.
+
+**Note:** Qt recommends only creating one instance of `QNetworkAccessManager` in an application, so if you need to use the network access manager for another purpose, you can instead create a `QNetworkAccessManager` somwhere else and initiate the `HueBridge` object with a pointer to the `QNetworkAccessManager` as a third optional argument:
+```c++
+QNetworkAccessManager* nam = new QNetworkAccessManager();
+HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df", nam);
+```
+
+## Discovering HueLights and HueGroups
+The library gives you access to individual lights (`HueLight` objects), and groups of lights like e.g. rooms (`HueGroup` objects). The library currently has no functionality to create new lights or groups - this can be done quickly and conveniently in the Philips Hue smartphone app.
+
+The following code discovers lights and groups on the network and returns a list of pointers to those objects:
+
+```c++
+HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df");
+
+QList<HueLight*> lights = HueLight::discoverLights(bridge);
+QList<HueGroup*> groups = HueGroup::discoverGroups(bridge);
+
+qDebug() << "Lights found: " << lights.size();
+qDebug() << "Groups found: " << groups.size();
+```
+
+## Controlling HueLights and HueGroups
+Once you have discovered the lights and/or groups on the network, you can directly change the properties of the lights. The following code will look for the group named "Living Room" and turn off the lights in that room.
+```c++
+for (auto group = groups.begin(); group != groups.end(); ++group) {
+    if ((*group)->name().getName() == "Living Room")
+        (*group)->turnOn();
+}
+```
+
+The following functions can be called on HueLights and HueGroups to change their properties:
+```c++
+bool turnOn();
+bool turnOff();
+bool setHue(int hue);
+bool setSaturation(int saturation);
+bool setBrightness(int brightness);
+bool setColorTemp(int colorTemp);
+bool setXY(double x, double y);
+bool setAlert(HueAlert alert);
+bool setEffect(HueEffect effect);
+```
+All functions return a boolean indicating if the change was successful (`true`) or unsuccessful (`false`).
+
+For `setAlert(HueAlert alert)` you have the option to use the following arguments:
+```c++
+HueAlert::NoAlert
+HueAlert::BreatheSingle
+HueAlert::Breathe15Sec
+````
+
+For `setEffect(HueEffect effect)` you have the option to use the following arguments:
+```c++
+HueEffect::NoEffect
+HueEffect::ColorLoop
+````
+
+## Some implementation details
+The library uses a synchronous request/reply pattern to keep the program state synchronized with the bridge. This means that a function call to e.g. `turnOn()` will not return until a request has been sent to the bridge and a reply has been received, or a timer has expired. The timeout period can be set by redefining `HUE_REQUEST_TIMEOUT_MILLISECONDS` before including `huelib.h`. The default value is 200 ms.
+
+Note that according to the [Hue System Performance guidelines](https://developers.meethue.com/develop/application-design-guidance/hue-system-performance/), the maximum throughput of the Hue bridge is about 10 light commands per second and about 1 group command per second. Exceeding this limit will queue any further requests which can lead to long response time and commands being dropped if the queue exceeds a certain length. In the library, a sleep timer will start running after a command has been sendt to the bridge that will delay the next command by a certain duration. The sleep duration can be changed by redefining `HUE_BRIDGE_SLEEP_MILLISECONDS` before including `huelib.h`. The default value is 50 ms which has been tested to work well on a network with 15 Hue lights divided into 5 groups. Reducing the sleep duration will increase the response time for short bursts of commands, but can lead to more frequent requests being dropped or returning with an error.
+
+
