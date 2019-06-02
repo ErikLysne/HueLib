@@ -125,7 +125,7 @@ HueReply HueBridge::sendGetRequest(QString urlPath)
         reply.isValid(false);
     }
 
-    m_sleepTimer->start(BRIDGE_SLEEP_MILLISECONDS);
+    m_sleepTimer->start(HUE_BRIDGE_SLEEP_MILLISECONDS);
     return reply;
 }
 
@@ -170,7 +170,7 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
         reply.isValid(false);
     }
 
-    m_sleepTimer->start(BRIDGE_SLEEP_MILLISECONDS);
+    m_sleepTimer->start(HUE_BRIDGE_SLEEP_MILLISECONDS);
     return reply;
 }
 

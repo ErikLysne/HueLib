@@ -81,6 +81,8 @@ qDebug() << "Lights found: " << lights.size();
 qDebug() << "Groups found: " << groups.size();
 ```
 
+If everything worked correctly, you should see the number of Hue lights you have connected to your bridge, and the number of groups you have created printed to the debug console.
+
 <a name="control"></a>
 ## 5. Controlling HueLights and HueGroups
 Once you have discovered the lights and/or groups on the network, you can directly change the properties of the lights. The following code will look for the group named "Living Room" and turn off the lights in that room.
