@@ -2,6 +2,14 @@
 
 This is a C++ Qt library to control Philips Hue lights.
 
+1. [Installation] (#installation)
+2. [Usage] (#usage)
+3. [Creating a HueBridge object] (#create)
+3. [Discovering HueLights and HueGroups] (#discover)
+4. [Controlling HueLights and HueGroups] (#control)
+5. [Some implementation details] (#implementation)
+
+<a name="installation"></a>
 ## Installation
 
 ### Download Qt and Qt Creator
@@ -10,6 +18,7 @@ This library is made to be used with Qt Creator. Qt and Qt Creator can be downlo
 ### Build the project to generate the static library file
 Clone or download this repository and open `HueLib.pro`. Build the project. This should create a build folder with a static library file (`libHueLib.a` on Mac).
 
+<a name="usage"></a>
 ## Usage
 To use the library, create a new Qt project (e.g. Qt Widgets Application or Qt Console Application), right click on the project folder and click `Add Library...`. Choose `External Library`, navigate to the `HueLib` **build** folder and select the static library file (`libHueLib.a` on Mac) generated in the previous step.
 
@@ -21,6 +30,7 @@ In your `main.cpp` file, add the following include:
 ```
 If you try compiling now, you will probably get a lot of errors about a missing `QNetworkAccessManager` file. This is because we must let Qt know that we will be needing access to the network classes. Open your `.pro` file and append `QT += network`. Now you should be good to go.
 
+<a name="create"></a>
 ## Creating a HueBridge object
 To get access to the Hue network, you must first create a HueBridge object. To create this, you will need two things: the IP address of the bridge, and an authorized username. The easiest way to obtain these things is to head over to the [Philips Hue Get Started Page](https://developers.meethue.com/develop/get-started-2/) and follow their steps.
 
@@ -55,7 +65,7 @@ If `status` does not return with `Success`, verify that your IP address and user
 QNetworkAccessManager* nam = new QNetworkAccessManager();
 HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df", nam);
 ```
-
+<a name="discover"></a>
 ## Discovering HueLights and HueGroups
 The library gives you access to individual lights (`HueLight` objects), and groups of lights like e.g. rooms (`HueGroup` objects). The library currently has no functionality to create new lights or groups - this can be done quickly and conveniently in the Philips Hue smartphone app.
 
@@ -71,6 +81,7 @@ qDebug() << "Lights found: " << lights.size();
 qDebug() << "Groups found: " << groups.size();
 ```
 
+<a name="control"></a>
 ## Controlling HueLights and HueGroups
 Once you have discovered the lights and/or groups on the network, you can directly change the properties of the lights. The following code will look for the group named "Living Room" and turn off the lights in that room.
 ```c++
@@ -114,7 +125,7 @@ you have the option to use the following arguments:
 HueEffect::NoEffect
 HueEffect::ColorLoop
 ````
-
+<a name="implementation"></a>
 ## Some implementation details
 The library uses a synchronous request/reply pattern to keep the program state synchronized with the bridge. This means that a function call to e.g. `turnOn()` will not return until a request has been sent to the bridge and a reply has been received, or a timer has expired. The timeout period can be set by redefining `HUE_REQUEST_TIMEOUT_MILLISECONDS` before including `huelib.h`. The default value is 200 ms.
 
