@@ -80,7 +80,7 @@ for (auto group = groups.begin(); group != groups.end(); ++group) {
 }
 ```
 
-The following functions can be called on HueLights and HueGroups to change their properties:
+The following functions can be called on `HueLight` objects and `HueGroup` objects to change their properties:
 ```c++
 bool turnOn();
 bool turnOff();
@@ -94,14 +94,14 @@ bool setEffect(HueEffect effect);
 ```
 All functions return a boolean indicating if the change was successful (`true`) or unsuccessful (`false`).
 
-For `setAlert(HueAlert alert)` you have the option to use the following arguments:
+For ```c++ setAlert(HueAlert alert)``` you have the option to use the following arguments:
 ```c++
 HueAlert::NoAlert
 HueAlert::BreatheSingle
 HueAlert::Breathe15Sec
 ````
 
-For `setEffect(HueEffect effect)` you have the option to use the following arguments:
+For ```c++ setEffect(HueEffect effect)``` you have the option to use the following arguments:
 ```c++
 HueEffect::NoEffect
 HueEffect::ColorLoop
