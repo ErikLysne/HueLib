@@ -113,7 +113,7 @@ All functions return a boolean indicating if the change was successful (`true`) 
 
 For
 ```c++
-setAlert(HueAlert alert)
+bool setAlert(HueAlert alert)
 ```
 you have the option to use the following arguments:
 ```c++
@@ -124,7 +124,7 @@ HueAlert::Breathe15Sec
 
 For
 ```c++
-setEffect(HueEffect effect)
+bool setEffect(HueEffect effect)
 ```
 you have the option to use the following arguments:
 ```c++
