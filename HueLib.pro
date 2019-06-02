@@ -24,24 +24,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        hueabstractobject.cpp \
-        huebridge.cpp \
-        huegroup.cpp \
-        huelib.cpp \
-        huelight.cpp \
-        huereply.cpp \
-        huerequest.cpp \
-        huetypes.cpp
+        HueLib/hueabstractobject.cpp \
+        HueLib/huebridge.cpp \
+        HueLib/huegroup.cpp \
+        HueLib/huelight.cpp \
+        HueLib/huereply.cpp \
+        HueLib/huerequest.cpp \
+        HueLib/huetypes.cpp
 
 HEADERS += \
-        hueabstractobject.h \
-        huebridge.h \
-        huegroup.h \
-        huelib.h \
-        huelight.h \
-        huereply.h \
-        huerequest.h \
-        huetypes.h
+        HueLib/hueabstractobject.h \
+        HueLib/huebridge.h \
+        HueLib/huegroup.h \
+        HueLib/huelib.h \
+        HueLib/huelight.h \
+        HueLib/huereply.h \
+        HueLib/huerequest.h \
+        HueLib/huetypes.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
