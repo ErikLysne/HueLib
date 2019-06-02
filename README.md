@@ -69,7 +69,7 @@ HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df
 ## 4. Discovering HueLights and HueGroups
 The library gives you access to individual lights (`HueLight` objects), and groups of lights like e.g. rooms (`HueGroup` objects). The library currently has no functionality to create new lights or groups - this can be done quickly and conveniently in the Philips Hue smartphone app.
 
-The following code discovers lights and groups on the network and returns a list of pointers to those objects:
+The following code discovers lights and groups on the network and creates an object for each one on the heap. A `QList` of pointers to the newly created objects is returned:
 
 ```c++
 HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df");
