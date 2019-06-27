@@ -39,7 +39,7 @@ Now you should be good to go.
 ## 3. Creating a HueBridge object
 To get access to the Hue network, you must first create a HueBridge object. To create this, you will need two things: the IP address of the bridge, and an authorized username. The easiest way to obtain these things is to head over to the [Philips Hue Get Started Page](https://developers.meethue.com/develop/get-started-2/) and follow their steps.
 
-Once you have the IP address and username, create a HueBridge object like this:
+Once you have the IP address and username, create a `HueBridge` object like this:
 ```c++
 #include <QCoreApplication>
 
@@ -65,14 +65,14 @@ int main(int argc, char *argv[])
 ```
 If `status` does not return with `Success`, verify that your IP address and username is correct.
 
-**Note:** Qt recommends only creating one instance of `QNetworkAccessManager` in an application, so if you need to use the network access manager for another purpose, you can instead create a `QNetworkAccessManager` somwhere else and initiate the `HueBridge` object with a pointer to the `QNetworkAccessManager` as a third optional argument:
+**Note:** The `HueBridge` class needs an instance of `QNetworkAccessManager` to work. Qt recommends only creating one instance of `QNetworkAccessManager` in an application, so if you need to use the network access manager for another purpose, you can instead create a `QNetworkAccessManager` somwhere else and initiate the `HueBridge` object with a pointer to the `QNetworkAccessManager` as a third optional argument:
 ```c++
 QNetworkAccessManager* nam = new QNetworkAccessManager();
 HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df", nam);
 ```
 <a name="discover"></a>
 ## 4. Discovering HueLights and HueGroups
-The library gives you access to individual lights (`HueLight` objects), and groups of lights like e.g. rooms (`HueGroup` objects). The library currently has no functionality to create new lights or groups - this can be done quickly and conveniently in the Philips Hue smartphone app.
+The library gives you access to individual lights (`HueLight` objects), and groups of lights like e.g. rooms (`HueGroup` objects). The library currently has no functionality to create new lights or groups - this is more easily done with the Philips Hue smartphone app.
 
 The following code discovers lights and groups on the network and creates an object for each one on the heap. A `QList` of pointers to the newly created objects is returned:
 
@@ -86,7 +86,7 @@ qDebug() << "Lights found: " << lights.size();
 qDebug() << "Groups found: " << groups.size();
 ```
 
-If everything worked correctly, you should see the number of Hue lights you have connected to your bridge, and the number of groups you have created printed to the debug console.
+If everything worked correctly, you should see the number of lights you have connected to your bridge, and the number of groups you have created printed to the debug console.
 
 <a name="control"></a>
 ## 5. Controlling HueLights and HueGroups
@@ -134,14 +134,14 @@ HueEffect::ColorLoop
 ````
 <a name="synchronization"></a>
 ## 6. Keeping HueLights and HueGroups synchronized
-You may have a scenario where other devices can change the state of your lights, i.e. if you have a Hue dimmer switch or if you use the Hue smartphone app. In this case, you may need to synchronize the HueLight and HueGroup objects in your program. To synchronize an object, call its `synchronize()` function, e.g.
+You may have a scenario where other devices can change the state of your lights, i.e. if you have a Hue dimmer switch or if you use the Hue smartphone app. In this case, you may need to synchronize the `HueLight`  and `HueGroup`  objects in your program. To synchronize an object, call its `synchronize()` function, e.g.
 ```c++
 for (auto light : lights)
     light->synchronize();
 ````
 Calling `synchronize()` on an object will fetch its current state stored on the bridge. This can be somewhat time consuming, especially when many objects are synchronized at the same time. Synchronizing with the bridge too often leads to heavy traffic and can make the bridge less responsive.
 
-HueLights and HueGroups can also be set up to synchronize with the bridge periodically. To enable periodic synchronization of an object, call its `enablePeriodicSync(bool periodicSyncOn)` with `periodicSyncOn = true/false` to enable/disable, e.g.
+`HueLight` and `HueGroup` objects can also be set up to synchronize with the bridge periodically. To enable periodic synchronization of an object, call its `enablePeriodicSync(bool periodicSyncOn)` with `periodicSyncOn = true/false` to enable/disable, e.g.
 ```c++
 for (auto light : lights)
     light->enablePeriodicSync(true);
