@@ -93,7 +93,7 @@ Once you have discovered the lights and/or groups on the network, you can direct
 ```c++
 for (auto group : groups) {
     if (group->name().getName() == "Living Room")
-    group->turnOff();
+        group->turnOff();
 }
 ```
 
