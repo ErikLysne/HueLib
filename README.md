@@ -134,7 +134,7 @@ HueEffect::ColorLoop
 ````
 <a name="synchronization"></a>
 ## 6. Keeping HueLights and HueGroups synchronized
-You may have a scenario where other devices can change the state of your lights, i.e. if you have a Hue dimmer switch or if you use the Hue smartphone app. In this case, you may need to synchronize the `HueLight`  and `HueGroup`  objects in your program. To synchronize an object, call its `synchronize()` function, e.g.
+You may have a scenario where other devices can change the state of your lights, e.g. if you have a Hue dimmer switch or if you use the Hue smartphone app. In this case, you may need to synchronize the `HueLight`  and `HueGroup`  objects in your program. To synchronize an object, call its `synchronize()` function, e.g.
 ```c++
 for (auto light : lights)
     light->synchronize();
