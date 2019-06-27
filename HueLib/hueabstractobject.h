@@ -30,8 +30,7 @@ public:
     bool setAlert(HueAlert alert);
     bool setEffect(HueEffect effect);
 
-    void synchronizePeriodically(bool enable);
-    void synchronizePeriodically();
+    void synchronizePeriodically(bool enable = true);
     void setSynchronizationInterval(int intervalSeconds);
 
     virtual bool synchronize() = 0;

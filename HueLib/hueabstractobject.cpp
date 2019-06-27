@@ -140,10 +140,6 @@ void HueAbstractObject::synchronizePeriodically(bool enable)
     }
 }
 
-void HueAbstractObject::synchronizePeriodically()
-{
-    synchronizePeriodically(true);
-}
 
 void HueAbstractObject::setSynchronizationInterval(int intervalSeconds)
 {

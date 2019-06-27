@@ -91,9 +91,9 @@ If everything worked correctly, you should see the number of Hue lights you have
 ## 5. Controlling HueLights and HueGroups
 Once you have discovered the lights and/or groups on the network, you can directly change the properties of the lights. The following code will look for the group named "Living Room" and turn off the lights in that room.
 ```c++
-for (auto group = groups.begin(); group != groups.end(); ++group) {
-    if ((*group)->name().getName() == "Living Room")
-        (*group)->turnOff();
+for (auto group : groups) {
+    if (group->name().getName() == "Living Room")
+    group->turnOff();
 }
 ```
 
