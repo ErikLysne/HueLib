@@ -1,12 +1,11 @@
 #include "hueabstractobject.h"
 #include <QJsonArray>
-
-QTimer* HueAbstractObject::m_syncTimer = new QTimer();
+#include "huebridge.h"
+#include "huesynchronizer.h"
 
 HueAbstractObject::HueAbstractObject(HueBridge* bridge) :
     QObject(bridge),
-    m_bridge(bridge),
-    m_syncIntervalSeconds(5)
+    m_bridge(bridge)
 {
 
 }
@@ -127,24 +126,14 @@ bool HueAbstractObject::setEffect(HueEffect effect)
     return sendRequest(request);
 }
 
-void HueAbstractObject::synchronizePeriodically(bool enable)
+void HueAbstractObject::enablePeriodicSync(bool periodicSyncOn)
 {
-    if (enable) {
-        connect(m_syncTimer, &QTimer::timeout,
-                this, &HueAbstractObject::timeToSynchronize);
-        m_syncTimer->setSingleShot(false);
-        m_syncTimer->start(m_syncIntervalSeconds*1000);
+    if (periodicSyncOn) {
+        m_synchronizer->instance().addHueObject(this);
     }
     else {
-        m_syncTimer->stop();
+        m_synchronizer->instance().removeHueObject(this);
     }
-}
-
-
-void HueAbstractObject::setSynchronizationInterval(int intervalSeconds)
-{
-    m_syncIntervalSeconds = intervalSeconds;
-    synchronizePeriodically();
 }
 
 QMap<int, QJsonObject> HueAbstractObject::parseJson(QJsonObject json)
@@ -198,9 +187,4 @@ void HueAbstractObject::setBridge(HueBridge *bridge)
 HueBridge* HueAbstractObject::getBridge() const
 {
     return m_bridge;
-}
-
-void HueAbstractObject::timeToSynchronize()
-{
-    synchronize();
 }

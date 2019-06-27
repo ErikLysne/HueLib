@@ -5,7 +5,6 @@
 #-------------------------------------------------
 
 QT       += network
-
 QT       -= gui
 
 TARGET = HueLib
@@ -30,6 +29,7 @@ SOURCES += \
         HueLib/huelight.cpp \
         HueLib/huereply.cpp \
         HueLib/huerequest.cpp \
+        HueLib/huesynchronizer.cpp \
         HueLib/huetypes.cpp
 
 HEADERS += \
@@ -40,8 +40,5 @@ HEADERS += \
         HueLib/huelight.h \
         HueLib/huereply.h \
         HueLib/huerequest.h \
+        HueLib/huesynchronizer.h \
         HueLib/huetypes.h
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
-}

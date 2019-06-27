@@ -31,6 +31,7 @@ public:
     QString getAlert() const;
     QString getColorMode() const;
     QString getMode() const;
+
     void setOn(const bool on);
     void setReachable(const bool reachable);
     void setBrightness(const int brightness);
@@ -65,6 +66,7 @@ public:
     Name(const QJsonValue json);
 
     QString getName() const;
+
     void setName(const QString name);
 
 private:
@@ -77,6 +79,7 @@ public:
     Type(const QJsonValue json);
 
     QString getType() const;
+
     void setType(const QString type);
 
 private:
@@ -89,6 +92,7 @@ public:
     UniqueID(const QJsonValue json);
 
     QString getUniqueID() const;
+
     void setUniqueID(const QString uniqueID);
 
 private:
@@ -102,6 +106,7 @@ public:
     SoftwareVersion(const QJsonValue json);
 
     QString getSoftwareVersion() const;
+
     void setSoftwareVersion(const QString softwareVersion);
 
 private:
@@ -116,6 +121,7 @@ public:
 
     QString getState() const;
     QString getLastInstall() const;
+
     void setState(const QString state);
     void setLastInstall(const QString lastInstall);
 
@@ -132,6 +138,7 @@ public:
     SoftwareConfigID(const QJsonValue json);
 
     QString getSoftwareConfigID() const;
+
     void setSoftwareConfigID(const QString softwareConfigID);
 
 private:
@@ -145,6 +152,7 @@ public:
     ProductName(const QJsonValue json);
 
     QString getProductName() const;
+
     void setProductName(const QString productName);
 
 private:
@@ -158,6 +166,7 @@ public:
     Manufacturer(const QJsonValue json);
 
     QString getManufacturer() const;
+
     void setManufacturer(const QString manufacturer);
 
 private:
@@ -171,6 +180,7 @@ public:
     ProductID(const QJsonValue json);
 
     QString getProductID() const;
+
     void setProductID(const QString productID);
 
 private:
@@ -203,6 +213,7 @@ public:
     QString getEffect() const;
     QString getAlert() const;
     QString getColorMode() const;
+
     void setOn(const bool on);
     void setBrightness(const int brightness);
     void setHue(const int hue);
@@ -234,6 +245,7 @@ public:
     Lights(const QJsonValue json);
 
     QList<QString> getLights() const;
+
     void setLights(const QList<QString> lights);
 
 private:
@@ -247,6 +259,7 @@ public:
     Sensors(const QJsonValue json);
 
     QList<QString> getSensors() const;
+
     void setSensors(const QList<QString> sensors);
 
 private:
@@ -261,6 +274,7 @@ public:
 
     bool getAllOn() const;
     bool getAnyOn() const;
+
     void setAllOn(const bool allOn);
     void setAnyOn(const bool anyOn);
 
@@ -276,6 +290,7 @@ public:
     Name(const QJsonValue json);
 
     QString getName() const;
+
     void setName(const QString name);
 
 private:
@@ -289,6 +304,7 @@ public:
     Type(const QJsonValue json);
 
     QString getType() const;
+
     void setType(const QString type);
 
 private:
@@ -302,6 +318,7 @@ public:
     GroupClass(const QJsonValue json);
 
     QString getGroupClass() const;
+
     void setGroupClass(const QString groupClass);
 
 private:
@@ -315,6 +332,7 @@ public:
     Recycle(const QJsonValue json);
 
     bool getRecycle() const;
+
     void setRecycle(const bool recycle);
 
 private:

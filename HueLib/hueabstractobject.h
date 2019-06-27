@@ -2,7 +2,11 @@
 #define HUEABSTRACTOBJECT_H
 
 #include <QObject>
-#include "huebridge.h"
+
+class HueBridge;
+class HueRequest;
+class HueReply;
+class HueSynchronizer;
 
 class HueAbstractObject : public QObject
 {
@@ -30,8 +34,7 @@ public:
     bool setAlert(HueAlert alert);
     bool setEffect(HueEffect effect);
 
-    void synchronizePeriodically(bool enable = true);
-    void setSynchronizationInterval(int intervalSeconds);
+    void enablePeriodicSync(bool periodicSyncOn = true);
 
     virtual bool synchronize() = 0;
 
@@ -40,19 +43,18 @@ protected:
 
     bool sendRequest(HueRequest request);
     bool sendRequest(HueRequest request, HueReply& reply);
+
     void setBridge(HueBridge* bridge);
     HueBridge* getBridge() const;
 
     virtual HueRequest makePutRequest(QJsonObject json) = 0;
     virtual HueRequest makeGetRequest() = 0;
 
-protected slots:
-    void timeToSynchronize();
 
 private:
     HueBridge* m_bridge;
-    int m_syncIntervalSeconds;
-    static QTimer* m_syncTimer;
+    HueSynchronizer* m_synchronizer;
+
 };
 
 #endif // HUEABSTRACTOBJECT_H

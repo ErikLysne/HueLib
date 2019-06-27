@@ -1,4 +1,5 @@
 #include "huegroup.h"
+#include "huebridge.h"
 
 HueGroup::HueGroup(HueBridge* bridge) :
     HueAbstractObject(bridge),
@@ -213,6 +214,9 @@ bool HueGroup::synchronize()
         if (constructHueGroup(m_ID, json, &synchronizedGroup)) {
             if (synchronizedGroup.hasValidConstructor()) {
                 *this = synchronizedGroup;
+
+                qDebug() << name().getName() << ": "
+                         << action().isOn();
                 return true;
             }
         }
