@@ -5,9 +5,10 @@ This is a C++ Qt library to control Philips Hue lights.
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Creating a HueBridge object](#create)
-3. [Discovering HueLights and HueGroups](#discover)
-4. [Controlling HueLights and HueGroups](#control)
-5. [Some implementation details](#implementation)
+4. [Discovering HueLights and HueGroups](#discover)
+5. [Controlling HueLights and HueGroups](#control)
+6. [Keeping HueLights and HueGroups synchronized](#synchronization)
+7. [Some implementation details](#implementation)
 
 <a name="installation"></a>
 ## 1. Installation
@@ -131,8 +132,28 @@ you have the option to use the following arguments:
 HueEffect::NoEffect
 HueEffect::ColorLoop
 ````
+<a name="synchronization"></a>
+## 6. Keeping HueLights and HueGroups synchronized
+You may have a scenario where other devices can change the state of your lights, i.e. if you have a Hue dimmer switch or if you use the Hue smartphone app. In this case, you may need to synchronize the HueLight and HueGroup objects in your program. To synchronize an object, call its `synchronize()` function, e.g.
+```c++
+for (auto light : lights)
+    light->synchronize();
+````
+Calling `synchronize()` on an object will fetch its current state stored on the bridge. This can be somewhat time consuming, especially when many objects are synchronized at the same time. Synchronizing with the bridge too often leads to heavy traffic and can make the bridge less responsive.
+
+HueLights and HueGroups can also be set up to synchronize with the bridge periodically. To enable periodic synchronization of an object, call its `enablePeriodicSync(bool periodicSyncOn)` with `periodicSyncOn = true/false` to enable/disable, e.g.
+```c++
+for (auto light : lights)
+    light->enablePeriodicSync(true);
+````
+The default synchronization interval is 10 seconds. The interval can be changed in the following way:
+```c++
+HueSynchronizer::setSyncIntervalMilliSec(5000);
+````
+As explained above, this should not be done too often.
+
 <a name="implementation"></a>
-## 6. Some implementation details
+## 7. Some implementation details
 The library uses a synchronous request/reply pattern to keep the program state synchronized with the bridge. This means that a function call to e.g. `turnOn()` will not return until a request has been sent to the bridge and a reply has been received, or a timer has expired. The timeout period can be set by redefining `HUE_REQUEST_TIMEOUT_MILLISECONDS` before including `huelib.h`. The default value is 200 ms.
 
 Note that according to the [Hue System Performance guidelines](https://developers.meethue.com/develop/application-design-guidance/hue-system-performance/), the maximum throughput of the Hue bridge is about 10 light commands per second and about 1 group command per second. Exceeding this limit will queue any further requests which can lead to long response time and commands being dropped if the queue exceeds a certain length. In the library, a sleep timer will start running after a command has been sendt to the bridge that will delay the next command by a certain duration. The sleep duration can be changed by redefining `HUE_BRIDGE_SLEEP_MILLISECONDS` before including `huelib.h`. The default value is 50 ms which has been tested to work well on a network with 15 Hue lights divided into 5 groups. Reducing the sleep duration will increase the response time for short bursts of commands, but can lead to more frequent requests being dropped or returning with an error.

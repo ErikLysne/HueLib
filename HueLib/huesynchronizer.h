@@ -11,9 +11,10 @@ class HueSynchronizer : public QObject
     Q_OBJECT
 
 public:
-    const int defaultSyncIntervalMilliSec = 1000;
+    const int defaultSyncIntervalMilliSec = 10000;
 
     static HueSynchronizer& instance();
+    static void setSyncIntervalMilliSec(int intervalMilliSec);
 
     void start();
     void stop();
@@ -22,8 +23,6 @@ public:
 
     void addHueObject(HueAbstractObject* object);
     void removeHueObject(HueAbstractObject* object);
-
-    void setSyncIntervalMilliSec(int intervalMilliSec);
 
 private:
     explicit HueSynchronizer();

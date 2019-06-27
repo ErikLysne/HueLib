@@ -20,6 +20,11 @@ HueSynchronizer& HueSynchronizer::instance()
     return singleton;
 }
 
+void HueSynchronizer::setSyncIntervalMilliSec(int intervalMilliSec)
+{
+    instance().m_timer->setInterval(intervalMilliSec);
+}
+
 void HueSynchronizer::start()
 {
     m_isActive = true;
@@ -51,11 +56,6 @@ void HueSynchronizer::removeHueObject(HueAbstractObject* object)
 
     if (m_hueObjects.empty())
         stop();
-}
-
-void HueSynchronizer::setSyncIntervalMilliSec(int intervalMilliSec)
-{
-    m_timer->setInterval(intervalMilliSec);
 }
 
 void HueSynchronizer::synchronize()
