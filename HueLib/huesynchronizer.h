@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QTimer>
 
+#define DEFAULT_HUE_SYNC_INTERVAL_MILLISECONDS 10000
+
 class HueAbstractObject;
 
 class HueSynchronizer : public QObject
@@ -11,8 +13,6 @@ class HueSynchronizer : public QObject
     Q_OBJECT
 
 public:
-    const int defaultSyncIntervalMilliSec = 10000;
-
     static HueSynchronizer& instance();
     static void setSyncIntervalMilliSec(int intervalMilliSec);
 

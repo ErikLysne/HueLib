@@ -72,7 +72,7 @@ HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df
 ```
 <a name="discover"></a>
 ## 4. Discovering HueLights and HueGroups
-The library gives you access to individual lights (`HueLight` objects), and groups of lights like e.g. rooms (`HueGroup` objects). The library currently has no functionality to create new lights or groups - this is more easily done with the Philips Hue smartphone app.
+The library gives you access to individual lights (`HueLight` objects), and groups of lights like e.g. rooms (`HueGroup` objects). The library currently has no functionality to set up new lights or groups - this is more easily done with the Philips Hue smartphone app.
 
 The following code discovers lights and groups on the network and creates an object for each one on the heap. A `QList` of pointers to the newly created objects is returned:
 
@@ -123,7 +123,7 @@ HueAlert::BreatheSingle
 HueAlert::Breathe15Sec
 ````
 
-For
+and for
 ```c++
 bool setEffect(HueEffect effect)
 ```
@@ -134,7 +134,7 @@ HueEffect::ColorLoop
 ````
 <a name="synchronization"></a>
 ## 6. Keeping HueLights and HueGroups synchronized
-You may have a scenario where other devices can change the state of your lights, e.g. if you have a Hue dimmer switch or if you use the Hue smartphone app. In this case, you may need to synchronize the `HueLight`  and `HueGroup`  objects in your program. To synchronize an object, call its `synchronize()` function, e.g.
+You may have a scenario where multiple devices can change the state of your lights, e.g. using a Hue dimmer switch or the Hue smartphone app. In this case, you may need to synchronize the `HueLight`  and `HueGroup`  objects in your program. To synchronize an object, call its `synchronize()` function, e.g.
 ```c++
 for (auto light : lights)
     light->synchronize();
