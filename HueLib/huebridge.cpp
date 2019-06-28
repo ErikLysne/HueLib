@@ -10,15 +10,7 @@ HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam) :
     m_username(username),
     m_sleepTimer(new QTimer)
 {
-    m_sleepTimer->setSingleShot(true);
-}
-
-HueBridge::HueBridge(QString ip, QString username) :
-    m_nam(new QNetworkAccessManager(this)),
-    m_ip(ip),
-    m_username(username),
-    m_sleepTimer(new QTimer)
-{
+    m_nam->setParent(this);
     m_sleepTimer->setSingleShot(true);
 }
 

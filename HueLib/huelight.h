@@ -8,6 +8,9 @@ class HueLight : public HueAbstractObject
 {
     Q_OBJECT
 public:
+    HueLight(const HueLight& rhs);
+    HueLight operator=(const HueLight& rhs);
+
     static QList<HueLight*> discoverLights(HueBridge* bridge);
 
     bool hasValidConstructor() const;
@@ -39,8 +42,6 @@ protected:
              Light::ProductName productName,
              Light::Manufacturer manufacturer,
              Light::ProductID productID);
-    HueLight(const HueLight& rhs);
-    HueLight operator=(const HueLight& rhs);
 
     HueRequest makePutRequest(QJsonObject json) override;
     HueRequest makeGetRequest() override;

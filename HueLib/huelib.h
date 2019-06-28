@@ -6,4 +6,6 @@
 #include "huegroup.h"
 #include "huesynchronizer.h"
 
+#include "huelightmodel.h"
+
 #endif // HUELIB_H

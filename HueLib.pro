@@ -27,6 +27,7 @@ SOURCES += \
         HueLib/huebridge.cpp \
         HueLib/huegroup.cpp \
         HueLib/huelight.cpp \
+        HueLib/huelightmodel.cpp \
         HueLib/huereply.cpp \
         HueLib/huerequest.cpp \
         HueLib/huesynchronizer.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
         HueLib/huegroup.h \
         HueLib/huelib.h \
         HueLib/huelight.h \
+        HueLib/huelightmodel.h \
         HueLib/huereply.h \
         HueLib/huerequest.h \
         HueLib/huesynchronizer.h \

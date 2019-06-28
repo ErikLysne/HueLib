@@ -39,8 +39,7 @@ public:
         Unknown
     };
 
-    HueBridge(QString ip, QString username, QNetworkAccessManager* nam);
-    HueBridge(QString ip, QString username);
+    HueBridge(QString ip, QString username, QNetworkAccessManager* nam = new QNetworkAccessManager());
     ~HueBridge();
 
     HueReply sendRequest(const HueRequest request);
