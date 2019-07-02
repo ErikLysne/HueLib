@@ -220,7 +220,7 @@ Light::UniqueID::UniqueID() :
 
 Light::UniqueID::UniqueID(const QJsonValue json)
 {
-    json["uniqueid"].toString();
+    m_uniqueID = json.toString();
 }
 
 QString Light::UniqueID::getUniqueID() const
@@ -242,7 +242,7 @@ Light::SoftwareVersion::SoftwareVersion() :
 
 Light::SoftwareVersion::SoftwareVersion(const QJsonValue json)
 {
-    m_softwareVersion = json["swversion"].toString();
+    m_softwareVersion = json.toString();
 }
 
 QString Light::SoftwareVersion::getSoftwareVersion() const
@@ -309,7 +309,7 @@ Light::SoftwareConfigID::SoftwareConfigID() :
 
 Light::SoftwareConfigID::SoftwareConfigID(const QJsonValue json)
 {
-    m_softwareConfigID = json["swconfigid"].toString();
+    m_softwareConfigID = json.toString();
 }
 
 QString Light::SoftwareConfigID::getSoftwareConfigID() const

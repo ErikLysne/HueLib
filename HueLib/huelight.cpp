@@ -216,7 +216,7 @@ bool HueLight::constructHueLight(int ID, QJsonObject json, HueLight* light)
     Light::SoftwareUpdate softwareUpdate(json["swupdate"]);
     Light::SoftwareConfigID softwareConfigID(json["swconfigid"]);
     Light::ProductName productName(json["productname"]);
-    Light::Manufacturer manufacturer(json["manufacturer"]);
+    Light::Manufacturer manufacturer(json["manufacturername"]);
     Light::ProductID productID(json["productid"]);
 
     HueLight newLight(light->getBridge(), ID, state, name, type, uniqueID,
