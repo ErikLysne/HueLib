@@ -1,4 +1,5 @@
 #include "huelightmodel.h"
+#include "../huelight.h"
 
 HueLightModel::HueLightModel(std::shared_ptr<HueLight> light, QObject* parent) :
     AbstractTreeModel(parent),
@@ -6,7 +7,6 @@ HueLightModel::HueLightModel(std::shared_ptr<HueLight> light, QObject* parent) :
 {
     setRootItem(new TreeItem({tr("Parameter"), tr("Value")}));
     setupModelData(getRootItem());
-
 }
 
 HueLightModel::~HueLightModel()
@@ -16,10 +16,12 @@ HueLightModel::~HueLightModel()
 
 void HueLightModel::setupModelData(TreeItem* rootItem)
 {
+    int ID = m_light->ID();
     Light::Name name = m_light->name();
     Light::Type type = m_light->type();
     Light::UniqueID uniqueID = m_light->uniqueID();
-    TreeItem* aboutItem = new TreeItem({tr("Info"), tr("")}, rootItem);
+    TreeItem* aboutItem = new TreeItem({tr("About"), tr("")}, rootItem);
+    aboutItem->appendChild(new TreeItem({tr("ID"),          ID},                        aboutItem));
     aboutItem->appendChild(new TreeItem({tr("Name"),        name.getName()},            aboutItem));
     aboutItem->appendChild(new TreeItem({tr("Type"),        type.getType()},            aboutItem));
     aboutItem->appendChild(new TreeItem({tr("Unique ID"),   uniqueID.getUniqueID()},    aboutItem));

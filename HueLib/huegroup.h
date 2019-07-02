@@ -8,9 +8,13 @@ class HueGroup : public HueAbstractObject
 {
     Q_OBJECT
 public:
+    HueGroup(const HueGroup& rhs);
+    HueGroup operator=(const HueGroup& rhs);
+
     static QList<HueGroup*> discoverGroups(HueBridge* bridge);
 
     bool hasValidConstructor() const;
+
     int ID() const;
     Group::Action action() const;
     Group::Lights lights() const;
@@ -33,8 +37,6 @@ protected:
              Group::Sensors sensors, Group::State state,
              Group::Name name, Group::Type type,
              Group::GroupClass classObject, Group::Recycle recycle);
-    HueGroup(const HueGroup& rhs);
-    HueGroup operator=(const HueGroup& rhs);
 
     HueRequest makePutRequest(QJsonObject json) override;
     HueRequest makeGetRequest() override;

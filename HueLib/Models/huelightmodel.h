@@ -2,7 +2,8 @@
 #define HUELIGHTMODEL_H
 
 #include "abstracttreemodel.h"
-#include "../huelight.h"
+
+class HueLight;
 
 class HueLightModel : public AbstractTreeModel
 {
@@ -13,7 +14,6 @@ public:
 
 private:
     void setupModelData(TreeItem* rootItem) override;
-
 
 private:
     std::shared_ptr<HueLight> m_light;
