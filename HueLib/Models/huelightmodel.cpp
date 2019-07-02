@@ -6,6 +6,7 @@ HueLightModel::HueLightModel(std::shared_ptr<HueLight> light, QObject* parent) :
 {
     setRootItem(new TreeItem({tr("Parameter"), tr("Value")}));
     setupModelData(getRootItem());
+
 }
 
 HueLightModel::~HueLightModel()

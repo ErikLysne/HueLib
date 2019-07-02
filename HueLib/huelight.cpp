@@ -242,8 +242,8 @@ bool HueLight::synchronize()
         if (constructHueLight(m_ID, json, &synchronizedLight)) {
             if (synchronizedLight.hasValidConstructor()) {
                 *this = synchronizedLight;
-                qDebug() << this->ID() << ": "
-                         << this->state().isOn();
+
+                emit synchronized();
                 return true;
             }
         }

@@ -50,6 +50,8 @@ protected:
     virtual HueRequest makePutRequest(QJsonObject json) = 0;
     virtual HueRequest makeGetRequest() = 0;
 
+signals:
+    void synchronized();
 
 private:
     HueBridge* m_bridge;
