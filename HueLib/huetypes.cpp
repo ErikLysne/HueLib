@@ -1,4 +1,5 @@
 #include "huetypes.h"
+
 #include <QJsonArray>
 
 /* =====================================

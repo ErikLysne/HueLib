@@ -1,5 +1,8 @@
 #include "huegroup.h"
+
 #include "huebridge.h"
+#include "huerequest.h"
+#include "huereply.h"
 
 HueGroup::HueGroup(HueBridge* bridge) :
     HueAbstractObject(bridge),

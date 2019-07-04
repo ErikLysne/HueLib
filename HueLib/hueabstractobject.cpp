@@ -1,6 +1,9 @@
 #include "hueabstractobject.h"
 #include <QJsonArray>
+
 #include "huebridge.h"
+#include "huerequest.h"
+#include "huereply.h"
 #include "huesynchronizer.h"
 
 HueAbstractObject::HueAbstractObject(HueBridge* bridge) :

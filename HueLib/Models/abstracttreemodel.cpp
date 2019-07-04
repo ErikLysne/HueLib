@@ -1,5 +1,7 @@
 #include "abstracttreemodel.h"
 
+#include "treeitem.h"
+
 AbstractTreeModel::AbstractTreeModel(QObject* parent) :
     QAbstractItemModel(parent)
 {

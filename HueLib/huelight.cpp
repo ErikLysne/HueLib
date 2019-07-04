@@ -1,5 +1,8 @@
 #include "huelight.h"
+
 #include "huebridge.h"
+#include "huerequest.h"
+#include "huereply.h"
 
 HueLight::HueLight(HueBridge* bridge) :
     HueAbstractObject(bridge),

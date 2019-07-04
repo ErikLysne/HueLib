@@ -1,4 +1,5 @@
 #include "huesynchronizer.h"
+
 #include "hueabstractobject.h"
 
 HueSynchronizer::HueSynchronizer() :

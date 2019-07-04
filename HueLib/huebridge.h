@@ -5,9 +5,6 @@
 #include <QJsonObject>
 #include <QTimer>
 
-#include "huerequest.h"
-#include "huereply.h"
-
 // Uses the default Qt::CoarseTimer (tries to keep accuracy within 5%)
 #ifndef HUE_REQUEST_TIMEOUT_MILLISECONDS
 #define HUE_REQUEST_TIMEOUT_MILLISECONDS 200
@@ -26,6 +23,8 @@
 #define HUE_BRIDGE_SLEEP_MILLISECONDS 50
 #endif
 
+class HueRequest;
+class HueReply;
 
 class HueBridge : public QObject
 {

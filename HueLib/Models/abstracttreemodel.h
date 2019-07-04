@@ -5,7 +5,7 @@
 #include <QHash>
 #include <memory>
 
-#include "treeitem.h"
+class TreeItem;
 
 class AbstractTreeModel : public QAbstractItemModel
 {

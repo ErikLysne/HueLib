@@ -4,6 +4,9 @@
 #include <QJsonArray>
 #include <QEventLoop>
 
+#include "huerequest.h"
+#include "huereply.h"
+
 HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam) :
     m_nam(nam),
     m_ip(ip),
