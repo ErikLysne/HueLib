@@ -30,14 +30,14 @@ public:
     HueObjectList& operator=(const HueObjectList& rhs);
     HueObjectList& operator=(HueObjectList&& rhs);
 
+    int size() const;
     iterator begin() const;
     iterator end() const;
 
-    std::shared_ptr<ObjectType> find(int ID) const;
-    std::shared_ptr<ObjectType> find(QString name) const;
-
-    ObjectType* findRaw(int ID) const;
-    ObjectType* findRaw(QString name) const;
+    std::shared_ptr<ObjectType> fetch(int ID) const;
+    std::shared_ptr<ObjectType> fetch(QString name) const;
+    ObjectType* fetchRaw(int ID) const;
+    ObjectType* fetchRaw(QString name) const;
 
 private:
     std::shared_ptr<ObjectList> m_objectList;
@@ -97,6 +97,12 @@ HueObjectList<ObjectType>& HueObjectList<ObjectType>::operator=(HueObjectList&& 
     return *this;
 }
 
+template  <typename ObjectType>
+int HueObjectList<ObjectType>::size() const
+{
+    return m_objectList.get()->size();
+}
+
 template <typename ObjectType>
 typename HueObjectList<ObjectType>::iterator HueObjectList<ObjectType>::begin() const
 {
@@ -109,8 +115,8 @@ typename HueObjectList<ObjectType>::iterator HueObjectList<ObjectType>::end() co
     return iterator(m_objectList.get()->end());
 }
 
-template<typename HueObject>
-typename std::shared_ptr<HueObject> HueObjectList<HueObject>::find(int ID) const
+template <typename HueObject>
+typename std::shared_ptr<HueObject> HueObjectList<HueObject>::fetch(int ID) const
 {
     std::shared_ptr<HueObject> retObject = std::make_shared<HueObject>();
 
@@ -121,8 +127,8 @@ typename std::shared_ptr<HueObject> HueObjectList<HueObject>::find(int ID) const
     return retObject;
 }
 
-template<typename HueObject>
-typename std::shared_ptr<HueObject> HueObjectList<HueObject>::find(QString name) const
+template <typename HueObject>
+typename std::shared_ptr<HueObject> HueObjectList<HueObject>::fetch(QString name) const
 {
     std::shared_ptr<HueObject> retObject = std::make_shared<HueObject>();
 
@@ -133,16 +139,16 @@ typename std::shared_ptr<HueObject> HueObjectList<HueObject>::find(QString name)
     return retObject;
 }
 
-template<typename HueObject>
-HueObject* HueObjectList<HueObject>::findRaw(int ID) const
+template <typename HueObject>
+HueObject* HueObjectList<HueObject>::fetchRaw(int ID) const
 {
-    return this->find(ID).get();
+    return this->fetch(ID).get();
 }
 
-template<typename HueObject>
-HueObject* HueObjectList<HueObject>::findRaw(QString name) const
+template <typename HueObject>
+HueObject* HueObjectList<HueObject>::fetchRaw(QString name) const
 {
-    return this->find(name).get();
+    return this->fetch(name).get();
 }
 
 // Iterator functions

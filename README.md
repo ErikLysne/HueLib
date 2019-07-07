@@ -74,13 +74,13 @@ HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df
 ## 4. Discovering HueLights and HueGroups
 The library gives you access to individual lights (`HueLight` objects), and groups of lights like e.g. rooms (`HueGroup` objects). The library currently has no functionality to set up new lights or groups - this is more easily done with the Philips Hue smartphone app.
 
-The following code discovers lights and groups on the network and creates an object for each one on the heap. A `QList` of pointers to the newly created objects is returned:
+The following code discovers lights and groups on the network and creates an object for each one on the heap:
 
 ```c++
 HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df");
 
-QList<HueLight*> lights = HueLight::discoverLights(bridge);
-QList<HueGroup*> groups = HueGroup::discoverGroups(bridge);
+HueLightList lights = HueLight::discoverLights(bridge);
+HueLightGroup groups = HueGroup::discoverGroups(bridge);
 
 qDebug() << "Lights found: " << lights.size();
 qDebug() << "Groups found: " << groups.size();
@@ -88,16 +88,37 @@ qDebug() << "Groups found: " << groups.size();
 
 If everything worked correctly, you should see the number of lights you have connected to your bridge, and the number of groups you have created printed to the debug console.
 
-<a name="control"></a>
-## 5. Controlling HueLights and HueGroups
-Once you have discovered the lights and/or groups on the network, you can directly change the properties of the lights. The following code will look for the group named "Living Room" and turn off the lights in that room.
+The return types of `HueLight::discoverLights()` and `HueGroup::discoverGroups()` are respectively `HueLightList` and `HueGroupList`. These types can be traversed just like a normal C++ container e.g. using a range-based for loop:
 ```c++
 for (auto group : groups) {
-    if (group->name().getName() == "Living Room")
-        group->turnOff();
+    qDebug() << group.name().getName();
 }
 ```
+<a name="control"></a>
+## 5. Controlling HueLights and HueGroups
+Once you have discovered the lights and/or groups on the network, you can manipulate their states by calling set-functions directly on the objects. You can fetch a specific light/group through its ID number or name using the functions `fetch(int ID)` or `fetch(QString name)` respectively. This will give you an `std::shared_ptr<HueLight>` or `std::shared_ptr<HueGroup>`. You can also use `fetchRaw(int ID)` or `fetchRaw(QString name)` to get a raw pointer. The following example shows how to turn of all lights in a group labled "Living room" and set the brightness in "Bedroom" to 50:
+```c++
+HueGroup* livingroom = groups.fetchRaw("Living Room");
+if (livingroom->isValid())
+    livingroom->turnOn();
 
+HueGroup* bedroom = groups.fetchRaw("Bedroom");
+if (bedroom->isValid())
+    bedroom->setBrightness(50);
+}
+```
+The names passed to `fetch(QString name)` and `fetchRaw(QString name)` must clearly match the name given to that group, and is case sensitive.
+
+Here is another example showing how to address individual lights. This code will fetch lights with ID 1, 2 and 3 and set their color to to red, green and blue. If those bulbs are installed in the same lamp, it creates a kind of rainbow effect:
+```c++
+HueLight* light1 = m_lights.fetchRaw(1);
+HueLight* light2 = m_lights.fetchRaw(2);
+HueLight* light3 = m_lights.fetchRaw(3);
+
+light1->setHue(65535); // red
+light2->setHue(21845); // green
+light3->setHue(43690); // blue
+```
 The following functions can be called on `HueLight` objects and `HueGroup` objects to change their properties:
 ```c++
 bool turnOn();
@@ -137,14 +158,14 @@ HueEffect::ColorLoop
 You may have a scenario where multiple devices can change the state of your lights, e.g. using a Hue dimmer switch or the Hue smartphone app. In this case, you may need to synchronize the `HueLight`  and `HueGroup`  objects in your program. To synchronize an object, call its `synchronize()` function, e.g.
 ```c++
 for (auto light : lights)
-    light->synchronize();
+    light.synchronize();
 ````
 Calling `synchronize()` on an object will fetch its current state stored on the bridge. This can be somewhat time consuming, especially when many objects are synchronized at the same time. Synchronizing with the bridge too often leads to heavy traffic and can make the bridge less responsive.
 
 `HueLight` and `HueGroup` objects can also be set up to synchronize with the bridge periodically. To enable periodic synchronization of an object, call its `enablePeriodicSync(bool periodicSyncOn)` with `periodicSyncOn = true/false` to enable/disable, e.g.
 ```c++
 for (auto light : lights)
-    light->enablePeriodicSync(true);
+    light.enablePeriodicSync(true);
 ````
 The default synchronization interval is 10 seconds. The interval can be changed in the following way:
 ```c++

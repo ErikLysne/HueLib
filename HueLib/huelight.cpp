@@ -155,6 +155,11 @@ bool HueLight::hasValidConstructor() const
     return m_validConstructor;
 }
 
+bool HueLight::isValid() const
+{
+    return hasValidConstructor();
+}
+
 int HueLight::ID() const
 {
     return m_ID;

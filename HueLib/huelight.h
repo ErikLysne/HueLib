@@ -17,6 +17,7 @@ public:
     static HueLightList discoverLights(HueBridge* bridge);
 
     bool hasValidConstructor() const;
+    bool isValid() const;
     int ID() const;
     Light::State state() const;
     Light::Name name() const;

@@ -17,7 +17,7 @@ public:
     static HueGroupList discoverGroups(HueBridge* bridge);
 
     bool hasValidConstructor() const;
-
+    bool isValid() const;
     int ID() const;
     Group::Action action() const;
     Group::Lights lights() const;

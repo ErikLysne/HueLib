@@ -142,6 +142,11 @@ bool HueGroup::hasValidConstructor() const
     return m_validConstructor;
 }
 
+bool HueGroup::isValid() const
+{
+    return hasValidConstructor();
+}
+
 int HueGroup::ID() const
 {
     return m_ID;
