@@ -3,15 +3,18 @@
 
 #include "hueabstractobject.h"
 #include "huetypes.h"
+#include "hueobjectlist.h"
 
 class HueGroup : public HueAbstractObject
 {
     Q_OBJECT
 public:
+    HueGroup();
+    HueGroup(HueBridge* bridge);
     HueGroup(const HueGroup& rhs);
     HueGroup operator=(const HueGroup& rhs);
 
-    static QList<HueGroup*> discoverGroups(HueBridge* bridge);
+    static HueGroupList discoverGroups(HueBridge* bridge);
 
     bool hasValidConstructor() const;
 
@@ -30,7 +33,6 @@ public:
 protected:
     static bool constructHueGroup(int ID, QJsonObject json, HueGroup* group);
 
-    HueGroup(HueBridge* bridge);
     HueGroup(HueBridge* bridge,
              int ID,
              Group::Action action, Group::Lights lights,

@@ -4,18 +4,34 @@
 #include "huerequest.h"
 #include "huereply.h"
 
-HueGroup::HueGroup(HueBridge* bridge) :
-    HueAbstractObject(bridge),
-    m_ID(),
-    m_action(),
-    m_lights(),
-    m_sensors(),
-    m_state(),
-    m_name(),
-    m_type(),
-    m_groupClass(),
-    m_recycle(),
-    m_validConstructor(false)
+HueGroup::HueGroup()
+    : HueAbstractObject(nullptr)
+    , m_ID()
+    , m_action()
+    , m_lights()
+    , m_sensors()
+    , m_state()
+    , m_name()
+    , m_type()
+    , m_groupClass()
+    , m_recycle()
+    , m_validConstructor(false)
+{
+
+}
+
+HueGroup::HueGroup(HueBridge* bridge)
+    : HueAbstractObject(bridge)
+    , m_ID()
+    , m_action()
+    , m_lights()
+    , m_sensors()
+    , m_state()
+    , m_name()
+    , m_type()
+    , m_groupClass()
+    , m_recycle()
+    , m_validConstructor(false)
 {
 
 }
@@ -25,34 +41,34 @@ HueGroup::HueGroup(HueBridge* bridge,
                    Group::Action action, Group::Lights lights,
                    Group::Sensors sensors, Group::State state,
                    Group::Name name, Group::Type type,
-                   Group::GroupClass groupClass, Group::Recycle recycle) :
-    HueAbstractObject(bridge),
-    m_ID(ID),
-    m_action(action),
-    m_lights(lights),
-    m_sensors(sensors),
-    m_state(state),
-    m_name(name),
-    m_type(type),
-    m_groupClass(groupClass),
-    m_recycle(recycle),
-    m_validConstructor(true)
+                   Group::GroupClass groupClass, Group::Recycle recycle)
+    : HueAbstractObject(bridge)
+    , m_ID(ID)
+    , m_action(action)
+    , m_lights(lights)
+    , m_sensors(sensors)
+    , m_state(state)
+    , m_name(name)
+    , m_type(type)
+    , m_groupClass(groupClass)
+    , m_recycle(recycle)
+    , m_validConstructor(true)
 {
 
 }
 
-HueGroup::HueGroup(const HueGroup& rhs) :
-    HueAbstractObject(rhs.getBridge()),
-    m_ID(rhs.m_ID),
-    m_action(rhs.m_action),
-    m_lights(rhs.m_lights),
-    m_sensors(rhs.m_sensors),
-    m_state(rhs.m_state),
-    m_name(rhs.m_name),
-    m_type(rhs.m_type),
-    m_groupClass(rhs.m_groupClass),
-    m_recycle(rhs.m_recycle),
-    m_validConstructor(rhs.m_validConstructor)
+HueGroup::HueGroup(const HueGroup& rhs)
+    : HueAbstractObject(rhs.getBridge())
+    , m_ID(rhs.m_ID)
+    , m_action(rhs.m_action)
+    , m_lights(rhs.m_lights)
+    , m_sensors(rhs.m_sensors)
+    , m_state(rhs.m_state)
+    , m_name(rhs.m_name)
+    , m_type(rhs.m_type)
+    , m_groupClass(rhs.m_groupClass)
+    , m_recycle(rhs.m_recycle)
+    , m_validConstructor(rhs.m_validConstructor)
 {
 
 }
@@ -79,9 +95,11 @@ HueGroup HueGroup::operator=(const HueGroup &rhs)
 }
 
 
-QList<HueGroup*> HueGroup::discoverGroups(HueBridge *bridge)
+HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
 {
-    QList<HueGroup*> groups;
+    typedef std::vector<std::shared_ptr<HueGroup>> GroupVector;
+
+    std::shared_ptr<GroupVector> groups = std::make_shared<GroupVector>();
 
     HueRequest request("groups", QJsonObject(), HueRequest::get);
     HueReply reply = bridge->sendRequest(request);
@@ -110,15 +128,13 @@ QList<HueGroup*> HueGroup::discoverGroups(HueBridge *bridge)
         int ID = iter.key();
         QJsonObject json = iter.value();
 
-        HueGroup* group = new HueGroup(bridge);
+        std::shared_ptr<HueGroup> group = std::make_shared<HueGroup>(bridge);
 
-        if (HueGroup::constructHueGroup(ID, json, group))
-            groups.append(group);
-        else
-            delete group;
+        if (HueGroup::constructHueGroup(ID, json, group.get()))
+            groups.get()->push_back(std::move(group));
     }
 
-    return groups;
+    return HueGroupList(std::move(groups));
 }
 
 bool HueGroup::hasValidConstructor() const

@@ -8,11 +8,11 @@
 #include "huerequest.h"
 #include "huereply.h"
 
-HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam) :
-    m_nam(nam),
-    m_ip(ip),
-    m_username(username),
-    m_sleepTimer(new QTimer)
+HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam)
+    : m_nam(nam)
+    , m_ip(ip)
+    , m_username(username)
+    , m_sleepTimer(new QTimer)
 {
     m_nam->setParent(this);
     m_sleepTimer->setSingleShot(true);

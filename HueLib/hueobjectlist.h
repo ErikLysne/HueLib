@@ -112,7 +112,7 @@ typename HueObjectList<ObjectType>::iterator HueObjectList<ObjectType>::end() co
 template<typename HueObject>
 typename std::shared_ptr<HueObject> HueObjectList<HueObject>::find(int ID) const
 {
-    std::shared_ptr<HueObject> retObject;
+    std::shared_ptr<HueObject> retObject = std::make_shared<HueObject>();
 
     for (auto object : *m_objectList.get())
         if (object.get()->ID() == ID)
@@ -124,7 +124,7 @@ typename std::shared_ptr<HueObject> HueObjectList<HueObject>::find(int ID) const
 template<typename HueObject>
 typename std::shared_ptr<HueObject> HueObjectList<HueObject>::find(QString name) const
 {
-    std::shared_ptr<HueObject> retObject;
+    std::shared_ptr<HueObject> retObject = std::make_shared<HueObject>();
 
     for (auto object : *m_objectList.get())
         if (object.get()->name().getName() == name)
@@ -174,6 +174,9 @@ const ObjectType& HueObjectList<ObjectType>::iterator::operator*() const
 
 class HueLight;
 typedef HueObjectList<HueLight> HueLightList;
+
+class HueGroup;
+typedef HueObjectList<HueGroup> HueGroupList;
 
 
 #endif // HUEOBJECTLIST_H
