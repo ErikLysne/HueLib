@@ -119,7 +119,7 @@ light1->setHue(65535); // red
 light2->setHue(21845); // green
 light3->setHue(43690); // blue
 ```
-The following functions can be called on `HueLight` objects and `HueGroup` objects to change their properties:
+The following functions can be called on `HueLight` objects and `HueGroup` objects to change their states:
 ```c++
 bool turnOn();
 bool turnOff();
