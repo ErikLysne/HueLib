@@ -80,7 +80,7 @@ The following code discovers lights and groups on the network and creates an obj
 HueBridge* bridge = new HueBridge("10.0.1.14", "1028d66426293e821ecfd9ef1a0731df");
 
 HueLightList lights = HueLight::discoverLights(bridge);
-HueLightGroup groups = HueGroup::discoverGroups(bridge);
+HueGroupList groups = HueGroup::discoverGroups(bridge);
 
 qDebug() << "Lights found: " << lights.size();
 qDebug() << "Groups found: " << groups.size();
