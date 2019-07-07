@@ -4,20 +4,38 @@
 #include "huerequest.h"
 #include "huereply.h"
 
-HueLight::HueLight(HueBridge* bridge) :
-    HueAbstractObject(bridge),
-    m_ID(),
-    m_state(),
-    m_name(),
-    m_type(),
-    m_uniqueID(),
-    m_softwareVersion(),
-    m_softwareUpdate(),
-    m_softwareConfigID(),
-    m_productName(),
-    m_manufacturer(),
-    m_productID(),
-    m_validConstructor(false)
+HueLight::HueLight()
+    : HueAbstractObject(nullptr)
+    , m_ID()
+    , m_state()
+    , m_name()
+    , m_type()
+    , m_uniqueID()
+    , m_softwareVersion()
+    , m_softwareUpdate()
+    , m_softwareConfigID()
+    , m_productName()
+    , m_manufacturer()
+    , m_productID()
+    , m_validConstructor(false)
+{
+
+}
+
+HueLight::HueLight(HueBridge* bridge)
+    : HueAbstractObject(bridge)
+    , m_ID()
+    , m_state()
+    , m_name()
+    , m_type()
+    , m_uniqueID()
+    , m_softwareVersion()
+    , m_softwareUpdate()
+    , m_softwareConfigID()
+    , m_productName()
+    , m_manufacturer()
+    , m_productID()
+    , m_validConstructor(false)
 {
 
 }
@@ -31,38 +49,38 @@ HueLight::HueLight(HueBridge* bridge,
                    Light::SoftwareConfigID softwareConfigID,
                    Light::ProductName productName,
                    Light::Manufacturer manufacturer,
-                   Light::ProductID productID) :
-    HueAbstractObject(bridge),
-    m_ID(ID),
-    m_state(state),
-    m_name(name),
-    m_type(type),
-    m_uniqueID(uniqueID),
-    m_softwareVersion(softwareVersion),
-    m_softwareUpdate(softwareUpdate),
-    m_softwareConfigID(softwareConfigID),
-    m_productName(productName),
-    m_manufacturer(manufacturer),
-    m_productID(productID),
-    m_validConstructor(true)
+                   Light::ProductID productID)
+    : HueAbstractObject(bridge)
+    , m_ID(ID)
+    , m_state(state)
+    , m_name(name)
+    , m_type(type)
+    , m_uniqueID(uniqueID)
+    , m_softwareVersion(softwareVersion)
+    , m_softwareUpdate(softwareUpdate)
+    , m_softwareConfigID(softwareConfigID)
+    , m_productName(productName)
+    , m_manufacturer(manufacturer)
+    , m_productID(productID)
+    , m_validConstructor(true)
 {
 
 }
 
-HueLight::HueLight(const HueLight& rhs) :
-    HueAbstractObject(rhs.getBridge()),
-    m_ID(rhs.m_ID),
-    m_state(rhs.m_state),
-    m_name(rhs.m_name),
-    m_type(rhs.m_type),
-    m_uniqueID(rhs.m_uniqueID),
-    m_softwareVersion(rhs.m_softwareVersion),
-    m_softwareUpdate(rhs.m_softwareUpdate),
-    m_softwareConfigID(rhs.m_softwareConfigID),
-    m_productName(rhs.m_productName),
-    m_manufacturer(rhs.m_manufacturer),
-    m_productID(rhs.m_productID),
-    m_validConstructor(rhs.m_validConstructor)
+HueLight::HueLight(const HueLight& rhs)
+    : HueAbstractObject(rhs.getBridge())
+    , m_ID(rhs.m_ID)
+    , m_state(rhs.m_state)
+    , m_name(rhs.m_name)
+    , m_type(rhs.m_type)
+    , m_uniqueID(rhs.m_uniqueID)
+    , m_softwareVersion(rhs.m_softwareVersion)
+    , m_softwareUpdate(rhs.m_softwareUpdate)
+    , m_softwareConfigID(rhs.m_softwareConfigID)
+    , m_productName(rhs.m_productName)
+    , m_manufacturer(rhs.m_manufacturer)
+    , m_productID(rhs.m_productID)
+    , m_validConstructor(rhs.m_validConstructor)
 {
 
 }
@@ -90,9 +108,11 @@ HueLight HueLight::operator=(const HueLight &rhs)
     return *this;
 }
 
-QList<HueLight*> HueLight::discoverLights(HueBridge* bridge)
+HueLightList HueLight::discoverLights(HueBridge* bridge)
 {
-    QList<HueLight*> lights;
+    typedef std::vector<std::shared_ptr<HueLight>> LightVector;
+
+    std::shared_ptr<LightVector> lights = std::make_shared<LightVector>();
 
     HueRequest request("lights", QJsonObject(), HueRequest::get);
     HueReply reply = bridge->sendRequest(request);
@@ -121,15 +141,13 @@ QList<HueLight*> HueLight::discoverLights(HueBridge* bridge)
         int ID = iter.key();
         QJsonObject json = iter.value();
 
-        HueLight* light = new HueLight(bridge);
+        std::shared_ptr<HueLight> light = std::make_shared<HueLight>(bridge);
 
-        if (HueLight::constructHueLight(ID, json, light))
-            lights.append(light);
-        else
-            delete light;
+        if (HueLight::constructHueLight(ID, json, light.get()))
+            lights.get()->push_back(std::move(light));
     }
 
-    return lights;
+    return HueLightList(std::move(lights));
 }
 
 bool HueLight::hasValidConstructor() const

@@ -1,4 +1,5 @@
 #include "huebridge.h"
+
 #include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonArray>

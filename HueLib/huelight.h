@@ -3,15 +3,18 @@
 
 #include "hueabstractobject.h"
 #include "huetypes.h"
+#include "hueobjectlist.h"
 
 class HueLight : public HueAbstractObject
 {
     Q_OBJECT
 public:
+    HueLight();
+    HueLight(HueBridge* bridge);
     HueLight(const HueLight& rhs);
     HueLight operator=(const HueLight& rhs);
 
-    static QList<HueLight*> discoverLights(HueBridge* bridge);
+    static HueLightList discoverLights(HueBridge* bridge);
 
     bool hasValidConstructor() const;
     int ID() const;
@@ -31,7 +34,6 @@ public:
 protected:
     static bool constructHueLight(int ID, QJsonObject json, HueLight* light);
 
-    HueLight(HueBridge* bridge);
     HueLight(HueBridge* bridge,
              int ID,
              Light::State state, Light::Name name,

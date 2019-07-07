@@ -1,4 +1,6 @@
 #include "huelightmodel.h"
+
+#include "treeitem.h"
 #include "../huelight.h"
 
 HueLightModel::HueLightModel(std::shared_ptr<HueLight> light, QObject* parent) :

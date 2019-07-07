@@ -1,4 +1,6 @@
 #include "huegroupmodel.h"
+
+#include "treeitem.h"
 #include "../huegroup.h"
 
 HueGroupModel::HueGroupModel(std::shared_ptr<HueGroup> group, QObject* parent) :

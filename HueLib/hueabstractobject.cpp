@@ -1,4 +1,5 @@
 #include "hueabstractobject.h"
+
 #include <QJsonArray>
 
 #include "huebridge.h"
@@ -7,7 +8,7 @@
 #include "huesynchronizer.h"
 
 HueAbstractObject::HueAbstractObject(HueBridge* bridge) :
-    QObject(bridge),
+    QObject(nullptr),
     m_bridge(bridge)
 {
 

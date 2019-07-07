@@ -10,6 +10,7 @@ QT       -= gui
 TARGET = HueLib
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -46,6 +47,7 @@ HEADERS += \
         HueLib/huegroup.h \
         HueLib/huelib.h \
         HueLib/huelight.h \
+        HueLib/hueobjectlist.h \
         HueLib/huereply.h \
         HueLib/huerequest.h \
         HueLib/huesynchronizer.h \

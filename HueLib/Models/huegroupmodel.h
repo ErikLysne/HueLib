@@ -1,7 +1,6 @@
 #ifndef HUEGROUPMODEL_H
 #define HUEGROUPMODEL_H
 
-
 #include "abstracttreemodel.h"
 
 class HueGroup;
