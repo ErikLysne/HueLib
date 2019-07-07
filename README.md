@@ -96,7 +96,7 @@ for (auto group : groups) {
 ```
 <a name="control"></a>
 ## 5. Controlling HueLights and HueGroups
-Once you have discovered the lights and/or groups on the network, you can manipulate their states by calling set-functions directly on the objects. You can fetch a specific light/group through its ID number or name using the functions `fetch(int ID)` or `fetch(QString name)` respectively. This will give you an `std::shared_ptr<HueLight>` or `std::shared_ptr<HueGroup>`. You can also use `fetchRaw(int ID)` or `fetchRaw(QString name)` to get a raw pointer. The following example shows how to turn of all lights in a group labled "Living room" and set the brightness in "Bedroom" to 50:
+Once you have discovered the lights and/or groups on the network, you can manipulate their states by calling set-functions directly on the objects. You can fetch a specific light/group through its ID number or name using the functions `fetch(int ID)` or `fetch(QString name)` respectively. This will give you an `std::shared_ptr<HueLight>` or `std::shared_ptr<HueGroup>`. You can also use `fetchRaw(int ID)` or `fetchRaw(QString name)` to get a raw pointer. The following example shows how to turn off all the lights in a group labled "Living room" and set the brightness in "Bedroom" to 50:
 ```c++
 HueGroup* livingroom = groups.fetchRaw("Living Room");
 if (livingroom->isValid())
