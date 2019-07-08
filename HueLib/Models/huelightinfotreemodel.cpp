@@ -7,13 +7,28 @@ HueLightInfoTreeModel::HueLightInfoTreeModel(std::shared_ptr<HueLight> light, QO
     : AbstractTreeModel(parent)
     , m_light(light)
 {
-    setRootItem(new TreeItem({tr("Parameter"), tr("Value")}));
-    setupModelData(getRootItem());
+    connect(m_light.get(), &HueLight::synchronized,
+            this, &HueLightInfoTreeModel::update);
+
+    update();
 }
 
 HueLightInfoTreeModel::~HueLightInfoTreeModel()
 {
     m_light.reset();
+}
+
+void HueLightInfoTreeModel::update()
+{
+    beginResetModel();
+
+    TreeItem* rootItem = getRootItem();
+    if (rootItem != nullptr)
+        delete getRootItem();
+
+    setRootItem(new TreeItem({tr("Parameter"), tr("Value")}));
+    setupModelData(getRootItem());
+    endResetModel();
 }
 
 void HueLightInfoTreeModel::setupModelData(TreeItem* rootItem)

@@ -2,18 +2,34 @@
 
 #include "treeitem.h"
 #include "../huegroup.h"
+#include <QtDebug>
 
 HueGroupInfoTreeModel::HueGroupInfoTreeModel(std::shared_ptr<HueGroup> group, QObject* parent)
     : AbstractTreeModel(parent)
     , m_group(group)
 {
-    setRootItem(new TreeItem({tr("Parameter"), tr("Value")}));
-    setupModelData(getRootItem());
+    connect(m_group.get(), &HueGroup::synchronized,
+            this, &HueGroupInfoTreeModel::update);
+
+    update();
 }
 
 HueGroupInfoTreeModel::~HueGroupInfoTreeModel()
 {
     m_group.reset();
+}
+
+void HueGroupInfoTreeModel::update()
+{
+    beginResetModel();
+
+    TreeItem* rootItem = getRootItem();
+    if (rootItem != nullptr)
+        delete getRootItem();
+
+    setRootItem(new TreeItem({tr("Parameter"), tr("Value")}));
+    setupModelData(getRootItem());
+    endResetModel();
 }
 
 void HueGroupInfoTreeModel::setupModelData(TreeItem *rootItem)

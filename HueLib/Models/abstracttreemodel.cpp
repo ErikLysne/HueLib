@@ -4,13 +4,14 @@
 
 AbstractTreeModel::AbstractTreeModel(QObject* parent)
     : QAbstractItemModel(parent)
+    , m_rootItem(nullptr)
 {
 
 }
 
 AbstractTreeModel::~AbstractTreeModel()
 {
-
+    delete m_rootItem;
 }
 
 QModelIndex AbstractTreeModel::index(int row, int column, const QModelIndex &parent) const

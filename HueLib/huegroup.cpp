@@ -238,6 +238,7 @@ bool HueGroup::synchronize()
         if (constructHueGroup(m_ID, json, &synchronizedGroup)) {
             if (synchronizedGroup.hasValidConstructor()) {
                 *this = synchronizedGroup;
+                emit synchronized();
                 return true;
             }
         }

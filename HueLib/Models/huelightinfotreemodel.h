@@ -12,6 +12,9 @@ public:
     explicit HueLightInfoTreeModel(std::shared_ptr<HueLight> light, QObject* parent = nullptr);
     ~HueLightInfoTreeModel() override;
 
+private slots:
+    void update();
+
 private:
     void setupModelData(TreeItem* rootItem) override;
 
