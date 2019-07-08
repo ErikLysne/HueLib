@@ -5,12 +5,12 @@
 
 class HueLight;
 
-class HueLightModel : public AbstractTreeModel
+class HueLightInfoTreeModel : public AbstractTreeModel
 {
     Q_OBJECT
 public:
-    explicit HueLightModel(std::shared_ptr<HueLight> light, QObject* parent = nullptr);
-    ~HueLightModel() override;
+    explicit HueLightInfoTreeModel(std::shared_ptr<HueLight> light, QObject* parent = nullptr);
+    ~HueLightInfoTreeModel() override;
 
 private:
     void setupModelData(TreeItem* rootItem) override;

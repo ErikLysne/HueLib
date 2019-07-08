@@ -1,9 +1,9 @@
-#include "huegroupmodel.h"
+#include "huegroupinfotreemodel.h"
 
 #include "treeitem.h"
 #include "../huegroup.h"
 
-HueGroupModel::HueGroupModel(std::shared_ptr<HueGroup> group, QObject* parent)
+HueGroupInfoTreeModel::HueGroupInfoTreeModel(std::shared_ptr<HueGroup> group, QObject* parent)
     : AbstractTreeModel(parent)
     , m_group(group)
 {
@@ -11,12 +11,12 @@ HueGroupModel::HueGroupModel(std::shared_ptr<HueGroup> group, QObject* parent)
     setupModelData(getRootItem());
 }
 
-HueGroupModel::~HueGroupModel()
+HueGroupInfoTreeModel::~HueGroupInfoTreeModel()
 {
     m_group.reset();
 }
 
-void HueGroupModel::setupModelData(TreeItem *rootItem)
+void HueGroupInfoTreeModel::setupModelData(TreeItem *rootItem)
 {
     int ID = m_group->ID();
     Group::Name name = m_group->name();
