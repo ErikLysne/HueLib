@@ -39,6 +39,4 @@ private:
     QString m_errorDescription;
 };
 
-Q_DECLARE_METATYPE(HueReply);
-
 #endif // HUEREPLY_H

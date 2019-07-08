@@ -2,8 +2,8 @@
 
 #include "treeitem.h"
 
-AbstractTreeModel::AbstractTreeModel(QObject* parent) :
-    QAbstractItemModel(parent)
+AbstractTreeModel::AbstractTreeModel(QObject* parent)
+    : QAbstractItemModel(parent)
 {
 
 }

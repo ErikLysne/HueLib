@@ -1,17 +1,17 @@
 #include "huerequest.h"
 
-HueRequest::HueRequest(QString urlPath, QJsonObject json, Method method) :
-    m_urlPath(urlPath),
-    m_json(json),
-    m_method(method)
+HueRequest::HueRequest(QString urlPath, QJsonObject json, Method method)
+    : m_urlPath(urlPath)
+    , m_json(json)
+    , m_method(method)
 {
 
 }
 
-HueRequest::HueRequest(const HueRequest& rhs) :
-    m_urlPath(rhs.m_urlPath),
-    m_json(rhs.m_json),
-    m_method(rhs.m_method)
+HueRequest::HueRequest(const HueRequest& rhs)
+    : m_urlPath(rhs.m_urlPath)
+    , m_json(rhs.m_json)
+    , m_method(rhs.m_method)
 {
 
 }

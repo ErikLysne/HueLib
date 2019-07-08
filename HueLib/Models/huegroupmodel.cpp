@@ -3,9 +3,9 @@
 #include "treeitem.h"
 #include "../huegroup.h"
 
-HueGroupModel::HueGroupModel(std::shared_ptr<HueGroup> group, QObject* parent) :
-    AbstractTreeModel(parent),
-    m_group(group)
+HueGroupModel::HueGroupModel(std::shared_ptr<HueGroup> group, QObject* parent)
+    : AbstractTreeModel(parent)
+    , m_group(group)
 {
     setRootItem(new TreeItem({tr("Parameter"), tr("Value")}));
     setupModelData(getRootItem());

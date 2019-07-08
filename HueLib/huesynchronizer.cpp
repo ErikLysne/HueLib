@@ -2,10 +2,10 @@
 
 #include "hueabstractobject.h"
 
-HueSynchronizer::HueSynchronizer() :
-    m_hueObjects(),
-    m_timer(new QTimer(this)),
-    m_isActive(false)
+HueSynchronizer::HueSynchronizer()
+    : m_hueObjects()
+    , m_timer(new QTimer(this))
+    , m_isActive(false)
 {
     m_timer->setSingleShot(false);
     m_timer->setInterval(DEFAULT_HUE_SYNC_INTERVAL_MILLISECONDS);

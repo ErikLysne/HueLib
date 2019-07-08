@@ -3,9 +3,9 @@
 #include "treeitem.h"
 #include "../huelight.h"
 
-HueLightModel::HueLightModel(std::shared_ptr<HueLight> light, QObject* parent) :
-    AbstractTreeModel(parent),
-    m_light(light)
+HueLightModel::HueLightModel(std::shared_ptr<HueLight> light, QObject* parent)
+    : AbstractTreeModel(parent)
+    , m_light(light)
 {
     setRootItem(new TreeItem({tr("Parameter"), tr("Value")}));
     setupModelData(getRootItem());

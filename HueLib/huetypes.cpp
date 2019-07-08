@@ -10,19 +10,19 @@
 
 // ---------- STATE ----------
 
-Light::State::State() :
-    m_on(false),
-    m_reachable(false),
-    m_brightness(0),
-    m_hue(0),
-    m_saturation(0),
-    m_colorTemp(0),
-    m_xValue(0),
-    m_yValue(0),
-    m_effect(""),
-    m_alert(""),
-    m_colorMode(""),
-    m_mode("")
+Light::State::State()
+    : m_on(false)
+    , m_reachable(false)
+    , m_brightness(0)
+    , m_hue(0)
+    , m_saturation(0)
+    , m_colorTemp(0)
+    , m_xValue(0)
+    , m_yValue(0)
+    , m_effect("")
+    , m_alert("")
+    , m_colorMode("")
+    , m_mode("")
 {
 
 }
@@ -169,8 +169,8 @@ void Light::State::setMode(const QString mode)
 }
 
 // ---------- TYPE ----------
-Light::Type::Type() :
-    m_type("")
+Light::Type::Type()
+    : m_type("")
 {
 
 }
@@ -191,8 +191,8 @@ void Light::Type::setType(const QString type)
 }
 
 // ---------- Name ----------
-Light::Name::Name() :
-    m_name("")
+Light::Name::Name()
+    : m_name("")
 {
 
 }
@@ -213,8 +213,8 @@ void Light::Name::setName(const QString name)
 }
 
 // ---------- Unique ID ----------
-Light::UniqueID::UniqueID() :
-    m_uniqueID("")
+Light::UniqueID::UniqueID()
+    : m_uniqueID("")
 {
 
 }
@@ -235,8 +235,8 @@ void Light::UniqueID::setUniqueID(const QString uniqueID)
 }
 
 // ---------- SOFTWARE VERSION ----------
-Light::SoftwareVersion::SoftwareVersion() :
-    m_softwareVersion("")
+Light::SoftwareVersion::SoftwareVersion()
+    : m_softwareVersion("")
 {
 
 }
@@ -257,9 +257,9 @@ void Light::SoftwareVersion::setSoftwareVersion(const QString softwareVersion)
 }
 
 // ---------- SOFTWARE UPDATE ----------
-Light::SoftwareUpdate::SoftwareUpdate() :
-    m_state(""),
-    m_lastInstall("")
+Light::SoftwareUpdate::SoftwareUpdate()
+    : m_state("")
+    , m_lastInstall("")
 {
 
 }
@@ -302,8 +302,8 @@ void Light::SoftwareUpdate::setLastInstall(const QString lastInstall)
 }
 
 // ---------- SOFTWARE CONFIG ID ----------
-Light::SoftwareConfigID::SoftwareConfigID() :
-    m_softwareConfigID("")
+Light::SoftwareConfigID::SoftwareConfigID()
+    : m_softwareConfigID("")
 {
 
 }
@@ -324,8 +324,8 @@ void Light::SoftwareConfigID::setSoftwareConfigID(const QString softwareConfigID
 }
 
 // ---------- PRODUCT NAME ----------
-Light::ProductName::ProductName() :
-    m_productName("")
+Light::ProductName::ProductName()
+    : m_productName("")
 {
 
 }
@@ -346,8 +346,8 @@ void Light::ProductName::setProductName(const QString productName)
 }
 
 // ---------- MANUFACTURER ----------
-Light::Manufacturer::Manufacturer() :
-    m_manufacturer("")
+Light::Manufacturer::Manufacturer()
+    : m_manufacturer("")
 {
 
 }
@@ -368,8 +368,8 @@ void Light::Manufacturer::setManufacturer(const QString manufacturer)
 }
 
 // ---------- PRODUCT ID ----------
-Light::ProductID::ProductID() :
-    m_productID("")
+Light::ProductID::ProductID()
+    : m_productID("")
 {
 
 }
@@ -396,17 +396,17 @@ void Light::ProductID::setProductID(const QString productID)
  */
 
 // ---------- ACTION ----------
-Group::Action::Action() :
-    m_on(false),
-    m_brightness(0),
-    m_hue(0),
-    m_saturation(0),
-    m_colorTemp(0),
-    m_xValue(0),
-    m_yValue(0),
-    m_effect(""),
-    m_alert(""),
-    m_colorMode("")
+Group::Action::Action()
+    : m_on(false)
+    , m_brightness(0)
+    , m_hue(0)
+    , m_saturation(0)
+    , m_colorTemp(0)
+    , m_xValue(0)
+    , m_yValue(0)
+    , m_effect("")
+    , m_alert("")
+    , m_colorMode("")
 {
 
 }
@@ -529,14 +529,14 @@ void Group::Action::setColorMode(const QString colorMode)
 }
 
 // ---------- LIGHTS ----------
-Group::Lights::Lights() :
-    m_lights()
+Group::Lights::Lights()
+    : m_lights()
 {
 
 }
 
-Group::Lights::Lights(const QJsonValue json) :
-    m_lights()
+Group::Lights::Lights(const QJsonValue json)
+    : m_lights()
 {
     QJsonArray lightsJson = json.toArray();
     for (auto iter = lightsJson.begin(); iter != lightsJson.end(); ++iter) {
@@ -555,8 +555,8 @@ void Group::Lights::setLights(const QList<QString> lights)
 }
 
 // ---------- SENSORS ----------
-Group::Sensors::Sensors() :
-    m_sensors()
+Group::Sensors::Sensors()
+    : m_sensors()
 {
 
 }
@@ -581,9 +581,9 @@ void Group::Sensors::setSensors(const QList<QString> sensors)
 }
 
 // ---------- STATE ----------
-Group::State::State() :
-    m_allOn(false),
-    m_anyOn(false)
+Group::State::State()
+    : m_allOn(false)
+    , m_anyOn(false)
 {
 
 }
@@ -622,8 +622,8 @@ void Group::State::setAnyOn(const bool anyOn)
 }
 
 // ---------- NAME ----------
-Group::Name::Name() :
-    m_name("")
+Group::Name::Name()
+    : m_name("")
 {
 
 }
@@ -644,8 +644,8 @@ void Group::Name::setName(const QString name)
 }
 
 // ---------- TYPE ----------
-Group::Type::Type() :
-    m_type("")
+Group::Type::Type()
+    : m_type("")
 {
 
 }
@@ -666,8 +666,8 @@ void Group::Type::setType(const QString type)
 }
 
 // ---------- GROUP CLASS ----------
-Group::GroupClass::GroupClass() :
-    m_groupClass("")
+Group::GroupClass::GroupClass()
+    : m_groupClass("")
 {
 
 }
@@ -688,8 +688,8 @@ void Group::GroupClass::setGroupClass(const QString groupClass)
 }
 
 // ---------- Recycle ----------
-Group::Recycle::Recycle() :
-    m_recycle(false)
+Group::Recycle::Recycle()
+    : m_recycle(false)
 {
 
 }
