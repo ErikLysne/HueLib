@@ -5,18 +5,18 @@
 #include <memory>
 #include <vector>
 
-template <typename ObjectType>
+template <typename HueObject>
 class HueObjectList
 {
 public:
-    typedef std::vector<std::shared_ptr<ObjectType>> ObjectList;
+    typedef std::vector<std::shared_ptr<HueObject>> ObjectList;
 
     class iterator {
     public:
         iterator(typename ObjectList::iterator iter);
         iterator operator++();
         bool operator!=(const iterator& rhs) const;
-        const ObjectType& operator*() const;
+        const HueObject& operator*() const;
     private:
         typename ObjectList::iterator m_iter;
     };
@@ -27,58 +27,60 @@ public:
     ~HueObjectList();
     HueObjectList(const HueObjectList& rhs);
     HueObjectList(HueObjectList&& rhs);
-    HueObjectList& operator=(const HueObjectList& rhs);
-    HueObjectList& operator=(HueObjectList&& rhs);
+    const HueObjectList& operator=(const HueObjectList& rhs);
+    const HueObjectList& operator=(HueObjectList&& rhs);
 
     int size() const;
+
     iterator begin() const;
     iterator end() const;
 
-    std::shared_ptr<ObjectType> fetch(int ID) const;
-    std::shared_ptr<ObjectType> fetch(QString name) const;
-    ObjectType* fetchRaw(int ID) const;
-    ObjectType* fetchRaw(QString name) const;
+    std::shared_ptr<HueObject> at(int index) const;
+    std::shared_ptr<HueObject> fetch(int ID) const;
+    std::shared_ptr<HueObject> fetch(QString name) const;
+    HueObject* fetchRaw(int ID) const;
+    HueObject* fetchRaw(QString name) const;
 
 private:
     std::shared_ptr<ObjectList> m_objectList;
 };
 
-template <typename ObjectType>
-HueObjectList<ObjectType>::HueObjectList()
+template <typename HueObject>
+HueObjectList<HueObject>::HueObjectList()
     : m_objectList(std::make_shared<ObjectList>())
 {
 
 }
 
-template <typename ObjectType>
-HueObjectList<ObjectType>::HueObjectList(std::shared_ptr<ObjectList> hueObjectList)
+template <typename HueObject>
+HueObjectList<HueObject>::HueObjectList(std::shared_ptr<ObjectList> hueObjectList)
     : m_objectList(hueObjectList)
 {
 
 }
 
-template <typename ObjectType>
-HueObjectList<ObjectType>::~HueObjectList<ObjectType>()
+template <typename HueObject>
+HueObjectList<HueObject>::~HueObjectList<HueObject>()
 {
 
 }
 
-template <typename ObjectType>
-HueObjectList<ObjectType>::HueObjectList(const HueObjectList& rhs)
+template <typename HueObject>
+HueObjectList<HueObject>::HueObjectList(const HueObjectList& rhs)
     : m_objectList(std::move(rhs.m_objectList))
 {
 
 }
 
-template <typename ObjectType>
-HueObjectList<ObjectType>::HueObjectList(HueObjectList&& rhs)
+template <typename HueObject>
+HueObjectList<HueObject>::HueObjectList(HueObjectList&& rhs)
     : m_objectList(std::move(rhs.m_objectList))
 {
 
 }
 
-template <typename ObjectType>
-HueObjectList<ObjectType>& HueObjectList<ObjectType>::operator=(const HueObjectList& rhs)
+template <typename HueObject>
+const HueObjectList<HueObject>& HueObjectList<HueObject>::operator=(const HueObjectList& rhs)
 {
     if (this == &rhs)
         return *this;
@@ -87,8 +89,8 @@ HueObjectList<ObjectType>& HueObjectList<ObjectType>::operator=(const HueObjectL
     return *this;
 }
 
-template <typename ObjectType>
-HueObjectList<ObjectType>& HueObjectList<ObjectType>::operator=(HueObjectList&& rhs)
+template <typename HueObject>
+const HueObjectList<HueObject>& HueObjectList<HueObject>::operator=(HueObjectList&& rhs)
 {
     if (this == &rhs)
         return *this;
@@ -97,22 +99,31 @@ HueObjectList<ObjectType>& HueObjectList<ObjectType>::operator=(HueObjectList&& 
     return *this;
 }
 
-template  <typename ObjectType>
-int HueObjectList<ObjectType>::size() const
+template  <typename HueObject>
+int HueObjectList<HueObject>::size() const
 {
     return m_objectList.get()->size();
 }
 
-template <typename ObjectType>
-typename HueObjectList<ObjectType>::iterator HueObjectList<ObjectType>::begin() const
+template <typename HueObject>
+typename HueObjectList<HueObject>::iterator HueObjectList<HueObject>::begin() const
 {
     return iterator(m_objectList.get()->begin());
 }
 
-template <typename ObjectType>
-typename HueObjectList<ObjectType>::iterator HueObjectList<ObjectType>::end() const
+template <typename HueObject>
+typename HueObjectList<HueObject>::iterator HueObjectList<HueObject>::end() const
 {
     return iterator(m_objectList.get()->end());
+}
+
+template <typename HueObject>
+std::shared_ptr<HueObject> HueObjectList<HueObject>::at(int index) const
+{
+    if (index > size())
+        return std::make_shared<HueObject>();
+
+    return m_objectList.get()->at(index);
 }
 
 template <typename HueObject>
@@ -152,28 +163,28 @@ HueObject* HueObjectList<HueObject>::fetchRaw(QString name) const
 }
 
 // Iterator functions
-template <typename ObjectType>
-HueObjectList<ObjectType>::iterator::iterator(typename ObjectList::iterator iter)
+template <typename HueObject>
+HueObjectList<HueObject>::iterator::iterator(typename ObjectList::iterator iter)
     : m_iter(iter)
 {
 
 }
 
-template <typename ObjectType>
-typename HueObjectList<ObjectType>::iterator HueObjectList<ObjectType>::iterator::operator++()
+template <typename HueObject>
+typename HueObjectList<HueObject>::iterator HueObjectList<HueObject>::iterator::operator++()
 {
     m_iter = std::next(m_iter);
     return *this;
 }
 
-template <typename ObjectType>
-bool HueObjectList<ObjectType>::iterator::operator!=(const HueObjectList<ObjectType>::iterator& rhs) const
+template <typename HueObject>
+bool HueObjectList<HueObject>::iterator::operator!=(const HueObjectList<HueObject>::iterator& rhs) const
 {
     return m_iter != rhs.m_iter;
 }
 
-template <typename ObjectType>
-const ObjectType& HueObjectList<ObjectType>::iterator::operator*() const
+template <typename HueObject>
+const HueObject& HueObjectList<HueObject>::iterator::operator*() const
 {
     return *(m_iter->get());
 }

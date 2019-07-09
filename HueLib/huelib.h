@@ -6,6 +6,7 @@
 #include "huegroup.h"
 #include "huesynchronizer.h"
 
+#include "Models/huegrouplistmodel.h"
 #include "Models/huelightinfotreemodel.h"
 #include "Models/huegroupinfotreemodel.h"
 

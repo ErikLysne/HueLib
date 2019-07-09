@@ -9,9 +9,9 @@ HueGroupInfoTreeModel::HueGroupInfoTreeModel(std::shared_ptr<HueGroup> group, QO
     , m_group(group)
 {
     connect(m_group.get(), &HueGroup::synchronized,
-            this, &HueGroupInfoTreeModel::update);
+            this, &HueGroupInfoTreeModel::reset);
 
-    update();
+    reset();
 }
 
 HueGroupInfoTreeModel::~HueGroupInfoTreeModel()
@@ -19,7 +19,7 @@ HueGroupInfoTreeModel::~HueGroupInfoTreeModel()
     m_group.reset();
 }
 
-void HueGroupInfoTreeModel::update()
+void HueGroupInfoTreeModel::reset()
 {
     beginResetModel();
 

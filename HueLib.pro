@@ -26,6 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         HueLib/Models/abstracttreemodel.cpp \
         HueLib/Models/huegroupinfotreemodel.cpp \
+        HueLib/Models/huegrouplistmodel.cpp \
         HueLib/Models/huelightinfotreemodel.cpp \
         HueLib/Models/treeitem.cpp \
         HueLib/hueabstractobject.cpp \
@@ -40,6 +41,7 @@ SOURCES += \
 HEADERS += \
         HueLib/Models/abstracttreemodel.h \
         HueLib/Models/huegroupinfotreemodel.h \
+        HueLib/Models/huegrouplistmodel.h \
         HueLib/Models/huelightinfotreemodel.h \
         HueLib/Models/treeitem.h \
         HueLib/hueabstractobject.h \

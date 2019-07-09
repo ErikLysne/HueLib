@@ -13,7 +13,7 @@ public:
     ~HueGroupInfoTreeModel() override;
 
 private slots:
-    void update();
+    void reset();
 
 private:
     void setupModelData(TreeItem* rootItem) override;
