@@ -10,7 +10,7 @@ QT       -= gui
 TARGET = HueLib
 TEMPLATE = lib
 CONFIG += staticlib
-CONFIG += c++14
+CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -28,6 +28,7 @@ SOURCES += \
         HueLib/Models/huegroupinfotreemodel.cpp \
         HueLib/Models/huegrouplistmodel.cpp \
         HueLib/Models/huelightinfotreemodel.cpp \
+        HueLib/Models/huelightlistmodel.cpp \
         HueLib/Models/treeitem.cpp \
         HueLib/hueabstractobject.cpp \
         HueLib/huebridge.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
         HueLib/Models/huegroupinfotreemodel.h \
         HueLib/Models/huegrouplistmodel.h \
         HueLib/Models/huelightinfotreemodel.h \
+        HueLib/Models/huelightlistmodel.h \
         HueLib/Models/treeitem.h \
         HueLib/hueabstractobject.h \
         HueLib/huebridge.h \

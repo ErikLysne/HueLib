@@ -18,6 +18,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
     std::shared_ptr<HueGroup> getGroup(const QModelIndex& index) const;
+
 private:
     std::shared_ptr<HueGroupList> m_groupList;
 

@@ -2,6 +2,8 @@
 
 #include "hueabstractobject.h"
 
+#include <QtDebug>
+
 HueSynchronizer::HueSynchronizer()
     : m_hueObjects()
     , m_timer(new QTimer(this))
@@ -53,14 +55,21 @@ void HueSynchronizer::addHueObject(HueAbstractObject* object)
 
 void HueSynchronizer::removeHueObject(HueAbstractObject* object)
 {
-    m_hueObjects.remove(object);
+    // Need to fix out-of-range error
+    /*
+    auto objectPosition = std::find(m_hueObjects.begin(), m_hueObjects.end(), object);
+
+    if (objectPosition != m_hueObjects.end())
+        m_hueObjects.erase(objectPosition);
 
     if (m_hueObjects.empty())
         stop();
+    */
 }
 
 void HueSynchronizer::synchronize()
 {
+    qDebug() << m_hueObjects.size();
     for (auto hueObject : m_hueObjects) {
         hueObject->synchronize();
     }

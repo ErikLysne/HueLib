@@ -9,7 +9,8 @@
 
 HueAbstractObject::HueAbstractObject(HueBridge* bridge) :
     QObject(nullptr),
-    m_bridge(bridge)
+    m_bridge(bridge),
+    m_syncEnabled(false)
 {
 
 }
@@ -134,9 +135,13 @@ void HueAbstractObject::enablePeriodicSync(bool periodicSyncOn)
 {
     if (periodicSyncOn) {
         m_synchronizer->instance().addHueObject(this);
+        m_syncEnabled = true;
     }
     else {
-        m_synchronizer->instance().removeHueObject(this);
+        if (m_syncEnabled)
+            m_synchronizer->instance().removeHueObject(this);
+
+        m_syncEnabled = false;
     }
 }
 

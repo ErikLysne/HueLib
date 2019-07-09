@@ -3,6 +3,7 @@
 #include "huebridge.h"
 #include "huerequest.h"
 #include "huereply.h"
+#include "huelight.h"
 
 HueGroup::HueGroup()
     : HueAbstractObject(nullptr)
@@ -97,8 +98,6 @@ HueGroup HueGroup::operator=(const HueGroup &rhs)
 
 HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
 {
-    typedef std::vector<std::shared_ptr<HueGroup>> GroupVector;
-
     std::shared_ptr<GroupVector> groups = std::make_shared<GroupVector>();
 
     HueRequest request("groups", QJsonObject(), HueRequest::get);
@@ -135,6 +134,17 @@ HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
     }
 
     return HueGroupList(std::move(groups));
+}
+
+HueLightList HueGroup::getLights(const HueLightList& lights) const
+{
+    LightVector foundLights;
+    for (auto lightIDs : m_lights.getLights()) {
+        int lightID = lightIDs.toInt();
+        foundLights.push_back(lights.fetch(lightID));
+    }
+
+    return HueLightList(std::make_shared<LightVector>(foundLights));
 }
 
 bool HueGroup::hasValidConstructor() const

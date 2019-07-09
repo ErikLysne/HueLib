@@ -195,5 +195,8 @@ typedef HueObjectList<HueLight> HueLightList;
 class HueGroup;
 typedef HueObjectList<HueGroup> HueGroupList;
 
+typedef std::vector<std::shared_ptr<HueLight>> LightVector;
+typedef std::vector<std::shared_ptr<HueGroup>> GroupVector;
+
 
 #endif // HUEOBJECTLIST_H

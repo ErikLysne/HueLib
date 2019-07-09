@@ -16,6 +16,8 @@ public:
 
     static HueGroupList discoverGroups(HueBridge* bridge);
 
+    HueLightList getLights(const HueLightList& lights) const;
+
     bool hasValidConstructor() const;
     bool isValid() const;
     int ID() const;

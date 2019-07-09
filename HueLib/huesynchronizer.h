@@ -33,7 +33,7 @@ private slots:
     void synchronize();
 
 private:
-    std::list<HueAbstractObject*> m_hueObjects;
+    std::vector<HueAbstractObject*> m_hueObjects;
     QTimer* m_timer;
     bool m_isActive;
 };

@@ -2,9 +2,9 @@
 
 #include "../huegroup.h"
 
-HueGroupListModel::HueGroupListModel(std::shared_ptr<HueGroupList> group, QObject* parent)
+HueGroupListModel::HueGroupListModel(std::shared_ptr<HueGroupList> groupList, QObject* parent)
     : QAbstractListModel(parent)
-    , m_groupList(group)
+    , m_groupList(groupList)
 {
 
 }
