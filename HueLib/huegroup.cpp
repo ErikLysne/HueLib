@@ -105,14 +105,14 @@ HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
 
     if (!reply.isValid() || reply.timedOut()) {
         qDebug() << "INVALID HUE REPLY";
-        qDebug() << "=============================";
+        qDebug() << "______________________________";
         qDebug() << "Is valid: " << reply.isValid();
         qDebug() << "Timed out: " << reply.timedOut();
         qDebug() << "HTTP status: " << reply.getHttpStatus();
         qDebug() << "Error type: " << reply.getErrorType();
         qDebug() << "Error address: " << reply.getErrorAddress();
         qDebug() << "Error description: " << reply.getErrorDescription();
-        qDebug() << "=============================";
+        qDebug() << "______________________________";
 
         return groups;
     }
@@ -129,8 +129,9 @@ HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
 
         std::shared_ptr<HueGroup> group = std::make_shared<HueGroup>(bridge);
 
-        if (HueGroup::constructHueGroup(ID, json, group.get()))
+        if (HueGroup::constructHueGroup(ID, json, group))
             groups.get()->push_back(std::move(group));
+
     }
 
     return HueGroupList(std::move(groups));
@@ -145,21 +146,6 @@ HueLightList HueGroup::getLights(const HueLightList& lights) const
     }
 
     return HueLightList(std::make_shared<LightVector>(foundLights));
-}
-
-bool HueGroup::hasValidConstructor() const
-{
-    return m_validConstructor;
-}
-
-bool HueGroup::isValid() const
-{
-    return hasValidConstructor();
-}
-
-int HueGroup::ID() const
-{
-    return m_ID;
 }
 
 Group::Action HueGroup::action() const
@@ -202,7 +188,7 @@ Group::Recycle HueGroup::recycle() const
     return m_recycle;
 }
 
-bool HueGroup::constructHueGroup(int ID, QJsonObject json, HueGroup* group)
+bool HueGroup::constructHueGroup(int ID, QJsonObject json, std::shared_ptr<HueGroup>& group)
 {
     bool jsonIsValid =
             json.contains("name")       &
@@ -226,12 +212,35 @@ bool HueGroup::constructHueGroup(int ID, QJsonObject json, HueGroup* group)
     Group::GroupClass groupClass(json["class"]);
     Group::Recycle recycle(json["recycle"]);
 
-    HueGroup newGroup(group->getBridge(), ID, action, lights, sensors,
-                      state, name, type, groupClass, recycle);
+    HueGroup* newGroup = new HueGroup(group->getBridge(),
+                                      ID,
+                                      action,
+                                      lights,
+                                      sensors,
+                                      state,
+                                      name,
+                                      type,
+                                      groupClass,
+                                      recycle);
 
-    *group = newGroup;
+    group.reset(newGroup);
 
     return true;
+}
+
+bool HueGroup::hasValidConstructor() const
+{
+    return m_validConstructor;
+}
+
+bool HueGroup::isValid() const
+{
+    return hasValidConstructor();
+}
+
+int HueGroup::ID() const
+{
+    return m_ID;
 }
 
 bool HueGroup::synchronize()
@@ -243,11 +252,12 @@ bool HueGroup::synchronize()
 
     if (replyValid) {
         QJsonObject json = syncReply.getJson();
-        HueGroup synchronizedGroup(getBridge());
+        std::shared_ptr<HueGroup> synchronizedGroup = std::make_shared<HueGroup>(getBridge());
 
-        if (constructHueGroup(m_ID, json, &synchronizedGroup)) {
-            if (synchronizedGroup.hasValidConstructor()) {
-                *this = synchronizedGroup;
+        if (constructHueGroup(m_ID, json, synchronizedGroup)) {
+            if (synchronizedGroup->hasValidConstructor()) {
+                *this = *synchronizedGroup.get();
+
                 emit synchronized();
                 return true;
             }
@@ -272,3 +282,76 @@ HueRequest HueGroup::makeGetRequest()
 
     return HueRequest(urlPath, QJsonObject(), method);
 }
+
+void HueGroup::updateOn(const bool on)
+{
+    m_action.setOn(on);
+    emit valueUpdated();
+}
+
+void HueGroup::updateHue(const int hue)
+{
+    m_action.setHue(hue);
+    emit valueUpdated();
+}
+
+void HueGroup::updateSaturation(const int saturation)
+{
+    m_action.setSaturation(saturation);
+    emit valueUpdated();
+}
+
+void HueGroup::updateBrightness(const int brightness)
+{
+    m_action.setBrightness(brightness);
+    emit valueUpdated();
+}
+
+void HueGroup::updateColorTemp(const int colorTemp)
+{
+    m_action.setColorTemp(colorTemp);
+    emit valueUpdated();
+}
+
+void HueGroup::updateXY(const double x, const double y)
+{
+    m_action.setXValue(x);
+    m_action.setYValue(y);
+    emit valueUpdated();
+}
+
+void HueGroup::updateAlert(const HueAlert alert)
+{
+    QString alertString;
+    switch (alert) {
+    case HueAlert::NoAlert:
+        alertString = "none";
+        break;
+    case HueAlert::BreatheSingle:
+        alertString = "select";
+        break;
+    case HueAlert::Breathe15Sec:
+        alertString = "lselect";
+        break;
+    }
+    m_action.setAlert(alertString);
+    emit valueUpdated();
+}
+
+void HueGroup::updateEffect(const HueEffect effect)
+{
+    QString effectString;
+    switch (effect) {
+    case HueEffect::NoEffect:
+        effectString = "none";
+        break;
+    case HueEffect::ColorLoop:
+        effectString = "colorloop";
+        break;
+    }
+    m_action.setEffect(effectString);
+    emit valueUpdated();
+}
+
+
+

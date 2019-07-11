@@ -117,14 +117,14 @@ HueLightList HueLight::discoverLights(HueBridge* bridge)
 
     if (!reply.isValid() || reply.timedOut()) {
         qDebug() << "INVALID HUE REPLY";
-        qDebug() << "=============================";
+        qDebug() << "______________________________";
         qDebug() << "Is valid: " << reply.isValid();
         qDebug() << "Timed out: " << reply.timedOut();
         qDebug() << "HTTP status: " << reply.getHttpStatus();
         qDebug() << "Error type: " << reply.getErrorType();
         qDebug() << "Error address: " << reply.getErrorAddress();
         qDebug() << "Error description: " << reply.getErrorDescription();
-        qDebug() << "=============================";
+        qDebug() << "______________________________";
 
         return lights;
     }
@@ -141,26 +141,11 @@ HueLightList HueLight::discoverLights(HueBridge* bridge)
 
         std::shared_ptr<HueLight> light = std::make_shared<HueLight>(bridge);
 
-        if (HueLight::constructHueLight(ID, json, light.get()))
+        if (HueLight::constructHueLight(ID, json, light))
             lights.get()->push_back(std::move(light));
     }
 
     return HueLightList(std::move(lights));
-}
-
-bool HueLight::hasValidConstructor() const
-{
-    return m_validConstructor;
-}
-
-bool HueLight::isValid() const
-{
-    return hasValidConstructor();
-}
-
-int HueLight::ID() const
-{
-    return m_ID;
 }
 
 Light::State HueLight::state() const
@@ -213,7 +198,7 @@ Light::ProductID HueLight::productID() const
     return m_productID;
 }
 
-bool HueLight::constructHueLight(int ID, QJsonObject json, HueLight* light)
+bool HueLight::constructHueLight(int ID, QJsonObject json, std::shared_ptr<HueLight>& light)
 {
     bool jsonIsValid =
             json.contains("state")              &
@@ -243,13 +228,37 @@ bool HueLight::constructHueLight(int ID, QJsonObject json, HueLight* light)
     Light::Manufacturer manufacturer(json["manufacturername"]);
     Light::ProductID productID(json["productid"]);
 
-    HueLight newLight(light->getBridge(), ID, state, name, type, uniqueID,
-                      softwareVersion, softwareUpdate, softwareConfigID,
-                      productName, manufacturer, productID);
+    HueLight* newLight = new HueLight(light->getBridge(),
+                                      ID,
+                                      state,
+                                      name,
+                                      type,
+                                      uniqueID,
+                                      softwareVersion,
+                                      softwareUpdate,
+                                      softwareConfigID,
+                                      productName,
+                                      manufacturer,
+                                      productID);
 
-    *light = newLight;
+    light.reset(newLight);
 
     return true;
+}
+
+bool HueLight::hasValidConstructor() const
+{
+    return m_validConstructor;
+}
+
+bool HueLight::isValid() const
+{
+    return hasValidConstructor();
+}
+
+int HueLight::ID() const
+{
+    return m_ID;
 }
 
 bool HueLight::synchronize()
@@ -261,11 +270,11 @@ bool HueLight::synchronize()
 
     if (replyValid) {
         QJsonObject json = syncReply.getJson();
-        HueLight synchronizedLight(getBridge());
+        std::shared_ptr<HueLight> synchronizedLight = std::make_shared<HueLight>(getBridge());
 
-        if (constructHueLight(m_ID, json, &synchronizedLight)) {
-            if (synchronizedLight.hasValidConstructor()) {
-                *this = synchronizedLight;
+        if (constructHueLight(m_ID, json, synchronizedLight)) {
+            if (synchronizedLight->hasValidConstructor()) {
+                *this = *synchronizedLight.get();
 
                 emit synchronized();
                 return true;
@@ -290,4 +299,66 @@ HueRequest HueLight::makeGetRequest()
     HueRequest::Method method = HueRequest::get;
 
     return HueRequest(urlPath, QJsonObject(), method);
+}
+
+void HueLight::updateOn(const bool on)
+{
+    m_state.setOn(on);
+}
+
+void HueLight::updateHue(const int hue)
+{
+    m_state.setHue(hue);
+}
+
+void HueLight::updateSaturation(const int saturation)
+{
+    m_state.setSaturation(saturation);
+}
+
+void HueLight::updateBrightness(const int brightness)
+{
+    m_state.setBrightness(brightness);
+}
+
+void HueLight::updateColorTemp(const int colorTemp)
+{
+    m_state.setColorTemp(colorTemp);
+}
+
+void HueLight::updateXY(const double x, const double y)
+{
+    m_state.setXValue(x);
+    m_state.setYValue(y);
+}
+
+void HueLight::updateAlert(const HueAlert alert)
+{
+    QString alertString;
+    switch (alert) {
+    case HueAlert::NoAlert:
+        alertString = "none";
+        break;
+    case HueAlert::BreatheSingle:
+        alertString = "select";
+        break;
+    case HueAlert::Breathe15Sec:
+        alertString = "lselect";
+        break;
+    }
+    m_state.setAlert(alertString);
+}
+
+void HueLight::updateEffect(const HueEffect effect)
+{
+    QString effectString;
+    switch (effect) {
+    case HueEffect::NoEffect:
+        effectString = "none";
+        break;
+    case HueEffect::ColorLoop:
+        effectString = "colorloop";
+        break;
+    }
+    m_state.setEffect(effectString);
 }

@@ -148,6 +148,21 @@ void Light::State::setSaturation(const int saturation)
     m_saturation = saturation;
 }
 
+void Light::State::setColorTemp(const int colorTemp)
+{
+    m_colorTemp = colorTemp;
+}
+
+void Light::State::setXValue(const double xValue)
+{
+    m_xValue = xValue;
+}
+
+void Light::State::setYValue(const double yValue)
+{
+    m_yValue = yValue;
+}
+
 void Light::State::setEffect(const QString effect)
 {
     m_effect = effect;
@@ -511,6 +526,21 @@ void Group::Action::setHue(const int hue)
 void Group::Action::setSaturation(const int saturation)
 {
     m_saturation = saturation;
+}
+
+void Group::Action::setColorTemp(const int colorTemp)
+{
+    m_colorTemp = colorTemp;
+}
+
+void Group::Action::setXValue(const double xValue)
+{
+    m_xValue = xValue;
+}
+
+void Group::Action::setYValue(const double yValue)
+{
+    m_yValue = yValue;
 }
 
 void Group::Action::setEffect(const QString effect)

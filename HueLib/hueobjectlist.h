@@ -16,7 +16,7 @@ public:
         iterator(typename ObjectList::iterator iter);
         iterator operator++();
         bool operator!=(const iterator& rhs) const;
-        const HueObject& operator*() const;
+        HueObject* operator*() const;
     private:
         typename ObjectList::iterator m_iter;
     };
@@ -184,9 +184,9 @@ bool HueObjectList<HueObject>::iterator::operator!=(const HueObjectList<HueObjec
 }
 
 template <typename HueObject>
-const HueObject& HueObjectList<HueObject>::iterator::operator*() const
+HueObject* HueObjectList<HueObject>::iterator::operator*() const
 {
-    return *(m_iter->get());
+    return m_iter->get();
 }
 
 class HueLight;

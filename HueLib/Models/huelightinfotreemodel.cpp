@@ -10,6 +10,9 @@ HueLightInfoTreeModel::HueLightInfoTreeModel(std::shared_ptr<HueLight> light, QO
     connect(m_light.get(), &HueLight::synchronized,
             this, &HueLightInfoTreeModel::update);
 
+    connect(m_light.get(), &HueLight::valueUpdated,
+            this, &HueLightInfoTreeModel::update);
+
     update();
 }
 

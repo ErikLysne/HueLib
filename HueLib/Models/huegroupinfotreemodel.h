@@ -12,8 +12,8 @@ public:
     explicit HueGroupInfoTreeModel(std::shared_ptr<HueGroup> group, QObject* parent = nullptr);
     ~HueGroupInfoTreeModel() override;
 
-private slots:
-    void reset();
+public slots:
+    void update();
 
 private:
     void setupModelData(TreeItem* rootItem) override;

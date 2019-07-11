@@ -15,24 +15,34 @@ HueAbstractObject::HueAbstractObject(HueBridge* bridge) :
 
 }
 
-bool HueAbstractObject::turnOn()
+bool HueAbstractObject::turnOn(bool on)
 {
     QJsonObject json {
-        {"on", true}
+        {"on", on}
     };
 
     HueRequest request = makePutRequest(json);
-    return sendRequest(request);
+    bool updateSuccessful = sendRequest(request);
+
+    if (updateSuccessful)
+        updateOn(on);
+
+    return updateSuccessful;
 }
 
-bool HueAbstractObject::turnOff()
+bool HueAbstractObject::turnOff(bool off)
 {
     QJsonObject json {
-        {"on", false}
+        {"on", !off}
     };
 
     HueRequest request = makePutRequest(json);
-    return sendRequest(request);
+    bool updateSuccessful = sendRequest(request);
+
+    if (updateSuccessful)
+        updateOn(!off);
+
+    return updateSuccessful;
 }
 
 bool HueAbstractObject::setHue(int hue)
@@ -42,7 +52,12 @@ bool HueAbstractObject::setHue(int hue)
     };
 
     HueRequest request = makePutRequest(json);
-    return sendRequest(request);
+    bool updateSuccessful = sendRequest(request);
+
+    if (updateSuccessful)
+        updateHue(hue);
+
+    return updateSuccessful;
 }
 
 bool HueAbstractObject::setSaturation(int saturation)
@@ -52,7 +67,12 @@ bool HueAbstractObject::setSaturation(int saturation)
     };
 
     HueRequest request = makePutRequest(json);
-    return sendRequest(request);
+    bool updateSuccessful = sendRequest(request);
+
+    if (updateSuccessful)
+        updateSaturation(saturation);
+
+    return updateSuccessful;
 }
 
 bool HueAbstractObject::setBrightness(int brightness)
@@ -62,7 +82,12 @@ bool HueAbstractObject::setBrightness(int brightness)
     };
 
     HueRequest request = makePutRequest(json);
-    return sendRequest(request);
+    bool updateSuccessful = sendRequest(request);
+
+    if (updateSuccessful)
+        updateBrightness(brightness);
+
+    return updateSuccessful;
 }
 
 bool HueAbstractObject::setColorTemp(int colorTemp)
@@ -72,7 +97,12 @@ bool HueAbstractObject::setColorTemp(int colorTemp)
     };
 
     HueRequest request = makePutRequest(json);
-    return sendRequest(request);
+    bool updateSuccessful = sendRequest(request);
+
+    if (updateSuccessful)
+        updateColorTemp(colorTemp);
+
+    return updateSuccessful;
 }
 
 bool HueAbstractObject::setXY(double x, double y)
@@ -83,7 +113,12 @@ bool HueAbstractObject::setXY(double x, double y)
     };
 
     HueRequest request = makePutRequest(json);
-    return sendRequest(request);
+    bool updateSuccessful = sendRequest(request);
+
+    if (updateSuccessful)
+        updateXY(x, y);
+
+    return updateSuccessful;
 }
 
 bool HueAbstractObject::setAlert(HueAlert alert)
@@ -108,7 +143,12 @@ bool HueAbstractObject::setAlert(HueAlert alert)
     }
 
     HueRequest request = makePutRequest(json);
-    return sendRequest(request);
+    bool updateSuccessful = sendRequest(request);
+
+    if (updateSuccessful)
+        updateAlert(alert);
+
+    return updateSuccessful;
 }
 
 bool HueAbstractObject::setEffect(HueEffect effect)
@@ -128,21 +168,31 @@ bool HueAbstractObject::setEffect(HueEffect effect)
     }
 
     HueRequest request = makePutRequest(json);
-    return sendRequest(request);
+    bool updateSuccessful = sendRequest(request);
+
+    if (updateSuccessful)
+        updateEffect(effect);
+
+    return updateSuccessful;
 }
 
-void HueAbstractObject::enablePeriodicSync(bool periodicSyncOn)
+void HueAbstractObject::enablePeriodicSync(const HueObjectList<HueAbstractObject>& list, bool periodicSyncOn)
 {
-    if (periodicSyncOn) {
-        m_synchronizer->instance().addHueObject(this);
+    // must be down-cast
+    /*
+    auto sharedToThis = list.fetch(this->ID());
+
+    if (periodicSyncOn && !m_syncEnabled) {
+        m_synchronizer->instance().addHueObject(sharedToThis);
         m_syncEnabled = true;
     }
-    else {
+    else if (!periodicSyncOn && m_syncEnabled){
         if (m_syncEnabled)
-            m_synchronizer->instance().removeHueObject(this);
+            m_synchronizer->instance().removeHueObject(sharedToThis);
 
         m_syncEnabled = false;
     }
+    */
 }
 
 QMap<int, QJsonObject> HueAbstractObject::parseJson(QJsonObject json)

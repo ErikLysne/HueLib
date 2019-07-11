@@ -45,7 +45,7 @@ bool HueSynchronizer::isActive()
     return m_isActive;
 }
 
-void HueSynchronizer::addHueObject(HueAbstractObject* object)
+void HueSynchronizer::addHueObject(std::shared_ptr<HueAbstractObject> object)
 {
     m_hueObjects.push_back(object);
 
@@ -53,10 +53,8 @@ void HueSynchronizer::addHueObject(HueAbstractObject* object)
         start();
 }
 
-void HueSynchronizer::removeHueObject(HueAbstractObject* object)
+void HueSynchronizer::removeHueObject(std::shared_ptr<HueAbstractObject> object)
 {
-    // Need to fix out-of-range error
-    /*
     auto objectPosition = std::find(m_hueObjects.begin(), m_hueObjects.end(), object);
 
     if (objectPosition != m_hueObjects.end())
@@ -64,7 +62,6 @@ void HueSynchronizer::removeHueObject(HueAbstractObject* object)
 
     if (m_hueObjects.empty())
         stop();
-    */
 }
 
 void HueSynchronizer::synchronize()

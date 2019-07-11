@@ -21,8 +21,8 @@ public:
 
     bool isActive();
 
-    void addHueObject(HueAbstractObject* object);
-    void removeHueObject(HueAbstractObject* object);
+    void addHueObject(std::shared_ptr<HueAbstractObject> object);
+    void removeHueObject(std::shared_ptr<HueAbstractObject> object);
 
 private:
     explicit HueSynchronizer();
@@ -33,7 +33,7 @@ private slots:
     void synchronize();
 
 private:
-    std::vector<HueAbstractObject*> m_hueObjects;
+    std::vector<std::shared_ptr<HueAbstractObject>> m_hueObjects;
     QTimer* m_timer;
     bool m_isActive;
 };

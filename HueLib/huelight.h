@@ -11,14 +11,9 @@ class HueLight : public HueAbstractObject
 public:
     HueLight();
     HueLight(HueBridge* bridge);
-    HueLight(const HueLight& rhs);
-    HueLight operator=(const HueLight& rhs);
 
     static HueLightList discoverLights(HueBridge* bridge);
 
-    bool hasValidConstructor() const;
-    bool isValid() const;
-    int ID() const;
     Light::State state() const;
     Light::Name name() const;
     Light::Type type() const;
@@ -30,11 +25,12 @@ public:
     Light::Manufacturer manufacturer() const;
     Light::ProductID productID() const;
 
+    bool hasValidConstructor() const override;
+    bool isValid() const override;
+    int ID() const override;
     bool synchronize() override;
 
-protected:
-    static bool constructHueLight(int ID, QJsonObject json, HueLight* light);
-
+private:
     HueLight(HueBridge* bridge,
              int ID,
              Light::State state, Light::Name name,
@@ -45,9 +41,22 @@ protected:
              Light::ProductName productName,
              Light::Manufacturer manufacturer,
              Light::ProductID productID);
+    HueLight(const HueLight& rhs);
+    HueLight operator=(const HueLight& rhs);
+
+    static bool constructHueLight(int ID, QJsonObject json, std::shared_ptr<HueLight>& light);
 
     HueRequest makePutRequest(QJsonObject json) override;
     HueRequest makeGetRequest() override;
+
+    void updateOn(const bool on) override;
+    void updateHue(const int hue) override;
+    void updateSaturation(const int saturation) override;
+    void updateBrightness(const int brightness) override;
+    void updateColorTemp(const int colorTemp) override;
+    void updateXY(const double x, const double y) override;
+    void updateAlert(const HueAlert alert) override;
+    void updateEffect(const HueEffect effect) override;
 
 private:
     int m_ID;
