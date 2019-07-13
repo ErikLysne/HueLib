@@ -98,6 +98,9 @@ HueGroup HueGroup::operator=(const HueGroup &rhs)
 
 HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
 {
+    if (bridge == nullptr)
+        return HueGroupList();
+
     std::shared_ptr<GroupVector> groups = std::make_shared<GroupVector>();
 
     HueRequest request("groups", QJsonObject(), HueRequest::get);

@@ -8,11 +8,12 @@
 #include "huerequest.h"
 #include "huereply.h"
 
-HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam)
-    : m_nam(nam)
+HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam, QObject* parent)
+    : QObject(parent)
+    , m_nam(nam)
     , m_ip(ip)
     , m_username(username)
-    , m_sleepTimer(new QTimer)
+    , m_sleepTimer(new QTimer(this))
 {
     m_nam->setParent(this);
     m_sleepTimer->setSingleShot(true);
@@ -20,7 +21,7 @@ HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam)
 
 HueBridge::~HueBridge()
 {
-    delete m_sleepTimer;
+
 }
 
 HueReply HueBridge::sendRequest(const HueRequest request)
@@ -178,6 +179,7 @@ void HueBridge::evaluateReply(QNetworkReply* networkReply, HueReply& reply)
 
     QByteArray replyBytes = networkReply->readAll();
     QJsonDocument jsonDoc = QJsonDocument::fromJson(replyBytes);
+
     if (jsonDoc.isArray()) {
         QJsonArray jsonArray = jsonDoc.array();
         QJsonObject jsonRootObject = jsonArray[0].toObject();
@@ -197,10 +199,13 @@ void HueBridge::evaluateReply(QNetworkReply* networkReply, HueReply& reply)
             reply.isValid(true);
         }
     }
-    else {
+    else if (!jsonDoc.isEmpty()){
         QJsonObject jsonContent = jsonDoc.object();
         reply.setJson(jsonContent);
         reply.isValid(true);
+    }
+    else {
+        reply.isValid(false);
     }
 }
 

@@ -28,6 +28,11 @@ void HueSynchronizer::setSyncIntervalMilliSec(int intervalMilliSec)
     instance().m_timer->setInterval(intervalMilliSec);
 }
 
+int HueSynchronizer::clear()
+{
+    return instance().clearList();
+}
+
 void HueSynchronizer::start()
 {
     m_isActive = true;
@@ -38,6 +43,18 @@ void HueSynchronizer::stop()
 {
     m_isActive = false;
     m_timer->stop();
+}
+
+int HueSynchronizer::listSize()
+{
+    return static_cast<int>(m_hueObjects.size());
+}
+
+int HueSynchronizer::clearList()
+{
+    int size = listSize();
+    m_hueObjects.clear();
+    return size;
 }
 
 bool HueSynchronizer::isActive()
@@ -66,7 +83,6 @@ void HueSynchronizer::removeHueObject(std::shared_ptr<HueAbstractObject> object)
 
 void HueSynchronizer::synchronize()
 {
-    qDebug() << m_hueObjects.size();
     for (auto hueObject : m_hueObjects) {
         hueObject->synchronize();
     }

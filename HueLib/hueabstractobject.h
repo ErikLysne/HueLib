@@ -3,14 +3,14 @@
 
 #include <QObject>
 
-#include "hueobjectlist.h"
-
 class HueBridge;
 class HueRequest;
 class HueReply;
 class HueSynchronizer;
 
-class HueAbstractObject : public QObject
+class HueAbstractObject
+        : public QObject
+        , public std::enable_shared_from_this<HueAbstractObject>
 {
     Q_OBJECT
 public:
@@ -26,17 +26,17 @@ public:
     explicit HueAbstractObject(HueBridge* bridge);
     virtual ~HueAbstractObject() {}
 
-    bool turnOn(bool on = true);
-    bool turnOff(bool off = true);
-    bool setHue(int hue);
-    bool setSaturation(int saturation);
-    bool setBrightness(int brightness);
-    bool setColorTemp(int colorTemp);
-    bool setXY(double x, double y);
-    bool setAlert(HueAlert alert);
-    bool setEffect(HueEffect effect);
+    bool turnOn(const bool on = true);
+    bool turnOff(const bool off = true);
+    bool setHue(const int hue);
+    bool setSaturation(const int saturation);
+    bool setBrightness(const int brightness);
+    bool setColorTemp(const int colorTemp);
+    bool setXY(const double x, const double y);
+    bool setAlert(const HueAlert alert);
+    bool setEffect(const HueEffect effect);
 
-    void enablePeriodicSync(const HueObjectList<HueAbstractObject>& list, bool periodicSyncOn = true);
+    void enablePeriodicSync(const bool periodicSyncOn = true);
 
     virtual bool hasValidConstructor() const = 0;
     virtual bool isValid() const = 0;

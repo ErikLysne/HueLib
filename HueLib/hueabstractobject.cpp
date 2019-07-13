@@ -15,7 +15,7 @@ HueAbstractObject::HueAbstractObject(HueBridge* bridge) :
 
 }
 
-bool HueAbstractObject::turnOn(bool on)
+bool HueAbstractObject::turnOn(const bool on)
 {
     QJsonObject json {
         {"on", on}
@@ -30,7 +30,7 @@ bool HueAbstractObject::turnOn(bool on)
     return updateSuccessful;
 }
 
-bool HueAbstractObject::turnOff(bool off)
+bool HueAbstractObject::turnOff(const bool off)
 {
     QJsonObject json {
         {"on", !off}
@@ -45,7 +45,7 @@ bool HueAbstractObject::turnOff(bool off)
     return updateSuccessful;
 }
 
-bool HueAbstractObject::setHue(int hue)
+bool HueAbstractObject::setHue(const int hue)
 {
     QJsonObject json {
         {"hue", hue}
@@ -60,7 +60,7 @@ bool HueAbstractObject::setHue(int hue)
     return updateSuccessful;
 }
 
-bool HueAbstractObject::setSaturation(int saturation)
+bool HueAbstractObject::setSaturation(const int saturation)
 {
     QJsonObject json {
         {"sat", saturation}
@@ -75,7 +75,7 @@ bool HueAbstractObject::setSaturation(int saturation)
     return updateSuccessful;
 }
 
-bool HueAbstractObject::setBrightness(int brightness)
+bool HueAbstractObject::setBrightness(const int brightness)
 {
     QJsonObject json {
         {"bri", brightness}
@@ -90,7 +90,7 @@ bool HueAbstractObject::setBrightness(int brightness)
     return updateSuccessful;
 }
 
-bool HueAbstractObject::setColorTemp(int colorTemp)
+bool HueAbstractObject::setColorTemp(const int colorTemp)
 {
     QJsonObject json {
         {"ct", colorTemp}
@@ -105,7 +105,7 @@ bool HueAbstractObject::setColorTemp(int colorTemp)
     return updateSuccessful;
 }
 
-bool HueAbstractObject::setXY(double x, double y)
+bool HueAbstractObject::setXY(const double x, const double y)
 {
     QJsonArray xy = {x, y};
     QJsonObject json {
@@ -121,7 +121,7 @@ bool HueAbstractObject::setXY(double x, double y)
     return updateSuccessful;
 }
 
-bool HueAbstractObject::setAlert(HueAlert alert)
+bool HueAbstractObject::setAlert(const HueAlert alert)
 {
     QJsonObject json;
     switch (alert) {
@@ -151,7 +151,7 @@ bool HueAbstractObject::setAlert(HueAlert alert)
     return updateSuccessful;
 }
 
-bool HueAbstractObject::setEffect(HueEffect effect)
+bool HueAbstractObject::setEffect(const HueEffect effect)
 {
     QJsonObject json;
     switch (effect) {
@@ -176,23 +176,24 @@ bool HueAbstractObject::setEffect(HueEffect effect)
     return updateSuccessful;
 }
 
-void HueAbstractObject::enablePeriodicSync(const HueObjectList<HueAbstractObject>& list, bool periodicSyncOn)
+void HueAbstractObject::enablePeriodicSync(const bool periodicSyncOn)
 {
-    // must be down-cast
-    /*
-    auto sharedToThis = list.fetch(this->ID());
+    bool actionRequired = (periodicSyncOn != m_syncEnabled);
 
-    if (periodicSyncOn && !m_syncEnabled) {
-        m_synchronizer->instance().addHueObject(sharedToThis);
+    if (!actionRequired)
+        return;
+
+    if (!isValid())
+        return;
+
+    if (periodicSyncOn) {
+        m_synchronizer->instance().addHueObject(shared_from_this());
         m_syncEnabled = true;
     }
-    else if (!periodicSyncOn && m_syncEnabled){
-        if (m_syncEnabled)
-            m_synchronizer->instance().removeHueObject(sharedToThis);
-
+    else {
+        m_synchronizer->instance().removeHueObject(shared_from_this());
         m_syncEnabled = false;
     }
-    */
 }
 
 QMap<int, QJsonObject> HueAbstractObject::parseJson(QJsonObject json)

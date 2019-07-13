@@ -110,6 +110,9 @@ HueLight HueLight::operator=(const HueLight &rhs)
 
 HueLightList HueLight::discoverLights(HueBridge* bridge)
 {
+    if (bridge == nullptr)
+        return HueLightList();
+
     std::shared_ptr<LightVector> lights = std::make_shared<LightVector>();
 
     HueRequest request("lights", QJsonObject(), HueRequest::get);
