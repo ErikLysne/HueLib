@@ -88,7 +88,7 @@ bool HueBridge::testConnection()
 
 void HueBridge::setNetworkRequestTimeout(int timeoutMilliseconds)
 {
-    if (timeoutMilliseconds > 0)
+    if (timeoutMilliseconds < 0)
         m_networkTimeoutMilliSec = timeoutMilliseconds;
     else
         m_networkTimeoutMilliSec = HUE_REQUEST_TIMEOUT_MILLISECONDS;
@@ -119,7 +119,7 @@ HueReply HueBridge::sendGetRequest(QString urlPath)
     networkReply->deleteLater();
 
     eventTimer.setSingleShot(true);
-    eventTimer.start(HUE_REQUEST_TIMEOUT_MILLISECONDS);
+    eventTimer.start(m_networkTimeoutMilliSec);
 
     eventLoop.exec();
 
@@ -164,7 +164,7 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
     networkReply->deleteLater();
 
     eventTimer.setSingleShot(true);
-    eventTimer.start(HUE_REQUEST_TIMEOUT_MILLISECONDS);
+    eventTimer.start(m_networkTimeoutMilliSec);
 
     eventLoop.exec();
 
