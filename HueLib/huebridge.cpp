@@ -14,6 +14,7 @@ HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam, Q
     , m_ip(ip)
     , m_username(username)
     , m_sleepTimer(new QTimer(this))
+    , m_networkTimeoutMilliSec(HUE_REQUEST_TIMEOUT_MILLISECONDS)
 {
     m_nam->setParent(this);
     m_sleepTimer->setSingleShot(true);
@@ -38,9 +39,9 @@ HueReply HueBridge::sendRequest(const HueRequest request)
 
     switch (method) {
     case HueRequest::get:
-        return this->sendGetRequest(url);
+        return sendGetRequest(url);
     case HueRequest::put:
-        return this->sendPutRequest(url, json);
+        return sendPutRequest(url, json);
     }
 }
 
@@ -85,6 +86,11 @@ bool HueBridge::testConnection()
     return testConnection(status);
 }
 
+void HueBridge::setNetworkRequestTimeout(int timeoutMilliseconds)
+{
+    m_networkTimeoutMilliSec = timeoutMilliseconds;
+}
+
 HueReply HueBridge::sendGetRequest(QString urlPath)
 {
     HueReply reply;
@@ -97,20 +103,20 @@ HueReply HueBridge::sendGetRequest(QString urlPath)
 
     QEventLoop eventLoop;
     QTimer eventTimer;
-
     connect(&eventTimer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-    eventTimer.setSingleShot(true);
-    eventTimer.start(HUE_REQUEST_TIMEOUT_MILLISECONDS);
 
     QNetworkReply* networkReply = m_nam->get(request);
     connect(networkReply, &QNetworkReply::finished,
-            this, [=, &reply]()
+            this, [this, &reply]()
     {
         QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
-
-        this->evaluateReply(networkReply, reply);
+        evaluateReply(networkReply, reply);
     });
     connect(networkReply, &QNetworkReply::finished,  &eventLoop, &QEventLoop::quit);
+    networkReply->deleteLater();
+
+    eventTimer.setSingleShot(true);
+    eventTimer.start(HUE_REQUEST_TIMEOUT_MILLISECONDS);
 
     eventLoop.exec();
 
@@ -118,6 +124,7 @@ HueReply HueBridge::sendGetRequest(QString urlPath)
         eventTimer.stop();
     }
     else {
+        networkReply->abort();
         reply.timedOut(true);
         reply.isValid(false);
     }
@@ -141,21 +148,20 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
 
     QEventLoop eventLoop;
     QTimer eventTimer;
-
     connect(&eventTimer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-    eventTimer.setSingleShot(true);
-    eventTimer.start(HUE_REQUEST_TIMEOUT_MILLISECONDS);
 
     QNetworkReply* networkReply = m_nam->put(request, jsonBytes);
     connect(networkReply, &QNetworkReply::finished,
-            this, [=, &reply]()
+            this, [this, &reply]()
     {
         QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
-
-        this->evaluateReply(networkReply, reply);
+        evaluateReply(networkReply, reply);
     });
-
     connect(networkReply, &QNetworkReply::finished,  &eventLoop, &QEventLoop::quit);
+    networkReply->deleteLater();
+
+    eventTimer.setSingleShot(true);
+    eventTimer.start(HUE_REQUEST_TIMEOUT_MILLISECONDS);
 
     eventLoop.exec();
 
@@ -163,6 +169,7 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
         eventTimer.stop();
     }
     else {
+        networkReply->abort();
         reply.timedOut(true);
         reply.isValid(false);
     }

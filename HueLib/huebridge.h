@@ -48,6 +48,7 @@ public:
     QString getUsername() const;
     bool testConnection();
     bool testConnection(ConnectionStatus &status);
+    void setNetworkRequestTimeout(int timeoutMilliseconds);
 
 private:
     HueReply sendGetRequest(QString urlPath);
@@ -60,6 +61,7 @@ private:
     QString m_ip;
     QString m_username;
     QTimer* m_sleepTimer;
+    int m_networkTimeoutMilliSec;
 };
 
 #endif // HUEBRIDGE_H
