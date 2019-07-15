@@ -88,7 +88,7 @@ bool HueBridge::testConnection()
 
 void HueBridge::setNetworkRequestTimeout(int timeoutMilliseconds)
 {
-    if (timeoutMilliseconds < 0)
+    if (timeoutMilliseconds > 0)
         m_networkTimeoutMilliSec = timeoutMilliseconds;
     else
         m_networkTimeoutMilliSec = HUE_REQUEST_TIMEOUT_MILLISECONDS;
