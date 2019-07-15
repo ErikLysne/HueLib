@@ -11,22 +11,30 @@ class HueAbstractObject;
 class HueSynchronizer : public QObject
 {
     Q_OBJECT
+private:
+    enum ClearCondition {
+        ClearAll,
+        ClearGroups,
+        ClearLights
+    };
 
 public:
     static HueSynchronizer& instance();
     static void setSyncIntervalMilliSec(int intervalMilliSec);
-    static int clear();
+    static int clearAll();
+    static int clearGroups();
+    static int clearLights();
 
     void start();
     void stop();
 
     int listSize();
-    int clearList();
+    int clear(ClearCondition condition);
 
     bool isActive();
 
-    void addHueObject(std::shared_ptr<HueAbstractObject> object);
-    void removeHueObject(std::shared_ptr<HueAbstractObject> object);
+    bool addHueObject(std::shared_ptr<HueAbstractObject> object);
+    bool removeHueObject(std::shared_ptr<HueAbstractObject> object);
 
 private:
     explicit HueSynchronizer();

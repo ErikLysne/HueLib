@@ -7,10 +7,9 @@
 #include "huereply.h"
 #include "huesynchronizer.h"
 
-HueAbstractObject::HueAbstractObject(HueBridge* bridge) :
-    QObject(nullptr),
-    m_bridge(bridge),
-    m_syncEnabled(false)
+HueAbstractObject::HueAbstractObject(HueBridge* bridge)
+    : QObject(nullptr)
+    , m_bridge(bridge)
 {
 
 }
@@ -178,21 +177,14 @@ bool HueAbstractObject::setEffect(const HueEffect effect)
 
 void HueAbstractObject::enablePeriodicSync(const bool periodicSyncOn)
 {
-    bool actionRequired = (periodicSyncOn != m_syncEnabled);
-
-    if (!actionRequired)
-        return;
-
     if (!isValid())
         return;
 
     if (periodicSyncOn) {
         m_synchronizer->instance().addHueObject(shared_from_this());
-        m_syncEnabled = true;
     }
     else {
         m_synchronizer->instance().removeHueObject(shared_from_this());
-        m_syncEnabled = false;
     }
 }
 

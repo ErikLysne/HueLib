@@ -71,7 +71,6 @@ signals:
 private:
     HueBridge* m_bridge;
     HueSynchronizer* m_synchronizer;
-    bool m_syncEnabled;
 
 };
 

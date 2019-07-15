@@ -1,6 +1,8 @@
 #include "huesynchronizer.h"
 
 #include "hueabstractobject.h"
+#include "huelight.h"
+#include "huegroup.h"
 
 #include <QtDebug>
 
@@ -28,9 +30,19 @@ void HueSynchronizer::setSyncIntervalMilliSec(int intervalMilliSec)
     instance().m_timer->setInterval(intervalMilliSec);
 }
 
-int HueSynchronizer::clear()
+int HueSynchronizer::clearAll()
 {
-    return instance().clearList();
+    return instance().clear(HueSynchronizer::ClearAll);
+}
+
+int HueSynchronizer::clearGroups()
+{
+    return instance().clear(HueSynchronizer::ClearGroups);
+}
+
+int HueSynchronizer::clearLights()
+{
+    return instance().clear(HueSynchronizer::ClearLights);
 }
 
 void HueSynchronizer::start()
@@ -50,11 +62,38 @@ int HueSynchronizer::listSize()
     return static_cast<int>(m_hueObjects.size());
 }
 
-int HueSynchronizer::clearList()
+int HueSynchronizer::clear(HueSynchronizer::ClearCondition condition)
 {
-    int size = listSize();
-    m_hueObjects.clear();
-    return size;
+    int objectsRemoved = 0;
+
+    for (auto object : m_hueObjects) {
+        bool conditionIsMatched = false;
+
+        switch (condition) {
+        case ClearAll:
+            conditionIsMatched = true;
+            break;
+
+        case ClearGroups:
+        {
+            HueGroup* groupPointer = dynamic_cast<HueGroup*>(object.get());
+            conditionIsMatched = groupPointer != nullptr;
+            break;
+        }
+        case ClearLights:
+        {
+            HueLight* lightPointer = dynamic_cast<HueLight*>(object.get());
+            conditionIsMatched = lightPointer != nullptr;
+            break;
+        }
+        }
+
+        if (conditionIsMatched)
+            if (removeHueObject(object))
+                objectsRemoved++;
+    }
+
+    return objectsRemoved;
 }
 
 bool HueSynchronizer::isActive()
@@ -62,27 +101,41 @@ bool HueSynchronizer::isActive()
     return m_isActive;
 }
 
-void HueSynchronizer::addHueObject(std::shared_ptr<HueAbstractObject> object)
+bool HueSynchronizer::addHueObject(std::shared_ptr<HueAbstractObject> object)
 {
-    m_hueObjects.push_back(object);
+    bool objectWasAdded = false;
+    auto objectPosition = std::find(m_hueObjects.begin(), m_hueObjects.end(), object);
+
+    if (objectPosition == m_hueObjects.end()) {
+        m_hueObjects.push_back(object);
+        objectWasAdded = true;
+    }
 
     if (!isActive())
         start();
+
+    return objectWasAdded;
 }
 
-void HueSynchronizer::removeHueObject(std::shared_ptr<HueAbstractObject> object)
+bool HueSynchronizer::removeHueObject(std::shared_ptr<HueAbstractObject> object)
 {
+    bool objectWasRemoved = false;
     auto objectPosition = std::find(m_hueObjects.begin(), m_hueObjects.end(), object);
 
-    if (objectPosition != m_hueObjects.end())
+    if (objectPosition != m_hueObjects.end()) {
         m_hueObjects.erase(objectPosition);
+        objectWasRemoved = true;
+    }
 
     if (m_hueObjects.empty())
         stop();
+
+    return objectWasRemoved;
 }
 
 void HueSynchronizer::synchronize()
 {
+    qDebug() << m_hueObjects.size();
     for (auto hueObject : m_hueObjects) {
         hueObject->synchronize();
     }
