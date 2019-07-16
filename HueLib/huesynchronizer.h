@@ -20,7 +20,7 @@ private:
 
 public:
     static HueSynchronizer& instance();
-    static void setSyncIntervalMilliSec(int intervalMilliSec);
+    static void setSyncInterval(int intervalMilliSec);
     static int clearAll();
     static int clearGroups();
     static int clearLights();
@@ -29,8 +29,6 @@ public:
     void stop();
 
     int listSize();
-    int clear(ClearCondition condition);
-
     bool isActive();
 
     bool addHueObject(std::shared_ptr<HueAbstractObject> object);
@@ -40,6 +38,7 @@ private:
     explicit HueSynchronizer();
     HueSynchronizer(const HueSynchronizer& rhs) = delete;
     HueSynchronizer& operator=(HueSynchronizer& rhs) = delete;
+    int clear(ClearCondition condition);
 
 private slots:
     void synchronize();

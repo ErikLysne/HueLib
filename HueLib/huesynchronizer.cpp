@@ -25,7 +25,7 @@ HueSynchronizer& HueSynchronizer::instance()
     return singleton;
 }
 
-void HueSynchronizer::setSyncIntervalMilliSec(int intervalMilliSec)
+void HueSynchronizer::setSyncInterval(int intervalMilliSec)
 {
     instance().m_timer->setInterval(intervalMilliSec);
 }
@@ -60,40 +60,6 @@ void HueSynchronizer::stop()
 int HueSynchronizer::listSize()
 {
     return static_cast<int>(m_hueObjects.size());
-}
-
-int HueSynchronizer::clear(HueSynchronizer::ClearCondition condition)
-{
-    int objectsRemoved = 0;
-
-    for (auto object : m_hueObjects) {
-        bool conditionIsMatched = false;
-
-        switch (condition) {
-        case ClearAll:
-            conditionIsMatched = true;
-            break;
-
-        case ClearGroups:
-        {
-            HueGroup* groupPointer = dynamic_cast<HueGroup*>(object.get());
-            conditionIsMatched = groupPointer != nullptr;
-            break;
-        }
-        case ClearLights:
-        {
-            HueLight* lightPointer = dynamic_cast<HueLight*>(object.get());
-            conditionIsMatched = lightPointer != nullptr;
-            break;
-        }
-        }
-
-        if (conditionIsMatched)
-            if (removeHueObject(object))
-                objectsRemoved++;
-    }
-
-    return objectsRemoved;
 }
 
 bool HueSynchronizer::isActive()
@@ -135,8 +101,42 @@ bool HueSynchronizer::removeHueObject(std::shared_ptr<HueAbstractObject> object)
 
 void HueSynchronizer::synchronize()
 {
-    qDebug() << m_hueObjects.size();
     for (auto hueObject : m_hueObjects) {
         hueObject->synchronize();
     }
+}
+
+
+int HueSynchronizer::clear(HueSynchronizer::ClearCondition condition)
+{
+    int objectsRemoved = 0;
+
+    for (auto object : m_hueObjects) {
+        bool conditionIsMatched = false;
+
+        switch (condition) {
+        case ClearAll:
+            conditionIsMatched = true;
+            break;
+
+        case ClearGroups:
+        {
+            HueGroup* groupPointer = dynamic_cast<HueGroup*>(object.get());
+            conditionIsMatched = groupPointer != nullptr;
+            break;
+        }
+        case ClearLights:
+        {
+            HueLight* lightPointer = dynamic_cast<HueLight*>(object.get());
+            conditionIsMatched = lightPointer != nullptr;
+            break;
+        }
+        }
+
+        if (conditionIsMatched)
+            if (removeHueObject(object))
+                objectsRemoved++;
+    }
+
+    return objectsRemoved;
 }
