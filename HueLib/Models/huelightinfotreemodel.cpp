@@ -78,8 +78,17 @@ void HueLightInfoTreeModel::setupModelData(TreeItem* rootItem)
     modelItem->appendChild(new TreeItem({tr("Manufacturer"),    manufacturer.getManufacturer()},    modelItem));
     modelItem->appendChild(new TreeItem({tr("Product ID"),      productID.getProductID()},          modelItem));
 
+    Light::Config config = m_light->config();
+    TreeItem* configItem = new TreeItem({tr("Config"), tr("")}, rootItem);
+    configItem->appendChild(new TreeItem({tr("Archetype"),          config.getArchetype()},                 configItem));
+    configItem->appendChild(new TreeItem({tr("Function"),           config.getFunction()},                  configItem));
+    configItem->appendChild(new TreeItem({tr("Direction"),          config.getDirection()},                 configItem));
+    configItem->appendChild(new TreeItem({tr("Startup mode"),       config.getStartup().getMode()},         configItem));
+    configItem->appendChild(new TreeItem({tr("Startup configured"), config.getStartup().getConfigured()},   configItem));
+
     rootItem->appendChild(aboutItem);
     rootItem->appendChild(stateItem);
     rootItem->appendChild(swItem);
     rootItem->appendChild(modelItem);
+    rootItem->appendChild(configItem);
 }

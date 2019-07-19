@@ -187,7 +187,49 @@ private:
     QString m_productID;
 };
 
+class Config
+{
+public:
+    class Startup
+    {
+    public:
+        Startup();
+        Startup(const QJsonValue json);
+
+        QString getMode() const;
+        bool getConfigured() const;
+
+        void setMode(const QString mode);
+        void setConfigured(bool configured);
+
+    private:
+        QString m_mode;
+        bool m_configured;
+    };
+
+public:
+    Config();
+    Config(const QJsonValue json);
+
+    QString getArchetype() const;
+    QString getFunction() const;
+    QString getDirection() const;
+    Startup getStartup() const;
+
+    void setArchetype(const QString archetype);
+    void setFunction(const QString function);
+    void setDirection(const QString direction);
+    void setStartup(const Startup startup);
+
+private:
+    QString m_archetype;
+    QString m_function;
+    QString m_direction;
+    Startup m_startup;
+};
+
 }
+
 
 /* =====================================
  * =============== GROUP ===============

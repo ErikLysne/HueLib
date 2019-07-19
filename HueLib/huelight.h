@@ -24,6 +24,7 @@ public:
     Light::ProductName productName() const;
     Light::Manufacturer manufacturer() const;
     Light::ProductID productID() const;
+    Light::Config config() const;
 
     bool hasValidConstructor() const override;
     bool isValid() const override;
@@ -40,7 +41,8 @@ private:
              Light::SoftwareConfigID softwareConfigID,
              Light::ProductName productName,
              Light::Manufacturer manufacturer,
-             Light::ProductID productID);
+             Light::ProductID productID,
+             Light::Config config);
     HueLight(const HueLight& rhs);
     HueLight operator=(const HueLight& rhs);
 
@@ -70,6 +72,7 @@ private:
     Light::ProductName m_productName;
     Light::Manufacturer m_manufacturer;
     Light::ProductID m_productID;
+    Light::Config m_config;
     bool m_validConstructor;
 
 };

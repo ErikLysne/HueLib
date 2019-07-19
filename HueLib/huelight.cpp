@@ -17,6 +17,7 @@ HueLight::HueLight()
     , m_productName()
     , m_manufacturer()
     , m_productID()
+    , m_config()
     , m_validConstructor(false)
 {
 
@@ -35,6 +36,7 @@ HueLight::HueLight(HueBridge* bridge)
     , m_productName()
     , m_manufacturer()
     , m_productID()
+    , m_config()
     , m_validConstructor(false)
 {
 
@@ -49,7 +51,8 @@ HueLight::HueLight(HueBridge* bridge,
                    Light::SoftwareConfigID softwareConfigID,
                    Light::ProductName productName,
                    Light::Manufacturer manufacturer,
-                   Light::ProductID productID)
+                   Light::ProductID productID,
+                   Light::Config config)
     : HueAbstractObject(bridge)
     , m_ID(ID)
     , m_state(state)
@@ -62,6 +65,7 @@ HueLight::HueLight(HueBridge* bridge,
     , m_productName(productName)
     , m_manufacturer(manufacturer)
     , m_productID(productID)
+    , m_config(config)
     , m_validConstructor(true)
 {
 
@@ -80,6 +84,7 @@ HueLight::HueLight(const HueLight& rhs)
     , m_productName(rhs.m_productName)
     , m_manufacturer(rhs.m_manufacturer)
     , m_productID(rhs.m_productID)
+    , m_config(rhs.m_config)
     , m_validConstructor(rhs.m_validConstructor)
 {
 
@@ -103,6 +108,7 @@ HueLight HueLight::operator=(const HueLight &rhs)
     m_productName = rhs.m_productName;
     m_manufacturer = rhs.m_manufacturer;
     m_productID = rhs.m_productID;
+    m_config = rhs.m_config;
     m_validConstructor = rhs.m_validConstructor;
 
     return *this;
@@ -201,6 +207,11 @@ Light::ProductID HueLight::productID() const
     return m_productID;
 }
 
+Light::Config HueLight::config() const
+{
+    return m_config;
+}
+
 bool HueLight::constructHueLight(int ID, QJsonObject json, std::shared_ptr<HueLight>& light)
 {
     bool jsonIsValid =
@@ -212,6 +223,7 @@ bool HueLight::constructHueLight(int ID, QJsonObject json, std::shared_ptr<HueLi
             json.contains("manufacturername")   &
             json.contains("productname")        &
             json.contains("capabilities")       &
+            json.contains("config")             &
             json.contains("uniqueid")           &
             json.contains("swversion")          &
             json.contains("swconfigid")         &
@@ -230,6 +242,7 @@ bool HueLight::constructHueLight(int ID, QJsonObject json, std::shared_ptr<HueLi
     Light::ProductName productName(json["productname"]);
     Light::Manufacturer manufacturer(json["manufacturername"]);
     Light::ProductID productID(json["productid"]);
+    Light::Config config(json["config"]);
 
     HueLight* newLight = new HueLight(light->getBridge(),
                                       ID,
@@ -242,7 +255,8 @@ bool HueLight::constructHueLight(int ID, QJsonObject json, std::shared_ptr<HueLi
                                       softwareConfigID,
                                       productName,
                                       manufacturer,
-                                      productID);
+                                      productID,
+                                      config);
 
     light.reset(newLight);
 

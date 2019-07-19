@@ -404,6 +404,121 @@ void Light::ProductID::setProductID(const QString productID)
     m_productID = productID;
 }
 
+// ---------- Config ----------
+Light::Config::Startup::Startup()
+    : m_mode("")
+    , m_configured(false)
+{
+
+}
+
+Light::Config::Startup::Startup(const QJsonValue json)
+{
+    QJsonObject startupJson = json.toObject();
+
+    bool jsonIsValid =
+            startupJson.contains("mode")        &
+            startupJson.contains("configured")  ;
+
+    if (jsonIsValid) {
+        m_mode          = startupJson["mode"].toString();
+        m_configured    = startupJson["configured"].toBool();
+    }
+    else {
+        Light::Config::Startup();
+    }
+}
+
+QString Light::Config::Startup::getMode() const
+{
+    return m_mode;
+}
+
+bool Light::Config::Startup::getConfigured() const
+{
+    return m_configured;
+}
+
+void Light::Config::Startup::setMode(const QString mode)
+{
+    m_mode = mode;
+}
+
+void Light::Config::Startup::setConfigured(bool configured)
+{
+    m_configured = configured;
+}
+
+Light::Config::Config()
+    : m_archetype("")
+    , m_function("")
+    , m_direction("")
+    , m_startup()
+{
+
+}
+
+Light::Config::Config(const QJsonValue json)
+{
+    QJsonObject configJson = json.toObject();
+
+    bool jsonIsValid =
+            configJson.contains("archetype")    &
+            configJson.contains("function")     &
+            configJson.contains("direction")    &
+            configJson.contains("startup")      ;
+
+    if (jsonIsValid) {
+        m_archetype     = configJson["archetype"].toString();
+        m_function      = configJson["function"].toString();
+        m_direction     = configJson["direction"].toString();
+        m_startup       = Light::Config::Startup(configJson["startup"]);
+    }
+    else {
+        Light::Config();
+    }
+}
+
+QString Light::Config::getArchetype() const
+{
+    return m_archetype;
+}
+
+QString Light::Config::getFunction() const
+{
+    return m_function;
+}
+
+QString Light::Config::getDirection() const
+{
+    return m_direction;
+}
+
+Light::Config::Startup Light::Config::getStartup() const
+{
+    return m_startup;
+}
+
+void Light::Config::setArchetype(const QString archetype)
+{
+    m_archetype = archetype;
+}
+
+void Light::Config::setFunction(const QString function)
+{
+    m_function = function;
+}
+
+void Light::Config::setDirection(const QString direction)
+{
+    m_direction = direction;
+}
+
+void Light::Config::setStartup(const Startup startup)
+{
+    m_startup = startup;
+}
+
 /* =====================================
  * =============== GROUP ===============
  * =====================================

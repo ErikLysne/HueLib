@@ -14,7 +14,7 @@ HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam, Q
     , m_ip(ip)
     , m_username(username)
     , m_sleepTimer(new QTimer(this))
-    , m_networkTimeoutMilliSec(HUE_REQUEST_TIMEOUT_MILLISECONDS)
+    , m_networkTimeoutMilliSec(m_sleepTimeMilliSec)
 {
     m_nam->setParent(this);
     m_sleepTimer->setSingleShot(true);
@@ -91,7 +91,7 @@ void HueBridge::setNetworkRequestTimeout(int timeoutMilliseconds)
     if (timeoutMilliseconds > 0)
         m_networkTimeoutMilliSec = timeoutMilliseconds;
     else
-        m_networkTimeoutMilliSec = HUE_REQUEST_TIMEOUT_MILLISECONDS;
+        m_networkTimeoutMilliSec = m_requestTimeoutMilliSec;
 }
 
 HueReply HueBridge::sendGetRequest(QString urlPath)
@@ -132,7 +132,7 @@ HueReply HueBridge::sendGetRequest(QString urlPath)
         reply.isValid(false);
     }
 
-    m_sleepTimer->start(HUE_BRIDGE_SLEEP_MILLISECONDS);
+    m_sleepTimer->start(m_sleepTimeMilliSec);
     return reply;
 }
 
@@ -177,7 +177,7 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
         reply.isValid(false);
     }
 
-    m_sleepTimer->start(HUE_BRIDGE_SLEEP_MILLISECONDS);
+    m_sleepTimer->start(m_sleepTimeMilliSec);
     return reply;
 }
 

@@ -12,7 +12,7 @@ HueSynchronizer::HueSynchronizer()
     , m_isActive(false)
 {
     m_timer->setSingleShot(false);
-    m_timer->setInterval(DEFAULT_HUE_SYNC_INTERVAL_MILLISECONDS);
+    m_timer->setInterval(defaultSyncIntervalMilliSec);
 
     connect(m_timer, &QTimer::timeout,
             this, &HueSynchronizer::synchronize);

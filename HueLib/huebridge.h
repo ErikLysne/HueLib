@@ -5,24 +5,6 @@
 #include <QJsonObject>
 #include <QTimer>
 
-// Uses the default Qt::CoarseTimer (tries to keep accuracy within 5%)
-#ifndef HUE_REQUEST_TIMEOUT_MILLISECONDS
-#define HUE_REQUEST_TIMEOUT_MILLISECONDS 200
-#endif
-
-/*
- * Sleep duration between consecutive API commands sent to the bridge.
- * This is to keep the number of API commands sent per second below the
- * throughput limit of the Hue Bridge
- *
- * See application note "Hue System Performance" for details
- * https://developers.meethue.com/develop/application-design-guidance/hue-system-performance/
- *
- */
-#ifndef HUE_BRIDGE_SLEEP_MILLISECONDS
-#define HUE_BRIDGE_SLEEP_MILLISECONDS 50
-#endif
-
 class HueRequest;
 class HueReply;
 
@@ -57,11 +39,15 @@ private:
     void sleep(const int sleepTimeMilliseconds);
 
 private:
+    const int m_sleepTimeMilliSec = 50;
+    const int m_requestTimeoutMilliSec = 200;
+
     QNetworkAccessManager* m_nam;
     QString m_ip;
     QString m_username;
     QTimer* m_sleepTimer;
     int m_networkTimeoutMilliSec;
+
 };
 
 #endif // HUEBRIDGE_H
