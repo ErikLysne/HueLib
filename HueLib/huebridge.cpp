@@ -115,8 +115,9 @@ HueReply HueBridge::sendGetRequest(QString urlPath)
         QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
         evaluateReply(networkReply, reply);
     });
+
     connect(networkReply, &QNetworkReply::finished,  &eventLoop, &QEventLoop::quit);
-    networkReply->deleteLater();
+    //networkReply->deleteLater();
 
     eventTimer.setSingleShot(true);
     eventTimer.start(m_networkTimeoutMilliSec);
@@ -161,7 +162,7 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
         evaluateReply(networkReply, reply);
     });
     connect(networkReply, &QNetworkReply::finished,  &eventLoop, &QEventLoop::quit);
-    networkReply->deleteLater();
+    //networkReply->deleteLater();
 
     eventTimer.setSingleShot(true);
     eventTimer.start(m_networkTimeoutMilliSec);

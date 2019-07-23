@@ -117,14 +117,14 @@ HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
         qDebug() << "Error description: " << reply.getErrorDescription();
         qDebug() << "______________________________";
 
-        return groups;
+        return HueGroupList();
     }
 
     QJsonObject json = reply.getJson();
     auto parsedJsonWithIDs = HueAbstractObject::parseJson(json);
 
     if (parsedJsonWithIDs.isEmpty())
-        return groups;
+        return HueGroupList();
 
     for (auto iter = parsedJsonWithIDs.begin(); iter != parsedJsonWithIDs.end(); ++iter) {
         int ID = iter.key();

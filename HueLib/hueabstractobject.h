@@ -2,6 +2,7 @@
 #define HUEABSTRACTOBJECT_H
 
 #include <QObject>
+#include <memory>
 
 class HueBridge;
 class HueRequest;

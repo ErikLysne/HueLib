@@ -1,6 +1,8 @@
 #ifndef HUELIGHT_H
 #define HUELIGHT_H
 
+#include <memory>
+
 #include "hueabstractobject.h"
 #include "huetypes.h"
 #include "hueobjectlist.h"

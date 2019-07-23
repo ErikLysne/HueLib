@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <memory>
 
 class HueAbstractObject;
 

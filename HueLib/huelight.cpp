@@ -135,14 +135,14 @@ HueLightList HueLight::discoverLights(HueBridge* bridge)
         qDebug() << "Error description: " << reply.getErrorDescription();
         qDebug() << "______________________________";
 
-        return lights;
+        return HueLightList();
     }
 
     QJsonObject json = reply.getJson();
     auto parsedJsonWithIDs = HueAbstractObject::parseJson(json);
 
     if (parsedJsonWithIDs.isEmpty())
-        return lights;
+        return HueLightList();
 
     for (auto iter = parsedJsonWithIDs.begin(); iter != parsedJsonWithIDs.end(); ++iter) {
         int ID = iter.key();
