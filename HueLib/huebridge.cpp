@@ -117,7 +117,6 @@ HueReply HueBridge::sendGetRequest(QString urlPath)
     });
 
     connect(networkReply, &QNetworkReply::finished,  &eventLoop, &QEventLoop::quit);
-    //networkReply->deleteLater();
 
     eventTimer.setSingleShot(true);
     eventTimer.start(m_networkTimeoutMilliSec);
@@ -133,6 +132,7 @@ HueReply HueBridge::sendGetRequest(QString urlPath)
         reply.isValid(false);
     }
 
+    networkReply->deleteLater();
     m_sleepTimer->start(m_sleepTimeMilliSec);
     return reply;
 }
@@ -162,7 +162,6 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
         evaluateReply(networkReply, reply);
     });
     connect(networkReply, &QNetworkReply::finished,  &eventLoop, &QEventLoop::quit);
-    //networkReply->deleteLater();
 
     eventTimer.setSingleShot(true);
     eventTimer.start(m_networkTimeoutMilliSec);
@@ -179,6 +178,7 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
     }
 
     m_sleepTimer->start(m_sleepTimeMilliSec);
+    networkReply->deleteLater();
     return reply;
 }
 
