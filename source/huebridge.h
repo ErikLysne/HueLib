@@ -28,7 +28,7 @@ public:
               QObject* parent = nullptr);
     ~HueBridge();
 
-    QString createNewUser(QString app = "C++ HueLib app", QString device = "");
+    QString link(QString appName = "C++ HueLib app", QString deviceName = "");
     bool testConnection(ConnectionStatus &status);
     bool testConnection();
 
@@ -45,6 +45,7 @@ public:
     void setNetworkRequestTimeout(int milliseconds);
 
 private:
+    QString createNewUser(QString name, HueReply reply);
     void evaluateReply(QNetworkReply* networkReply, HueReply& reply);
     void block(const int sleepTimeMilliseconds);
 

@@ -4,6 +4,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QEventLoop>
+#include <QDir>
 
 #include "huerequest.h"
 #include "hueerror.h"
@@ -31,15 +32,31 @@ HueBridge::~HueBridge()
 
 }
 
-QString HueBridge::createNewUser(QString app, QString device)
+QString HueBridge::link(QString appName, QString deviceName)
 {
-    QString userID = app;
-    if (device != "") {
-        userID += "#";
-        userID += device;
+    // First check if a user has already been created for this application
+    QDir hueDir(".hue");
+    if (!hueDir.exists())
+        hueDir.mkpath(".");
+
+    QFile hueUserFile(".hue/username.txt");
+    if (hueUserFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream stream(&hueUserFile);
+        QString firstLine = stream.readLine();
+        hueUserFile.close();
+
+        if (!firstLine.isNull())
+            return firstLine;
     }
 
-    QJsonObject json = {{"devicetype", userID}};
+    // If not, create a new user
+    QString name = appName;
+    if (deviceName != "") {
+        name += "#";
+        name += deviceName;
+    }
+
+    QJsonObject json = {{"devicetype", name}};
 
     HueRequest request("", json, HueRequest::post);
     HueReply firstReply = sendRequest(request, nullptr);
@@ -50,16 +67,18 @@ QString HueBridge::createNewUser(QString app, QString device)
         return "";
     }
 
-    // If link button is already pressed
-    if (!firstReply.containsError() && firstReply.getJson().contains("username")) {
-        QString username = firstReply.getJson()["username"].toString();
-        qDebug() << "New user created: " << username;
+    // Attempt to create user if link button has already been pressed
+    QString username = createNewUser(name, firstReply);
+    if (username != "") {
+        m_username = username;
         return username;
     }
 
-    // If not, ask user to press it
+    // If not, check for 101 error ("link button not pressed")
     if (firstReply.getError().getType() == 101)
         qDebug() << "Press link button now...";
+    else
+        return "";
 
     QEventLoop waitEventLoop;
     QTimer waitTimer;
@@ -70,19 +89,23 @@ QString HueBridge::createNewUser(QString app, QString device)
 
     int attempts = 10;
     for (int i = 0; i < attempts; i++) {
-        qDebug() << "Attempting to create new user: " << attempts-i;
-        HueReply nextReply = sendRequest(request, nullptr);
-        if (!nextReply.containsError() && nextReply.getJson().contains("username")) {
-            QString username = nextReply.getJson()["username"].toString();
-            qDebug() << "New user created: " << username;
+        qDebug() << "Waiting for link button press: " << attempts-i;
+        HueReply reply = sendRequest(request, nullptr);
+        username = createNewUser(name, reply);
+        if (username != "") {
+            waitTimer.stop();
+            waitEventLoop.exit();
+            m_username = username;
             return username;
         }
         waitTimer.start();
         waitEventLoop.exec();
     }
 
-    qDebug() << "Link button was not pressed in time.";
+    qDebug() << "Link button was not pressed within the time limit. Please try again.";
 
+    waitTimer.stop();
+    waitEventLoop.exit();
     return "";
 }
 
@@ -262,6 +285,25 @@ void HueBridge::setNetworkRequestTimeout(int milliseconds)
         m_networkRequestTimeout = milliseconds;
     else
         m_networkRequestTimeout = m_defaultNetworkRequestTimeout;
+}
+
+QString HueBridge::createNewUser(QString name, HueReply reply)
+{
+    if (reply.containsError() || !reply.getJson().contains("username"))
+        return "";
+
+    QString username = reply.getJson()["username"].toString();
+    qDebug() << "New user created:\n" << name << ": " << username;
+
+    QFile hueUserFile(".hue/username.txt");
+    if (hueUserFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream stream(&hueUserFile);
+        stream << username << "\n\r";
+        stream << "Application Name: " << name;
+        hueUserFile.close();
+    }
+
+    return username;
 }
 
 void HueBridge::evaluateReply(QNetworkReply* networkReply, HueReply& reply)
