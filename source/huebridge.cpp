@@ -6,13 +6,14 @@
 #include <QEventLoop>
 
 #include "huerequest.h"
-#include "huereply.h"
+#include "hueerror.h"
 
 HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam, QObject* parent)
     : QObject(parent)
     , m_nam(nam)
     , m_ip(ip)
     , m_username(username)
+    , m_lastReply()
     , m_sleepTimer(new QTimer(this))
     , m_networkTimeoutMilliSec(m_sleepTimeMilliSec)
 {
@@ -55,8 +56,18 @@ QString HueBridge::getUsername() const
     return m_username;
 }
 
-bool HueBridge::testConnection(ConnectionStatus &status)
+HueReply HueBridge::getLastReply() const
 {
+    return m_lastReply;
+}
+
+HueError HueBridge::getLastError() const
+{
+    return m_lastReply.getError();
+}
+
+bool HueBridge::testConnection(ConnectionStatus &status)
+{   
     HueRequest request("lights", QJsonObject(), HueRequest::get);
     HueReply reply = sendRequest(request);
 
@@ -70,7 +81,7 @@ bool HueBridge::testConnection(ConnectionStatus &status)
     else if (reply.getHttpStatus() != 200) {
         status = ConnectionStatus::HttpError;
     }
-    else if (reply.getErrorType() != 0) {
+    else if (reply.getError().getType() != 0) {
         status = ConnectionStatus::JsonError;
     }
     else {
@@ -82,7 +93,7 @@ bool HueBridge::testConnection(ConnectionStatus &status)
 
 bool HueBridge::testConnection()
 {
-    ConnectionStatus status = Success;
+    ConnectionStatus status = ConnectionStatus::Success;
     return testConnection(status);
 }
 
@@ -197,13 +208,12 @@ void HueBridge::evaluateReply(QNetworkReply* networkReply, HueReply& reply)
         if (jsonRootObject.contains("error")) {
             QJsonObject jsonError = jsonRootObject["error"].toObject();
 
-            int errorType               = jsonError["type"].toInt();
-            QString errorAddress        = jsonError["address"].toString();
-            QString errorDescription    = jsonError["description"].toString();
+            HueError error;
+            error.setType(jsonError["type"].toInt());
+            error.setAddress(jsonError["address"].toString());
+            error.setDescription(jsonError["description"].toString());
 
-            reply.setErrorType(errorType);
-            reply.setErrorAddress(errorAddress);
-            reply.setErrorDescription(errorDescription);
+            reply.setError(error);
             reply.isValid(false);
         }
         else if (jsonRootObject.contains("success")) {
@@ -218,6 +228,8 @@ void HueBridge::evaluateReply(QNetworkReply* networkReply, HueReply& reply)
     else {
         reply.isValid(false);
     }
+
+    m_lastReply = reply;
 }
 
 void HueBridge::sleep(const int sleepTimeMilliseconds)

@@ -106,17 +106,8 @@ HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
     HueRequest request("groups", QJsonObject(), HueRequest::get);
     HueReply reply = bridge->sendRequest(request);
 
-    if (!reply.isValid() || reply.timedOut()) {
-        qDebug() << "INVALID HUE REPLY";
-        qDebug() << "______________________________";
-        qDebug() << "Is valid: " << reply.isValid();
-        qDebug() << "Timed out: " << reply.timedOut();
-        qDebug() << "HTTP status: " << reply.getHttpStatus();
-        qDebug() << "Error type: " << reply.getErrorType();
-        qDebug() << "Error address: " << reply.getErrorAddress();
-        qDebug() << "Error description: " << reply.getErrorDescription();
-        qDebug() << "______________________________";
-
+    if (!reply.isValid() || reply.timedOut() || reply.containsError()) {
+        qDebug() << reply;
         return HueGroupList();
     }
 

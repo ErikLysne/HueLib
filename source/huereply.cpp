@@ -5,22 +5,18 @@ HueReply::HueReply()
     , m_timedOut(false)
     , m_json()
     , m_httpStatus(0)
-    , m_errorType(0)
-    , m_errorAddress("")
-    , m_errorDescription("")
+    , m_error()
 {
 
 }
 
-HueReply::HueReply(bool replyValid, bool timedOut, QJsonObject json, int httpStatus,
-                   int errorType, QString errorAddress, QString errorDescription)
+HueReply::HueReply(bool replyValid, bool timedOut, QJsonObject json,
+                   int httpStatus, HueError error)
     : m_replyValid(replyValid)
     , m_timedOut(timedOut)
     , m_json(json)
     , m_httpStatus(httpStatus)
-    , m_errorType(errorType)
-    , m_errorAddress(errorAddress)
-    , m_errorDescription(errorDescription)
+    , m_error(error)
 {
 
 }
@@ -30,9 +26,7 @@ HueReply::HueReply(const HueReply& rhs)
     , m_timedOut(rhs.m_timedOut)
     , m_json(rhs.m_json)
     , m_httpStatus(rhs.m_httpStatus)
-    , m_errorType(rhs.m_errorType)
-    , m_errorAddress(rhs.m_errorAddress)
-    , m_errorDescription(rhs.m_errorDescription)
+    , m_error(rhs.m_error)
 {
 
 }
@@ -46,9 +40,7 @@ HueReply HueReply::operator=(const HueReply &rhs)
     m_timedOut = rhs.m_timedOut;
     m_json = rhs.m_json;
     m_httpStatus = rhs.m_httpStatus;
-    m_errorType = rhs.m_errorType;
-    m_errorAddress = rhs.m_errorAddress;
-    m_errorDescription = rhs.m_errorDescription;
+    m_error = rhs.m_error;
 
     return *this;
 }
@@ -63,6 +55,11 @@ bool HueReply::timedOut() const
     return m_timedOut;
 }
 
+bool HueReply::containsError() const
+{
+    return m_error.getType() != -1;
+}
+
 QJsonObject HueReply::getJson() const
 {
     return m_json;
@@ -73,19 +70,9 @@ int HueReply::getHttpStatus() const
     return m_httpStatus;
 }
 
-int HueReply::getErrorType() const
+HueError HueReply::getError() const
 {
-    return m_errorType;
-}
-
-QString HueReply::getErrorAddress() const
-{
-    return m_errorAddress;
-}
-
-QString HueReply::getErrorDescription() const
-{
-    return m_errorDescription;
+    return m_error;
 }
 
 void HueReply::isValid(bool replyValid)
@@ -108,17 +95,25 @@ void HueReply::setHttpStatus(const int httpStatus)
     m_httpStatus = httpStatus;
 }
 
-void HueReply::setErrorType(const int errorType)
+void HueReply::setError(const HueError error)
 {
-    m_errorType = errorType;
+    m_error = error;
 }
 
-void HueReply::setErrorAddress(const QString errorAddress)
+HueReply::operator QString() const
 {
-    m_errorAddress = errorAddress;
-}
+    QString retval = "";
+    retval += "Reply:\n";
+    retval += "..................................................................\n";
+    retval += "Is valid:\t\t";          retval += (m_replyValid ? "True" : "False");            retval += "\n";
+    retval += "Timed out:\t\t";         retval += (m_timedOut ? "True" : "False");              retval += "\n";
+    retval += "HTTP status code:\t";    retval += QString::number(m_httpStatus);                retval += "\n";
+    retval += "Contains error:\t";      retval += (m_error.getType() != -1 ? "True" : "False"); retval += "\n";
 
-void HueReply::setErrorDescription(const QString errorDescription)
-{
-    m_errorDescription = errorDescription;
+    if (m_error.getType() != -1)
+        retval += QString(m_error);
+
+    retval += "..................................................................\n";
+
+    return retval;
 }

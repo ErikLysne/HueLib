@@ -213,19 +213,11 @@ bool HueAbstractObject::sendRequest(HueRequest request, HueReply& reply)
 {
     reply = m_bridge->sendRequest(request);
 
-    if (reply.isValid() && !reply.timedOut()) {
+    if (reply.isValid() && !reply.timedOut() && !reply.containsError()) {
         return true;
     }
     else {
-        qDebug() << "INVALID HUE REPLY";
-        qDebug() << "=============================";
-        qDebug() << "Is valid: " << reply.isValid();
-        qDebug() << "Timed out: " << reply.timedOut();
-        qDebug() << "HTTP status: " << reply.getHttpStatus();
-        qDebug() << "Error type: " << reply.getErrorType();
-        qDebug() << "Error address: " << reply.getErrorAddress();
-        qDebug() << "Error description: " << reply.getErrorDescription();
-        qDebug() << "=============================";
+        qDebug() << reply;
     }
 
     return false;

@@ -5,8 +5,10 @@
 #include <QJsonObject>
 #include <QTimer>
 
+#include "huereply.h"
+
 class HueRequest;
-class HueReply;
+class HueError;
 
 class HueBridge : public QObject
 {
@@ -20,16 +22,21 @@ public:
         Unknown
     };
 
-    HueBridge(QString ip, QString username,
+    HueBridge(QString ip, QString username = "",
               QNetworkAccessManager* nam = new QNetworkAccessManager(),
               QObject* parent = nullptr);
     ~HueBridge();
 
     HueReply sendRequest(const HueRequest request);
+    QString createUser();
+    bool testConnection(ConnectionStatus &status);
+    bool testConnection();
+
     QString getIP() const;
     QString getUsername() const;
-    bool testConnection();
-    bool testConnection(ConnectionStatus &status);
+    HueReply getLastReply() const;
+    HueError getLastError() const;
+
     void setNetworkRequestTimeout(int timeoutMilliseconds);
 
 private:
@@ -45,6 +52,7 @@ private:
     QNetworkAccessManager* m_nam;
     QString m_ip;
     QString m_username;
+    HueReply m_lastReply;
     QTimer* m_sleepTimer;
     int m_networkTimeoutMilliSec;
 
