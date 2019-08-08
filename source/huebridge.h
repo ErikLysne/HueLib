@@ -27,8 +27,7 @@ public:
               QObject* parent = nullptr);
     ~HueBridge();
 
-    HueReply sendRequest(const HueRequest request);
-    QString createUser();
+    QString createNewUser(QString app = "C++ HueLib app", QString device = "");
     bool testConnection(ConnectionStatus &status);
     bool testConnection();
 
@@ -37,11 +36,10 @@ public:
     HueReply getLastReply() const;
     HueError getLastError() const;
 
+    HueReply sendRequest(const HueRequest request);
     void setNetworkRequestTimeout(int timeoutMilliseconds);
 
 private:
-    HueReply sendGetRequest(QString urlPath);
-    HueReply sendPutRequest(QString urlPath, QJsonObject json);
     void evaluateReply(QNetworkReply* networkReply, HueReply& reply);
     void sleep(const int sleepTimeMilliseconds);
 

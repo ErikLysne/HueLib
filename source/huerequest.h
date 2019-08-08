@@ -9,7 +9,8 @@ class HueRequest
 public:
     enum Method {
         get,
-        put
+        put,
+        post
     };
 
     HueRequest(QString urlPath, QJsonObject json, Method method);

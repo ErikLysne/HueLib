@@ -26,24 +26,59 @@ HueBridge::~HueBridge()
 
 }
 
-HueReply HueBridge::sendRequest(const HueRequest request)
+QString HueBridge::createNewUser(QString app, QString device)
 {
-    if (m_sleepTimer->isActive()) {
-        int remainingTime = m_sleepTimer->remainingTime();
-        m_sleepTimer->stop();
-        sleep(remainingTime);
+    QString userID = app;
+    if (device != "") {
+        userID += "#";
+        userID += device;
     }
 
-    QString url = request.getUrlPath();
-    QJsonObject json = request.getJson();
-    HueRequest::Method method = request.getMethod();
+    QJsonObject json = {{"devicetype", userID}};
 
-    switch (method) {
-    case HueRequest::get:
-        return sendGetRequest(url);
-    case HueRequest::put:
-        return sendPutRequest(url, json);
+    HueRequest request("", json, HueRequest::post);
+    HueReply firstReply = sendRequest(request);
+
+    // If wrong IP
+    if (firstReply.timedOut()) {
+        qDebug() << "Request timed out - verify that the IP address of the Hue bridge is correct";
+        return "";
     }
+
+    // If link button is already pressed
+    if (!firstReply.containsError() && firstReply.getJson().contains("username")) {
+        QString username = firstReply.getJson()["username"].toString();
+        qDebug() << "New user created: " << username;
+        return username;
+    }
+
+    // If not, ask user to press it
+    if (firstReply.getError().getType() == 101)
+        qDebug() << "Press link button now...";
+
+    QEventLoop waitEventLoop;
+    QTimer waitTimer;
+
+    connect(&waitTimer, &QTimer::timeout, &waitEventLoop, &QEventLoop::quit);
+    waitTimer.setInterval(1000);
+    waitTimer.setSingleShot(false);
+
+    int attempts = 10;
+    for (int i = 0; i < attempts; i++) {
+        qDebug() << "Attempting to create new user: " << attempts-i;
+        HueReply nextReply = sendRequest(request);
+        if (!nextReply.containsError() && nextReply.getJson().contains("username")) {
+            QString username = nextReply.getJson()["username"].toString();
+            qDebug() << "New user created: " << username;
+            return username;
+        }
+        waitTimer.start();
+        waitEventLoop.exec();
+    }
+
+    qDebug() << "Link button was not pressed in time.";
+
+    return "";
 }
 
 QString HueBridge::getIP() const
@@ -97,66 +132,39 @@ bool HueBridge::testConnection()
     return testConnection(status);
 }
 
-void HueBridge::setNetworkRequestTimeout(int timeoutMilliseconds)
+HueReply HueBridge::sendRequest(const HueRequest request)
 {
-    if (timeoutMilliseconds > 0)
-        m_networkTimeoutMilliSec = timeoutMilliseconds;
-    else
-        m_networkTimeoutMilliSec = m_requestTimeoutMilliSec;
-}
+    if (m_sleepTimer->isActive()) {
+        int remainingTime = m_sleepTimer->remainingTime();
+        m_sleepTimer->stop();
+        sleep(remainingTime);
+    }
 
-HueReply HueBridge::sendGetRequest(QString urlPath)
-{
+    QString urlPath = request.getUrlPath();
+    QJsonObject json = request.getJson();
+    HueRequest::Method method = request.getMethod();
+
     HueReply reply;
     reply.timedOut(false);
     reply.isValid(true);
 
-    QNetworkRequest request;
-    QString url = "http://" + m_ip + "/api/" + m_username + "/" + urlPath;
-    request.setUrl(QUrl(url));
+    QString url;
 
-    QEventLoop eventLoop;
-    QTimer eventTimer;
-    connect(&eventTimer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-
-    QNetworkReply* networkReply = m_nam->get(request);
-    connect(networkReply, &QNetworkReply::finished,
-            this, [this, &reply]()
-    {
-        QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
-        evaluateReply(networkReply, reply);
-    });
-
-    connect(networkReply, &QNetworkReply::finished,  &eventLoop, &QEventLoop::quit);
-
-    eventTimer.setSingleShot(true);
-    eventTimer.start(m_networkTimeoutMilliSec);
-
-    eventLoop.exec();
-
-    if (eventTimer.isActive()) {
-        eventTimer.stop();
-    }
-    else {
-        networkReply->abort();
-        reply.timedOut(true);
-        reply.isValid(false);
+    switch (method) {
+    case HueRequest::get:
+    case HueRequest::put:
+        url = "http://" + m_ip + "/api/" + m_username + "/" + urlPath;
+        break;
+    case HueRequest::post:
+        url = "http://" + m_ip + "/api";
+        break;
     }
 
-    networkReply->deleteLater();
-    m_sleepTimer->start(m_sleepTimeMilliSec);
-    return reply;
-}
+    QNetworkRequest networkRequest;
+    networkRequest.setUrl(QUrl(url));
 
-HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
-{
-    HueReply reply;
-    reply.timedOut(false);
-    reply.isValid(true);
-
-    QNetworkRequest request;
-    QString url = "http://" + m_ip + "/api/" + m_username + "/" + urlPath;
-    request.setUrl(QUrl(url));
+    if (method == HueRequest::post)
+        networkRequest.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/x-www-form-urlencoded"));
 
     QJsonDocument jsonDoc(json);
     QByteArray jsonBytes = jsonDoc.toJson();
@@ -165,7 +173,19 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
     QTimer eventTimer;
     connect(&eventTimer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
 
-    QNetworkReply* networkReply = m_nam->put(request, jsonBytes);
+    QNetworkReply* networkReply;
+    switch (method) {
+    case HueRequest::get:
+        networkReply = m_nam->get(networkRequest);
+        break;
+    case HueRequest::put:
+        networkReply = m_nam->put(networkRequest, jsonBytes);
+        break;
+    case HueRequest::post:
+        networkReply = m_nam->post(networkRequest, jsonBytes);
+        break;
+    }
+
     connect(networkReply, &QNetworkReply::finished,
             this, [this, &reply]()
     {
@@ -191,6 +211,14 @@ HueReply HueBridge::sendPutRequest(QString urlPath, QJsonObject json)
     m_sleepTimer->start(m_sleepTimeMilliSec);
     networkReply->deleteLater();
     return reply;
+}
+
+void HueBridge::setNetworkRequestTimeout(int timeoutMilliseconds)
+{
+    if (timeoutMilliseconds > 0)
+        m_networkTimeoutMilliSec = timeoutMilliseconds;
+    else
+        m_networkTimeoutMilliSec = m_requestTimeoutMilliSec;
 }
 
 
@@ -215,9 +243,12 @@ void HueBridge::evaluateReply(QNetworkReply* networkReply, HueReply& reply)
 
             reply.setError(error);
             reply.isValid(false);
+            reply.setJson(jsonError);
         }
         else if (jsonRootObject.contains("success")) {
+            QJsonObject jsonSuccess = jsonRootObject["success"].toObject();
             reply.isValid(true);
+            reply.setJson(jsonSuccess);
         }
     }
     else if (!jsonDoc.isEmpty()){
