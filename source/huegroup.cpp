@@ -104,10 +104,10 @@ HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
     std::shared_ptr<GroupVector> groups = std::make_shared<GroupVector>();
 
     HueRequest request("groups", QJsonObject(), HueRequest::get);
-    HueReply reply = bridge->sendRequest(request);
+    HueReply reply = bridge->sendRequest(request, nullptr);
 
     if (!reply.isValid() || reply.timedOut() || reply.containsError()) {
-        qDebug() << reply;
+        qDebug().noquote() << reply;
         return HueGroupList();
     }
 

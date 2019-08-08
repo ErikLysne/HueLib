@@ -7,6 +7,8 @@
 
 #include "huerequest.h"
 #include "hueerror.h"
+#include "huelight.h"
+#include "huegroup.h"
 
 HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam, QObject* parent)
     : QObject(parent)
@@ -14,11 +16,14 @@ HueBridge::HueBridge(QString ip, QString username, QNetworkAccessManager* nam, Q
     , m_ip(ip)
     , m_username(username)
     , m_lastReply()
-    , m_sleepTimer(new QTimer(this))
-    , m_networkTimeoutMilliSec(m_sleepTimeMilliSec)
+    , m_blockTimer(new QTimer(this))
+    , m_lightCommandBlockTime(m_defaultLightCommandBlockTime)
+    , m_groupCommandBlockTime(m_defaultGroupCommandBlockTime)
+    , m_bridgeCommandBlockTime(m_defaultBridgeCommandBlockTime)
+    , m_networkRequestTimeout(m_defaultNetworkRequestTimeout)
 {
     m_nam->setParent(this);
-    m_sleepTimer->setSingleShot(true);
+    m_blockTimer->setSingleShot(true);
 }
 
 HueBridge::~HueBridge()
@@ -37,7 +42,7 @@ QString HueBridge::createNewUser(QString app, QString device)
     QJsonObject json = {{"devicetype", userID}};
 
     HueRequest request("", json, HueRequest::post);
-    HueReply firstReply = sendRequest(request);
+    HueReply firstReply = sendRequest(request, nullptr);
 
     // If wrong IP
     if (firstReply.timedOut()) {
@@ -66,7 +71,7 @@ QString HueBridge::createNewUser(QString app, QString device)
     int attempts = 10;
     for (int i = 0; i < attempts; i++) {
         qDebug() << "Attempting to create new user: " << attempts-i;
-        HueReply nextReply = sendRequest(request);
+        HueReply nextReply = sendRequest(request, nullptr);
         if (!nextReply.containsError() && nextReply.getJson().contains("username")) {
             QString username = nextReply.getJson()["username"].toString();
             qDebug() << "New user created: " << username;
@@ -104,7 +109,7 @@ HueError HueBridge::getLastError() const
 bool HueBridge::testConnection(ConnectionStatus &status)
 {   
     HueRequest request("lights", QJsonObject(), HueRequest::get);
-    HueReply reply = sendRequest(request);
+    HueReply reply = sendRequest(request, nullptr);
 
     if (reply.isValid()) {
         status = ConnectionStatus::Success;
@@ -132,12 +137,12 @@ bool HueBridge::testConnection()
     return testConnection(status);
 }
 
-HueReply HueBridge::sendRequest(const HueRequest request)
+HueReply HueBridge::sendRequest(const HueRequest request, HueAbstractObject* senderObject)
 {
-    if (m_sleepTimer->isActive()) {
-        int remainingTime = m_sleepTimer->remainingTime();
-        m_sleepTimer->stop();
-        sleep(remainingTime);
+    if (m_blockTimer->isActive()) {
+        int remainingTime = m_blockTimer->remainingTime();
+        m_blockTimer->stop();
+        block(remainingTime);
     }
 
     QString urlPath = request.getUrlPath();
@@ -191,11 +196,12 @@ HueReply HueBridge::sendRequest(const HueRequest request)
     {
         QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
         evaluateReply(networkReply, reply);
-    });
-    connect(networkReply, &QNetworkReply::finished,  &eventLoop, &QEventLoop::quit);
+    },
+    Qt::DirectConnection);
+    connect(networkReply, &QNetworkReply::finished,  &eventLoop, &QEventLoop::quit, Qt::DirectConnection);
 
     eventTimer.setSingleShot(true);
-    eventTimer.start(m_networkTimeoutMilliSec);
+    eventTimer.start(m_networkRequestTimeout);
 
     eventLoop.exec();
 
@@ -208,19 +214,55 @@ HueReply HueBridge::sendRequest(const HueRequest request)
         reply.isValid(false);
     }
 
-    m_sleepTimer->start(m_sleepTimeMilliSec);
+    // Block further bridge calls based on the type of command being sent
+    // HueGroup commands have lower throughput than HueLight commands
+
+    // General bridge/discovery command
+    if (senderObject == nullptr)
+        m_blockTimer->start(m_bridgeCommandBlockTime);
+    // Command sent from HueLight object
+    else if (dynamic_cast<HueLight*>(senderObject) != NULL)
+        m_blockTimer->start(m_lightCommandBlockTime);
+    // Command sent from HueGroup Object
+    else if (dynamic_cast<HueGroup*>(senderObject) != NULL)
+        m_blockTimer->start(m_groupCommandBlockTime);
+
+
     networkReply->deleteLater();
     return reply;
 }
 
-void HueBridge::setNetworkRequestTimeout(int timeoutMilliseconds)
+void HueBridge::setLightCommandBlockTime(int milliseconds)
 {
-    if (timeoutMilliseconds > 0)
-        m_networkTimeoutMilliSec = timeoutMilliseconds;
+    if (milliseconds > 0)
+        m_lightCommandBlockTime = milliseconds;
     else
-        m_networkTimeoutMilliSec = m_requestTimeoutMilliSec;
+        m_lightCommandBlockTime = m_defaultLightCommandBlockTime;
 }
 
+void HueBridge::setGroupCommandBlockTime(int milliseconds)
+{
+    if (milliseconds > 0)
+        m_groupCommandBlockTime = milliseconds;
+    else
+        m_groupCommandBlockTime = m_defaultGroupCommandBlockTime;
+}
+
+void HueBridge::setBridgeCommandBlockTime(int milliseconds)
+{
+    if (milliseconds > 0)
+        m_bridgeCommandBlockTime = milliseconds;
+    else
+        m_bridgeCommandBlockTime = m_defaultBridgeCommandBlockTime;
+}
+
+void HueBridge::setNetworkRequestTimeout(int milliseconds)
+{
+    if (milliseconds > 0)
+        m_networkRequestTimeout = milliseconds;
+    else
+        m_networkRequestTimeout = m_defaultNetworkRequestTimeout;
+}
 
 void HueBridge::evaluateReply(QNetworkReply* networkReply, HueReply& reply)
 {
@@ -263,15 +305,15 @@ void HueBridge::evaluateReply(QNetworkReply* networkReply, HueReply& reply)
     m_lastReply = reply;
 }
 
-void HueBridge::sleep(const int sleepTimeMilliseconds)
+void HueBridge::block(const int sleepTimeMilliseconds)
 {
-    QEventLoop sleepEventLoop;
-    QTimer sleepTimer;
+    QEventLoop blockEventLoop;
+    QTimer blockTimer;
 
-    connect(&sleepTimer, &QTimer::timeout, &sleepEventLoop, &QEventLoop::quit);
+    connect(&blockTimer, &QTimer::timeout, &blockEventLoop, &QEventLoop::quit);
 
-    sleepTimer.setSingleShot(true);
-    sleepTimer.start(sleepTimeMilliseconds);
+    blockTimer.setSingleShot(true);
+    blockTimer.start(sleepTimeMilliseconds);
 
-    sleepEventLoop.exec();
+    blockEventLoop.exec();
 }

@@ -211,13 +211,13 @@ bool HueAbstractObject::sendRequest(HueRequest request)
 
 bool HueAbstractObject::sendRequest(HueRequest request, HueReply& reply)
 {
-    reply = m_bridge->sendRequest(request);
+    reply = m_bridge->sendRequest(request, this);
 
     if (reply.isValid() && !reply.timedOut() && !reply.containsError()) {
         return true;
     }
     else {
-        qDebug() << reply;
+        qDebug().noquote() << reply;
     }
 
     return false;

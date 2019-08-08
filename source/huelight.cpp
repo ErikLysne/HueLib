@@ -122,10 +122,10 @@ HueLightList HueLight::discoverLights(HueBridge* bridge)
     std::shared_ptr<LightVector> lights = std::make_shared<LightVector>();
 
     HueRequest request("lights", QJsonObject(), HueRequest::get);
-    HueReply reply = bridge->sendRequest(request);
+    HueReply reply = bridge->sendRequest(request, nullptr);
 
     if (!reply.isValid() || reply.timedOut() || reply.containsError()) {
-        qDebug() << reply;
+        qDebug().noquote() << reply;
         return HueLightList();
     }
 
