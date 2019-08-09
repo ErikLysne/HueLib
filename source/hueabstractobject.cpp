@@ -216,10 +216,8 @@ bool HueAbstractObject::sendRequest(HueRequest request, HueReply& reply)
     if (reply.isValid() && !reply.timedOut() && !reply.containsError()) {
         return true;
     }
-    else {
-        qDebug().noquote() << reply;
-    }
 
+    qDebug().noquote() << reply;
     return false;
 }
 

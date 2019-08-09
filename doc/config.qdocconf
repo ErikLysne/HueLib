@@ -1,0 +1,16 @@
+# input
+headerdirs	= ../source
+sourcedirs	= ../source
+exampledirs	= ../examples
+imagedirs	= ./images
+
+sources.fileextensions	= "*.cpp"
+headers.fileextensions	= "*.h"
+
+# output
+outputdir	= html
+
+# formating
+outputformats		= HTML
+HTML.stylesheets	= style.css
+

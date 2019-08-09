@@ -31,7 +31,7 @@ HueReply::HueReply(const HueReply& rhs)
 
 }
 
-HueReply HueReply::operator=(const HueReply &rhs)
+HueReply HueReply::operator=(const HueReply& rhs)
 {
     if (&rhs == this)
         return *this;

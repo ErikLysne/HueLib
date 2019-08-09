@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- huebridge.cpp -->
+  <title>HueBridge Class | Qt </title>
+</head>
+<body>
+<li>HueBridge</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-types">Public Types</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">HueBridge Class</h1>
+<!-- $$$HueBridge-brief -->
+<p>The <a href="huebridge.html">HueBridge</a> class represents the physical bridge connected to the network. <a href="#details">More...</a></p>
+<!-- @@@HueBridge -->
+<ul>
+<li><a href="huebridge-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-types"></a>
+<h2 id="public-types">Public Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#ConnectionStatus-enum">ConnectionStatus</a></b> { Success, TimedOut, JsonError, HttpError, Unknown }</td></tr>
+</table></div>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#HueBridge">HueBridge</a></b>(QString <i>ip</i>, QString <i>username</i> = &quot;&quot;, QNetworkAccessManager *<i>nam</i> = new QNetworkAccessManager(), QObject *<i>parent</i> = nullptr)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#dtor.HueBridge">~HueBridge</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#getIP">getIP</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> HueError </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#getLastError">getLastError</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> HueReply </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#getLastReply">getLastReply</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#getUsername">getUsername</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#link">link</a></b>(QString <i>appName</i> = &quot;C++ HueLib app&quot;, QString <i>deviceName</i> = &quot;&quot;)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> HueReply </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#sendRequest">sendRequest</a></b>(const HueRequest <i>request</i>, HueAbstractObject *<i>senderObject</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#setBridgeCommandBlockTime">setBridgeCommandBlockTime</a></b>(const int <i>milliseconds</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#setGroupCommandBlockTime">setGroupCommandBlockTime</a></b>(const int <i>milliseconds</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#setLightCommandBlockTime">setLightCommandBlockTime</a></b>(const int <i>milliseconds</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#setNetworkAccessManager">setNetworkAccessManager</a></b>(QNetworkAccessManager *<i>nam</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#setNetworkRequestTimeout">setNetworkRequestTimeout</a></b>(const int <i>milliseconds</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#testConnection">testConnection</a></b>(ConnectionStatus &amp;<i>status</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="huebridge.html#testConnection-1">testConnection</a></b>()</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$HueBridge-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>The <a href="huebridge.html">HueBridge</a> class represents the physical bridge connected to the network.</p>
+<p>The Hue bridge is the link between Hue lights and the devices and applications that interface with them. To access the bridge, an application requires a valid username generated from the bridge. A username can be supplied with the constructor, or one can be generated by calling the link function.</p>
+<p>The minimum requirement to create a <a href="huebridge.html">HueBridge</a> object is the IP address of the bridge. In this case, the <a href="huebridge.html">HueBridge</a> object will be constructed without a valid username, and one must be created using the <code>link</code> function. When <code>link</code> is called, you have 10 seconds to press the link button on the bridge. When the button is pressed, a new username will be generated and stored in a file in the build folder. <code>link</code> always checks if a valid username has already been created before trying to create a new one, so pressing the button must only be done the first time a new application is running.</p>
+<pre class="cpp">HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="char">'10.0.1.14'</span>);
+bridge<span class="operator">-</span><span class="operator">&gt;</span>link();</pre>
+<p>If you want to supply an existing username instead of creating a new one, this can be added as a second argument.</p>
+<pre class="cpp">HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="char">'10.0.1.14'</span><span class="operator">,</span> <span class="char">'1028d66426293e821ecfd9ef1a0731df'</span>);</pre>
+<p><a href="huebridge.html">HueBridge</a> needs access to QNetworkAccessManager. By default, it will create one internally, but if this resource is required elsewhere, it can be created externally and a reference to <a href="huebridge.html">HueBridge</a> can be provided. Use a third argument to provide a pointer to a QNetworkAccessManager.</p>
+<pre class="cpp"><span class="type">QNetworkAccessManager</span><span class="operator">*</span> nam <span class="operator">=</span> <span class="keyword">new</span> <span class="type">QNetworkAccessManager</span>();
+HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="char">'10.0.1.14'</span><span class="operator">,</span> <span class="char">'1028d66426293e821ecfd9ef1a0731df'</span><span class="operator">,</span> nam);</pre>
+<p>Alternatively, <a href="huebridge.html#setNetworkAccessManager">setNetworkAccessManager</a> can be called after construction.</p>
+<p>Finally, a QObject parent can be specified as a forth argument.</p>
+<pre class="cpp"><span class="type">QNetworkAccessManager</span><span class="operator">*</span> nam <span class="operator">=</span> <span class="keyword">new</span> <span class="type">QNetworkAccessManager</span>();
+HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="char">'10.0.1.14'</span><span class="operator">,</span> <span class="char">'1028d66426293e821ecfd9ef1a0731df'</span><span class="operator">,</span> nam<span class="operator">,</span> <span class="keyword">this</span>);</pre>
+<p>Alternatively, the setParent function can be called.</p>
+</div>
+<!-- @@@HueBridge -->
+<div class="types">
+<h2>Member Type Documentation</h2>
+<!-- $$$ConnectionStatus$$$Success$$$TimedOut$$$JsonError$$$HttpError$$$Unknown -->
+<h3 class="fn" id="ConnectionStatus-enum"><a name="ConnectionStatus-enum"></a>enum HueBridge::<span class="name">ConnectionStatus</span></h3>
+<!-- @@@ConnectionStatus -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$HueBridge[overload1]$$$HueBridgeQStringQStringQNetworkAccessManager*QObject* -->
+<h3 class="fn" id="HueBridge"><a name="HueBridge"></a>HueBridge::<span class="name">HueBridge</span>(<span class="type">QString</span> <i>ip</i>, <span class="type">QString</span> <i>username</i> = &quot;&quot;, <span class="type">QNetworkAccessManager</span> *<i>nam</i> = new QNetworkAccessManager(), <span class="type">QObject</span> *<i>parent</i> = nullptr)</h3>
+<p><a href="huebridge.html">HueBridge::HueBridge</a> <b class="redFont"><code>\param</code></b> ip <b class="redFont"><code>\param</code></b> username <b class="redFont"><code>\param</code></b> nam <b class="redFont"><code>\param</code></b> parent</p>
+<!-- @@@HueBridge -->
+<!-- $$$~HueBridge[overload1]$$$~HueBridge -->
+<h3 class="fn" id="dtor.HueBridge"><a name="dtor.HueBridge"></a>HueBridge::<span class="name">~HueBridge</span>()</h3>
+<p>Destroys the instance of HueBridge.</p><!-- @@@~HueBridge -->
+<!-- $$$getIP[overload1]$$$getIP -->
+<h3 class="fn" id="getIP"><a name="getIP"></a><span class="type">QString</span> HueBridge::<span class="name">getIP</span>() const</h3>
+<!-- @@@getIP -->
+<!-- $$$getLastError[overload1]$$$getLastError -->
+<h3 class="fn" id="getLastError"><a name="getLastError"></a><span class="type">HueError</span> HueBridge::<span class="name">getLastError</span>() const</h3>
+<!-- @@@getLastError -->
+<!-- $$$getLastReply[overload1]$$$getLastReply -->
+<h3 class="fn" id="getLastReply"><a name="getLastReply"></a><span class="type">HueReply</span> HueBridge::<span class="name">getLastReply</span>() const</h3>
+<!-- @@@getLastReply -->
+<!-- $$$getUsername[overload1]$$$getUsername -->
+<h3 class="fn" id="getUsername"><a name="getUsername"></a><span class="type">QString</span> HueBridge::<span class="name">getUsername</span>() const</h3>
+<!-- @@@getUsername -->
+<!-- $$$link[overload1]$$$linkQStringQString -->
+<h3 class="fn" id="link"><a name="link"></a><span class="type">QString</span> HueBridge::<span class="name">link</span>(<span class="type">QString</span> <i>appName</i> = &quot;C++ HueLib app&quot;, <span class="type">QString</span> <i>deviceName</i> = &quot;&quot;)</h3>
+<!-- @@@link -->
+<!-- $$$sendRequest[overload1]$$$sendRequestconstHueRequestHueAbstractObject* -->
+<h3 class="fn" id="sendRequest"><a name="sendRequest"></a><span class="type">HueReply</span> HueBridge::<span class="name">sendRequest</span>(const <span class="type">HueRequest</span> <i>request</i>, <span class="type">HueAbstractObject</span> *<i>senderObject</i>)</h3>
+<!-- @@@sendRequest -->
+<!-- $$$setBridgeCommandBlockTime[overload1]$$$setBridgeCommandBlockTimeconstint -->
+<h3 class="fn" id="setBridgeCommandBlockTime"><a name="setBridgeCommandBlockTime"></a><span class="type">void</span> HueBridge::<span class="name">setBridgeCommandBlockTime</span>(const <span class="type">int</span> <i>milliseconds</i>)</h3>
+<!-- @@@setBridgeCommandBlockTime -->
+<!-- $$$setGroupCommandBlockTime[overload1]$$$setGroupCommandBlockTimeconstint -->
+<h3 class="fn" id="setGroupCommandBlockTime"><a name="setGroupCommandBlockTime"></a><span class="type">void</span> HueBridge::<span class="name">setGroupCommandBlockTime</span>(const <span class="type">int</span> <i>milliseconds</i>)</h3>
+<!-- @@@setGroupCommandBlockTime -->
+<!-- $$$setLightCommandBlockTime[overload1]$$$setLightCommandBlockTimeconstint -->
+<h3 class="fn" id="setLightCommandBlockTime"><a name="setLightCommandBlockTime"></a><span class="type">void</span> HueBridge::<span class="name">setLightCommandBlockTime</span>(const <span class="type">int</span> <i>milliseconds</i>)</h3>
+<!-- @@@setLightCommandBlockTime -->
+<!-- $$$setNetworkAccessManager[overload1]$$$setNetworkAccessManagerQNetworkAccessManager* -->
+<h3 class="fn" id="setNetworkAccessManager"><a name="setNetworkAccessManager"></a><span class="type">void</span> HueBridge::<span class="name">setNetworkAccessManager</span>(<span class="type">QNetworkAccessManager</span> *<i>nam</i>)</h3>
+<!-- @@@setNetworkAccessManager -->
+<!-- $$$setNetworkRequestTimeout[overload1]$$$setNetworkRequestTimeoutconstint -->
+<h3 class="fn" id="setNetworkRequestTimeout"><a name="setNetworkRequestTimeout"></a><span class="type">void</span> HueBridge::<span class="name">setNetworkRequestTimeout</span>(const <span class="type">int</span> <i>milliseconds</i>)</h3>
+<!-- @@@setNetworkRequestTimeout -->
+<!-- $$$testConnection[overload1]$$$testConnectionConnectionStatus& -->
+<h3 class="fn" id="testConnection"><a name="testConnection"></a><span class="type">bool</span> HueBridge::<span class="name">testConnection</span>(<span class="type"><a href="huebridge.html#ConnectionStatus-enum">ConnectionStatus</a></span> &amp;<i>status</i>)</h3>
+<!-- @@@testConnection -->
+<!-- $$$testConnection$$$testConnection -->
+<h3 class="fn" id="testConnection-1"><a name="testConnection-1"></a><span class="type">bool</span> HueBridge::<span class="name">testConnection</span>()</h3>
+<!-- @@@testConnection -->
+</div>
+</body>
+</html>

@@ -39,10 +39,11 @@ public:
 
     HueReply sendRequest(const HueRequest request, HueAbstractObject* senderObject);
 
-    void setLightCommandBlockTime(int milliseconds);
-    void setGroupCommandBlockTime(int milliseconds);
-    void setBridgeCommandBlockTime(int milliseconds);
-    void setNetworkRequestTimeout(int milliseconds);
+    void setNetworkAccessManager(QNetworkAccessManager* nam);
+    void setLightCommandBlockTime(const int milliseconds);
+    void setGroupCommandBlockTime(const int milliseconds);
+    void setBridgeCommandBlockTime(const int milliseconds);
+    void setNetworkRequestTimeout(const int milliseconds);
 
 private:
     QString createNewUser(QString name, HueReply reply);

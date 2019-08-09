@@ -16,6 +16,26 @@ HueError::HueError(int type, QString address, QString description)
 
 }
 
+HueError::HueError(const HueError& rhs)
+    : m_type(rhs.m_type)
+    , m_address(rhs.m_address)
+    , m_description(rhs.m_description)
+{
+
+}
+
+HueError HueError::operator=(const HueError& rhs)
+{
+    if (&rhs == this)
+        return *this;
+
+    m_type = rhs.m_type;
+    m_address = rhs.m_address;
+    m_description = rhs.m_description;
+
+    return *this;
+}
+
 int HueError::getType() const
 {
     return m_type;

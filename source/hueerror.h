@@ -8,6 +8,8 @@ class HueError
 public:
     HueError();
     HueError(int type, QString address, QString description);
+    HueError(const HueError& rhs);
+    HueError operator=(const HueError& rhs);
 
     int getType() const;
     QString getAddress() const;
