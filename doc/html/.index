@@ -280,7 +280,7 @@
                 <value name="Unknown" value="4"/>
             </enum>
         </class>
-        <class threadsafety="unspecified" name="HueError" href="hueerror.html" status="internal" access="private" location="hueerror.h" filepath="/home/erik/Dev/huelib/source/hueerror.h" lineno="6">
+        <class threadsafety="unspecified" name="HueError" href="hueerror.html" status="active" access="public" location="hueerror.h" filepath="/home/erik/Dev/huelib/source/hueerror.h" lineno="6" brief="Contains the details of an error received from HueBridge::sendRequest">
             <function threadsafety="unspecified" name="operator=" fullname="HueError::operator=" href="hueerror.html#operator-eq" status="active" access="public" location="hueerror.h" filepath="/home/erik/Dev/huelib/source/hueerror.h" lineno="12" virtual="non" meta="copy-assign" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="HueError" signature="HueError operator=(const HueError &amp;rhs)">
                 <parameter left="const HueError &amp;" right="" name="rhs" default=""/>
             </function>

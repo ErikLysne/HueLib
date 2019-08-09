@@ -110,8 +110,8 @@ bridge<span class="operator">-</span><span class="operator">&gt;</span>testConne
 <p><b>See also </b><a href="huebridge.html#getUsername">getUsername</a>().</p>
 <!-- @@@getIP -->
 <!-- $$$getLastError[overload1]$$$getLastError -->
-<h3 class="fn" id="getLastError"><a name="getLastError"></a><span class="type">HueError</span> HueBridge::<span class="name">getLastError</span>() const</h3>
-<p>Returns the HueError contained in the last HueReply received.</p>
+<h3 class="fn" id="getLastError"><a name="getLastError"></a><span class="type"><a href="hueerror.html">HueError</a></span> HueBridge::<span class="name">getLastError</span>() const</h3>
+<p>Returns the <a href="hueerror.html">HueError</a> contained in the last HueReply received.</p>
 <p><b>See also </b><a href="huebridge.html#getLastReply">getLastReply</a>().</p>
 <!-- @@@getLastError -->
 <!-- $$$getLastReply[overload1]$$$getLastReply -->
@@ -143,19 +143,19 @@ bridge<span class="operator">-</span><span class="operator">&gt;</span>link()</p
 <h3 class="fn" id="setBridgeCommandBlockTime"><a name="setBridgeCommandBlockTime"></a><span class="type">void</span> HueBridge::<span class="name">setBridgeCommandBlockTime</span>(const <span class="type">int</span> <i>milliseconds</i>)</h3>
 <p>Sets the time (in milliseconds) the bridge is blocked for after <a href="huebridge.html#sendRequest">sendRequest</a> has been called without a specified object, such as when calling <i>discover</i> functions. This is set to limit traffic to the throughput of the bridge. Setting a low value can lead to higher throughput, but can lead to more frequent timeouts and potentially make the bridge less responsive.</p>
 <p>Block time is specified by <i>milliseconds</i>.</p>
-<p><b>See also </b><a href="huebridge.html#setLightCommandBlockTime">setLightCommandBlockTime</a>, <a href="huebridge.html#setGroupCommandBlockTime">setGroupCommandBlockTime</a>, and <a href="huebridge.html#setNetworkRequestTimeout">setNetworkRequestTimeout</a>.</p>
+<p><b>See also </b><a href="huebridge.html#setLightCommandBlockTime">setLightCommandBlockTime</a>(), <a href="huebridge.html#setGroupCommandBlockTime">setGroupCommandBlockTime</a>(), and <a href="huebridge.html#setNetworkRequestTimeout">setNetworkRequestTimeout</a>().</p>
 <!-- @@@setBridgeCommandBlockTime -->
 <!-- $$$setGroupCommandBlockTime[overload1]$$$setGroupCommandBlockTimeconstint -->
 <h3 class="fn" id="setGroupCommandBlockTime"><a name="setGroupCommandBlockTime"></a><span class="type">void</span> HueBridge::<span class="name">setGroupCommandBlockTime</span>(const <span class="type">int</span> <i>milliseconds</i>)</h3>
 <p>Sets the time (in milliseconds) the bridge is blocked for after <a href="huebridge.html#sendRequest">sendRequest</a> has been called by a HueGroup object. This is set to limit traffic to the throughput of the bridge. Setting a low value can lead to higher throughput, but can lead to more frequent timeouts and potentially make the bridge less responsive.</p>
 <p>Block time is specified by <i>milliseconds</i>.</p>
-<p><b>See also </b><a href="huebridge.html#setLightCommandBlockTime">setLightCommandBlockTime</a>, <a href="huebridge.html#setBridgeCommandBlockTime">setBridgeCommandBlockTime</a>, and <a href="huebridge.html#setNetworkRequestTimeout">setNetworkRequestTimeout</a>.</p>
+<p><b>See also </b><a href="huebridge.html#setLightCommandBlockTime">setLightCommandBlockTime</a>(), <a href="huebridge.html#setBridgeCommandBlockTime">setBridgeCommandBlockTime</a>(), and <a href="huebridge.html#setNetworkRequestTimeout">setNetworkRequestTimeout</a>().</p>
 <!-- @@@setGroupCommandBlockTime -->
 <!-- $$$setLightCommandBlockTime[overload1]$$$setLightCommandBlockTimeconstint -->
 <h3 class="fn" id="setLightCommandBlockTime"><a name="setLightCommandBlockTime"></a><span class="type">void</span> HueBridge::<span class="name">setLightCommandBlockTime</span>(const <span class="type">int</span> <i>milliseconds</i>)</h3>
 <p>Sets the time (in milliseconds) the bridge is blocked for after <a href="huebridge.html#sendRequest">sendRequest</a> has been called by a HueLight object. This is set to limit traffic to the throughput of the bridge. Setting a low value can lead to higher throughput, but can lead to more frequent timeouts and potentially make the bridge less responsive.</p>
 <p>Block time is specified by <i>milliseconds</i>.</p>
-<p><b>See also </b><a href="huebridge.html#setGroupCommandBlockTime">setGroupCommandBlockTime</a>, <a href="huebridge.html#setBridgeCommandBlockTime">setBridgeCommandBlockTime</a>, and <a href="huebridge.html#setNetworkRequestTimeout">setNetworkRequestTimeout</a>.</p>
+<p><b>See also </b><a href="huebridge.html#setGroupCommandBlockTime">setGroupCommandBlockTime</a>(), <a href="huebridge.html#setBridgeCommandBlockTime">setBridgeCommandBlockTime</a>(), and <a href="huebridge.html#setNetworkRequestTimeout">setNetworkRequestTimeout</a>().</p>
 <!-- @@@setLightCommandBlockTime -->
 <!-- $$$setNetworkAccessManager[overload1]$$$setNetworkAccessManagerQNetworkAccessManager* -->
 <h3 class="fn" id="setNetworkAccessManager"><a name="setNetworkAccessManager"></a><span class="type">void</span> HueBridge::<span class="name">setNetworkAccessManager</span>(<span class="type">QNetworkAccessManager</span> *<i>nam</i>)</h3>
@@ -165,7 +165,7 @@ bridge<span class="operator">-</span><span class="operator">&gt;</span>link()</p
 <h3 class="fn" id="setNetworkRequestTimeout"><a name="setNetworkRequestTimeout"></a><span class="type">void</span> HueBridge::<span class="name">setNetworkRequestTimeout</span>(const <span class="type">int</span> <i>milliseconds</i>)</h3>
 <p>Sets the time (in milliseconds) until <i>timeout</i> after calling <a href="huebridge.html#sendRequest">sendRequest</a>.</p>
 <p><b>Note: </b>Reducing the timeout period for network requests will not make the bridge more responsive.</p><p>Timeout period is specified by <i>milliseconds</i>.</p>
-<p><b>See also </b><a href="huebridge.html#setLightCommandBlockTime">setLightCommandBlockTime</a>, <a href="huebridge.html#setGroupCommandBlockTime">setGroupCommandBlockTime</a>, and <a href="huebridge.html#setBridgeCommandBlockTime">setBridgeCommandBlockTime</a>.</p>
+<p><b>See also </b><a href="huebridge.html#setLightCommandBlockTime">setLightCommandBlockTime</a>(), <a href="huebridge.html#setGroupCommandBlockTime">setGroupCommandBlockTime</a>(), and <a href="huebridge.html#setBridgeCommandBlockTime">setBridgeCommandBlockTime</a>().</p>
 <!-- @@@setNetworkRequestTimeout -->
 <!-- $$$testConnection[overload1]$$$testConnectionConnectionStatus& -->
 <h3 class="fn" id="testConnection"><a name="testConnection"></a><span class="type">bool</span> HueBridge::<span class="name">testConnection</span>(<span class="type"><a href="huebridge.html#ConnectionStatus-enum">ConnectionStatus</a></span> &amp;<i>status</i>)</h3>
@@ -184,7 +184,7 @@ bridge<span class="operator">-</span><span class="operator">&gt;</span>link()</p
 <!-- $$$testConnection$$$testConnection -->
 <h3 class="fn" id="testConnection-1"><a name="testConnection-1"></a><span class="type">bool</span> HueBridge::<span class="name">testConnection</span>()</h3>
 <p>Tests connection to the bridge. Returns <code>true</code> if the test was successful, returns <code>false</code> otherwise.</p>
-<p><b>See also </b><a href="huebridge.html#testConnection">testConnection</a>(ConnectionStatus &amp;status).</p>
+<p><b>See also </b><a href="huebridge.html#testConnection">testConnection</a>(ConnectionStatus&amp; status).</p>
 <!-- @@@testConnection -->
 </div>
 </body>

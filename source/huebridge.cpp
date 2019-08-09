@@ -280,7 +280,7 @@ HueError HueBridge::getLastError() const
 }
 
 /*!
- * \fn bool HueBridge::testConnection(ConnectionStatus &status)
+ * \fn bool HueBridge::testConnection(ConnectionStatus& status)
  *
  * Tests connection to the bridge. Returns \c true if the test was successful, returns \c false otherwise.
  *
@@ -314,7 +314,7 @@ HueError HueBridge::getLastError() const
  * \sa testConnection()
  *
  */
-bool HueBridge::testConnection(ConnectionStatus &status)
+bool HueBridge::testConnection(ConnectionStatus& status)
 {   
     HueRequest request("lights", QJsonObject(), HueRequest::get);
     HueReply reply = sendRequest(request, nullptr);
@@ -344,7 +344,7 @@ bool HueBridge::testConnection(ConnectionStatus &status)
  *
  * Tests connection to the bridge. Returns \c true if the test was successful, returns \c false otherwise.
  *
- * \sa testConnection(ConnectionStatus &status)
+ * \sa testConnection(ConnectionStatus& status)
  *
  */
 bool HueBridge::testConnection()
@@ -489,7 +489,7 @@ void HueBridge::setNetworkAccessManager(QNetworkAccessManager* nam)
  *
  * Block time is specified by \a milliseconds.
  *
- * \sa setGroupCommandBlockTime, setBridgeCommandBlockTime, setNetworkRequestTimeout
+ * \sa setGroupCommandBlockTime(), setBridgeCommandBlockTime(), setNetworkRequestTimeout()
  *
  */
 void HueBridge::setLightCommandBlockTime(const int milliseconds)
@@ -510,7 +510,7 @@ void HueBridge::setLightCommandBlockTime(const int milliseconds)
  *
  * Block time is specified by \a milliseconds.
  *
- * \sa setLightCommandBlockTime, setBridgeCommandBlockTime, setNetworkRequestTimeout
+ * \sa setLightCommandBlockTime(), setBridgeCommandBlockTime(), setNetworkRequestTimeout()
  *
  */
 void HueBridge::setGroupCommandBlockTime(const int milliseconds)
@@ -532,7 +532,7 @@ void HueBridge::setGroupCommandBlockTime(const int milliseconds)
  *
  * Block time is specified by \a milliseconds.
  *
- * \sa setLightCommandBlockTime, setGroupCommandBlockTime, setNetworkRequestTimeout
+ * \sa setLightCommandBlockTime(), setGroupCommandBlockTime(), setNetworkRequestTimeout()
  *
  */
 void HueBridge::setBridgeCommandBlockTime(const int milliseconds)
@@ -551,7 +551,7 @@ void HueBridge::setBridgeCommandBlockTime(const int milliseconds)
  *
  * Timeout period is specified by \a milliseconds.
  *
- * \sa setLightCommandBlockTime, setGroupCommandBlockTime, setBridgeCommandBlockTime
+ * \sa setLightCommandBlockTime(), setGroupCommandBlockTime(), setBridgeCommandBlockTime()
  *
  */
 void HueBridge::setNetworkRequestTimeout(const int milliseconds)

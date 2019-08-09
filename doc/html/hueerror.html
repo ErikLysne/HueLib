@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- hueerror.cpp -->
+  <title>HueError Class | Qt </title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<body>
+<li>HueError</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">HueError Class</h1>
+<!-- $$$HueError-brief -->
+<p>Contains the details of an error received from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>. <a href="#details">More...</a></p>
+<!-- @@@HueError -->
+<ul>
+<li><a href="hueerror-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#HueError">HueError</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#HueError-1">HueError</a></b>(int <i>type</i>, QString <i>address</i>, QString <i>description</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#HueError-2">HueError</a></b>(const HueError &amp;<i>rhs</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#getAddress">getAddress</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#getDescription">getDescription</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#getType">getType</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#setAddress">setAddress</a></b>(const QString <i>address</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#setDescription">setDescription</a></b>(const QString <i>description</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#setType">setType</a></b>(const int <i>type</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#operator-QString">operator QString</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> HueError </td><td class="memItemRight bottomAlign"><b><a href="hueerror.html#operator-eq">operator=</a></b>(const HueError &amp;<i>rhs</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$HueError-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Contains the details of an error received from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>.</p>
+<p><a href="hueerror.html">HueError</a> contains the <i>type</i>, <i>address</i> and <i>description</i> of an error returned from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>. <i>type</i> is an ID of the error and is an <code>int</code>. The easiest way to test for specific errors is by comparison with <i>type</i>. <i>address</i> contains the path extention to the resouce that produced the error and is a <code>QString</code>. <i>description</i> provides a readable description of what caused the error and is a <code>QString</code>.</p>
+<p>A list of errors can be found in <a href="https://developers.meethue.com/develop/hue-api/error-messages/">https://developers.meethue.com/develop/hue-api/error-messages/</a>.</p>
+</div>
+<!-- @@@HueError -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$HueError[overload1]$$$HueError -->
+<h3 class="fn" id="HueError"><a name="HueError"></a>HueError::<span class="name">HueError</span>()</h3>
+<p>Constructs an empty <a href="hueerror.html">HueError</a>.</p>
+<!-- @@@HueError -->
+<!-- $$$HueError$$$HueErrorintQStringQString -->
+<h3 class="fn" id="HueError-1"><a name="HueError-1"></a>HueError::<span class="name">HueError</span>(<span class="type">int</span> <i>type</i>, <span class="type">QString</span> <i>address</i>, <span class="type">QString</span> <i>description</i>)</h3>
+<p>Constructs a <a href="hueerror.html">HueError</a> with contents specified by <i>type</i>, <i>address</i> and <i>description</i>.</p>
+<!-- @@@HueError -->
+<!-- $$$HueError$$$HueErrorconstHueError& -->
+<h3 class="fn" id="HueError-2"><a name="HueError-2"></a>HueError::<span class="name">HueError</span>(const <span class="type"><a href="hueerror.html#HueError">HueError</a></span> &amp;<i>rhs</i>)</h3>
+<p>Copy constructor - constructs a copy of <i>rhs</i>.</p>
+<!-- @@@HueError -->
+<!-- $$$getAddress[overload1]$$$getAddress -->
+<h3 class="fn" id="getAddress"><a name="getAddress"></a><span class="type">QString</span> HueError::<span class="name">getAddress</span>() const</h3>
+<p>Returns the error address.</p>
+<!-- @@@getAddress -->
+<!-- $$$getDescription[overload1]$$$getDescription -->
+<h3 class="fn" id="getDescription"><a name="getDescription"></a><span class="type">QString</span> HueError::<span class="name">getDescription</span>() const</h3>
+<p>Returns the error description.</p>
+<!-- @@@getDescription -->
+<!-- $$$getType[overload1]$$$getType -->
+<h3 class="fn" id="getType"><a name="getType"></a><span class="type">int</span> HueError::<span class="name">getType</span>() const</h3>
+<p>Returns the error type.</p>
+<!-- @@@getType -->
+<!-- $$$setAddress[overload1]$$$setAddressconstQString -->
+<h3 class="fn" id="setAddress"><a name="setAddress"></a><span class="type">void</span> HueError::<span class="name">setAddress</span>(const <span class="type">QString</span> <i>address</i>)</h3>
+<p>Sets the address type specified by <i>address</i>.</p>
+<!-- @@@setAddress -->
+<!-- $$$setDescription[overload1]$$$setDescriptionconstQString -->
+<h3 class="fn" id="setDescription"><a name="setDescription"></a><span class="type">void</span> HueError::<span class="name">setDescription</span>(const <span class="type">QString</span> <i>description</i>)</h3>
+<p>Sets the error description specified by <i>description</i>.</p>
+<!-- @@@setDescription -->
+<!-- $$$setType[overload1]$$$setTypeconstint -->
+<h3 class="fn" id="setType"><a name="setType"></a><span class="type">void</span> HueError::<span class="name">setType</span>(const <span class="type">int</span> <i>type</i>)</h3>
+<p>Sets the error type specified by <i>type</i>.</p>
+<!-- @@@setType -->
+<!-- $$$operator QString[overload1]$$$operator QString -->
+<h3 class="fn" id="operator-QString"><a name="operator-QString"></a>HueError::<span class="name">operator QString</span>() const</h3>
+<p>Overloads casting to <code>QString</code>.</p>
+<p>Convenient for e.g&#x2e; printing an error string to <i>qDebug</i>.</p>
+<pre class="cpp">HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="string">&quot;10.0.1.14&quot;</span>);
+bridge<span class="operator">-</span><span class="operator">&gt;</span>link();
+
+HueBridge<span class="operator">::</span>ConnectionStatus status;
+bridge<span class="operator">-</span><span class="operator">&gt;</span>testConnection(status);
+
+<span class="keyword">if</span> (status <span class="operator">=</span><span class="operator">=</span> HueBridge<span class="operator">::</span>JsonError)
+    qDebug() <span class="operator">&lt;</span><span class="operator">&lt;</span> bridge<span class="operator">-</span><span class="operator">&gt;</span>getLastError();</pre>
+<!-- @@@operator QString -->
+<!-- $$$operator=[overload1]$$$operator=constHueError& -->
+<h3 class="fn" id="operator-eq"><a name="operator-eq"></a><span class="type"><a href="hueerror.html#HueError">HueError</a></span> HueError::<span class="name">operator=</span>(const <span class="type"><a href="hueerror.html#HueError">HueError</a></span> &amp;<i>rhs</i>)</h3>
+<p>Copy assignment operator - assigns a copy of <i>rhs</i>.</p>
+<!-- @@@operator= -->
+</div>
+</body>
+</html>
