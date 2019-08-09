@@ -13,4 +13,5 @@ outputdir	= html
 # formating
 outputformats		= HTML
 HTML.stylesheets	= style.css
+HTML.headerstyles	= "<link rel=\"stylesheet\" type=\"text/css\" href=\"style/style.css\" />\n"
 
