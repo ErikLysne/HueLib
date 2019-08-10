@@ -166,7 +166,7 @@
  *  \li {1, 3} Software version on the light.
  *  \li \c QString \l Light::SoftwareUpdate::getState()
  *  \row
- *  \li \c QString \l Light::SoftwareUpdate::setLastInstall()
+ *  \li \c QString \l Light::SoftwareUpdate::getLastInstall()
  *  \row
  *  \li
  *
