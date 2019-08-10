@@ -307,7 +307,7 @@
             <function threadsafety="unspecified" name="getType" fullname="HueError::getType" href="hueerror.html#getType" status="active" access="public" location="hueerror.h" filepath="/home/erik/Dev/huelib/source/hueerror.h" lineno="14" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="int" signature="int getType() const"/>
             <function threadsafety="unspecified" name="operator QString" fullname="HueError::operator QString" href="hueerror.html#operator-QString" status="active" access="public" location="hueerror.h" filepath="/home/erik/Dev/huelib/source/hueerror.h" lineno="22" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="" signature="operator QString() const"/>
         </class>
-        <class threadsafety="unspecified" name="HueGroup" href="huegroup.html" status="internal" access="private" location="huegroup.h" filepath="/home/erik/Dev/huelib/source/huegroup.h" lineno="10" bases="HueAbstractObject">
+        <class threadsafety="unspecified" name="HueGroup" href="huegroup.html" status="active" access="public" location="huegroup.h" filepath="/home/erik/Dev/huelib/source/huegroup.h" lineno="10" bases="HueAbstractObject" groups="HueLib" brief="HueLight class is used to interface with a group of Hue lights">
             <function threadsafety="unspecified" name="operator=" fullname="HueGroup::operator=" href="huegroup.html#operator-eq" status="active" access="private" location="huegroup.h" filepath="/home/erik/Dev/huelib/source/huegroup.h" lineno="44" virtual="non" meta="copy-assign" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="HueGroup" signature="HueGroup operator=(const HueGroup &amp;rhs)">
                 <parameter left="const HueGroup &amp;" right="" name="rhs" default=""/>
             </function>
@@ -913,6 +913,6 @@
                 <function threadsafety="unspecified" name="getUniqueID" fullname="Light::UniqueID::getUniqueID" href="light-uniqueid.html#getUniqueID" status="active" access="public" location="huetypes.h" filepath="/home/erik/Dev/huelib/source/huetypes.h" lineno="94" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="QString" signature="QString getUniqueID() const"/>
             </class>
         </namespace>
-        <group name="HueLib" href="huelib.html" status="active" seen="true" title="HueLib" members="HueBridge,HueError,HueLight,HueReply,HueRequest"/>
+        <group name="HueLib" href="huelib.html" status="active" seen="true" title="HueLib" members="HueBridge,HueError,HueGroup,HueLight,HueReply,HueRequest"/>
     </namespace>
 </INDEX>

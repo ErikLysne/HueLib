@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- huegroup.cpp -->
+  <title>HueGroup Class | Qt </title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<body>
+<li>HueGroup</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#reimplemented-public-functions">Reimplemented Public Functions</a></li>
+<li class="level1"><a href="#static-public-members">Static Public Members</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">HueGroup Class</h1>
+<!-- $$$HueGroup-brief -->
+<p>The <a href="huelight.html">HueLight</a> class is used to interface with a group of Hue lights. <a href="#details">More...</a></p>
+<!-- @@@HueGroup -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> HueAbstractObject</td></tr></table></div><ul>
+<li><a href="huegroup-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#HueGroup">HueGroup</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#HueGroup-1">HueGroup</a></b>(HueBridge *<i>bridge</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Group::Action </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#action">action</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> HueLightList </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#getLights">getLights</a></b>(const HueLightList &amp;<i>lights</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Group::GroupClass </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#groupClass">groupClass</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Group::Lights </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#lights">lights</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#linkToLights">linkToLights</a></b>(const HueLightList &amp;<i>lights</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Group::Name </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#name">name</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Group::Recycle </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#recycle">recycle</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Group::Sensors </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#sensors">sensors</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Group::State </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#state">state</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Group::Type </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#type">type</a></b>() const</td></tr>
+</table></div>
+<a name="reimplemented-public-functions"></a>
+<h2 id="reimplemented-public-functions">Reimplemented Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> virtual int </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#ID">ID</a></b>() const override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#hasValidConstructor">hasValidConstructor</a></b>() const override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#isValid">isValid</a></b>() const override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#synchronize">synchronize</a></b>() override</td></tr>
+</table></div>
+<ul>
+<li class="fn">14 public functions inherited from <a href="hueabstractobject.html#public-functions">HueAbstractObject</a></li>
+</ul>
+<a name="static-public-members"></a>
+<h2 id="static-public-members">Static Public Members</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> HueGroupList </td><td class="memItemRight bottomAlign"><b><a href="huegroup.html#discoverGroups">discoverGroups</a></b>(HueBridge *<i>bridge</i>)</td></tr>
+</table></div>
+<h3>Additional Inherited Members</h3>
+<ul>
+<li class="fn">2 signals inherited from <a href="hueabstractobject.html#signals">HueAbstractObject</a></li>
+<li class="fn">14 protected functions inherited from <a href="hueabstractobject.html#protected-functions">HueAbstractObject</a></li>
+<li class="fn">1 static protected member inherited from <a href="hueabstractobject.html#static-protected-members">HueAbstractObject</a></li>
+</ul>
+<a name="details"></a>
+<!-- $$$HueGroup-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>The <a href="huelight.html">HueLight</a> class is used to interface with a group of Hue lights.</p>
+<p>A <a href="huegroup.html">HueGroup</a> object mirrors the state of a Hue group registered on the network. <a href="huegroup.html">HueGroup</a> objects cannot be constructed directly because the constructor of <a href="huegroup.html">HueGroup</a> is private. Instead, a list of <a href="huegroup.html">HueGroup</a> objects (a HueGroupList) is returned by the static function <a href="huegroup.html#discoverGroups">discoverGroups</a>(). A <a href="huebridge.html">HueBridge</a> object must be constructed before any <a href="huelight.html">HueLight</a> objects can be constructed.</p>
+<p>The following minimum working example turns off all groups on the network, then turns on the group named &quot;Living Room&quot; and enables the color loop effect.</p>
+<pre class="cpp"><span class="comment">// Create HueBridge</span>
+HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="string">&quot;10.0.1.14&quot;</span>);
+
+<span class="comment">// Link to bridge</span>
+bridge<span class="operator">-</span><span class="operator">&gt;</span>link();
+
+<span class="comment">// Discover groups on the network</span>
+HueGroupList<span class="operator">*</span> groups <span class="operator">=</span> <span class="keyword">new</span> HueGroupList(HueGroup<span class="operator">::</span>discoverGroups(bridge));
+
+<span class="comment">// Turn off all groups</span>
+<span class="keyword">for</span> (<span class="keyword">auto</span> group : <span class="operator">*</span>groups)
+    group<span class="operator">-</span><span class="operator">&gt;</span>turnOff();
+
+<span class="comment">// Turn on light 1 and set effect to color loop</span>
+groups<span class="operator">-</span><span class="operator">&gt;</span>fetch(<span class="string">&quot;Living Room&quot;</span>)<span class="operator">-</span><span class="operator">&gt;</span>turnOn();
+groups<span class="operator">-</span><span class="operator">&gt;</span>fetch(<span class="string">&quot;Living Room&quot;</span>)<span class="operator">-</span><span class="operator">&gt;</span>turnOn();</pre>
+<p>As can be seen from the example above, groups can be changed by directly calling <i>set</i> functions on the <a href="huegroup.html">HueGroup</a> objects. Below is a list of <i>set</i> functions that work with <a href="huegroup.html">HueGroup</a> objects.</p>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Function</th><th >Description</th><th >Range</th></tr></thead>
+<tr valign="top" class="odd"><td >turnOn(const bool on = true)</td><td >Turns the light on.</td><td ><code>true</code> or <code>false</code></td></tr>
+<tr valign="top" class="even"><td >turnOff(const bool off = true)</td><td >Turns the light off.</td><td ><code>true</code> or <code>false</code></td></tr>
+<tr valign="top" class="odd"><td >setHue(const int hue)</td><td >Sets the hue of the light.</td><td >0 - 65535</td></tr>
+<tr valign="top" class="even"><td >setSaturation(const int saturation)</td><td >Sets the saturation of the light.</td><td >0 - 254</td></tr>
+<tr valign="top" class="odd"><td >setBrightness(const int brightness)</td><td >Sets the brightness of the light.</td><td >1 - 254</td></tr>
+<tr valign="top" class="even"><td >setColorTemp(const int colorTemp)</td><td >Sets the color temperature of the light.</td><td >150 - 500 (corresponds to 6500K - 2000K)</td></tr>
+<tr valign="top" class="odd"><td >setXY(const double x, const double y)</td><td >Sets the X and Y color coordinates in CIE color space.</td><td >0 - 1</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 3">setAlert(const HueAlert alert)</td><td  rowspan=" 3">Sets an alert on the light.</td><td >HueAlert::NoAlert</td></tr>
+<tr valign="top" class="odd"><td >HueAlert::BreatheSingle</td></tr>
+<tr valign="top" class="even"><td >HueAlert::Breathe15sec</td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 2">setEffect(const HueEffect effect);</td><td  rowspan=" 2">Sets an effect on the light.</td><td >HueEffect::NoEffect</td></tr>
+<tr valign="top" class="even"><td >HueEffect::ColorLoop</td></tr>
+</table></div>
+<p>Data can be retreved from <a href="huegroup.html">HueGroup</a> by calling the functions in the table below.</p>
+<p><b>Note: </b>The data follows the convension of the Hue API, where some data is nested and some is not. For consistency, all data functions return an object of a data class, where <i>get</i> functions can be called to retreive the data - even when only one <i>get</i> function exists. The exception is <a href="huegroup.html#ID">ID</a>() which returns the ID of the light as an <code>int</code>.</p><div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Function</th><th >Description</th><th ><i>get</i> functions</th></tr></thead>
+<tr valign="top" class="odd"><td  rowspan=" 11"><a href="group-action.html">Group::Action</a> <a href="huegroup.html#action">action</a>()</td><td  rowspan=" 11">Describes the action perfomed on a group (similar to <a href="huelight.html#state">HueLight::state</a>()</td><td ><code>bool</code> <a href="group-action.html#isOn">Group::Action::isOn</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>int</code> <a href="group-action.html#getBrightness">Group::Action::getBrightness</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>int</code> <a href="group-action.html#getHue">Group::Action::getHue</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>int</code> <a href="group-action.html#getSaturation">Group::Action::getSaturation</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>int</code> <a href="group-action.html#getColorTemp">Group::Action::getColorTemp</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>double</code> <a href="group-action.html#getXValue">Group::Action::getXValue</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>double</code> <a href="group-action.html#getYValue">Group::Action::getYValue</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>QString</code> <a href="group-action.html#getEffect">Group::Action::getEffect</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>QString</code> <a href="group-action.html#getAlert">Group::Action::getAlert</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>QString</code> <a href="group-action.html#getColorMode">Group::Action::getColorMode</a>()</td></tr>
+<tr valign="top" class="odd"><td ></td></tr>
+<tr valign="top" class="even"><td  rowspan=" 1"><a href="group-lights.html">Group::Lights</a> <a href="huegroup.html#lights">lights</a>()</td><td  rowspan=" 1">List of lights associated with the group (by ID).</td><td ><code>QList&lt;QString&gt;</code> <a href="group-lights.html#getLights">Group::Lights::getLights</a>()</td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 1"><a href="group-sensors.html">Group::Sensors</a> <a href="huegroup.html#sensors">sensors</a>()</td><td  rowspan=" 1">List of sensors associated with the group.</td><td ><code>QList&lt;QString&gt;</code> <a href="group-sensors.html#getSensors">Group::Sensors::getSensors</a>()</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 3"><a href="group-state.html">Group::State</a> <a href="huegroup.html#state">state</a>()</td><td  rowspan=" 3">State of the group.</td><td ><code>bool</code> <a href="group-state.html#getAllOn">Group::State::getAllOn</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>bool</code> <a href="group-state.html#getAnyOn">Group::State::getAnyOn</a>()</td></tr>
+<tr valign="top" class="even"><td ></td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 1"><a href="group-name.html">Group::Name</a> <a href="huegroup.html#name">name</a>()</td><td  rowspan=" 1">Name of the group.</td><td ><code>QString</code> <a href="group-name.html#getName">Group::Name::getName</a>()</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 1"><a href="group-type.html">Group::Type</a> <a href="huegroup.html#type">type</a>()</td><td  rowspan=" 1">Describes the type of group.</td><td ><code>QString</code> <a href="group-type.html#getType">Group::Type::getType</a>()</td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 1"><a href="group-groupclass.html">Group::GroupClass</a> <a href="huegroup.html#groupClass">groupClass</a>()</td><td  rowspan=" 1">Describes the class of the group.</td><td ><code>QString</code> <a href="group-groupclass.html#getGroupClass">Group::GroupClass::getGroupClass</a>()</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 1"><a href="group-recycle.html">Group::Recycle</a> <a href="huegroup.html#recycle">recycle</a>()</td><td  rowspan=" 1">Determines if the group will recycle (be deleted when not referenced).</td><td ><code>QString</code> <a href="group-recycle.html#getRecycle">Group::Recycle::getRecycle</a>()</td></tr>
+<tr valign="top" class="odd"></tr>
+</table></div>
+</div>
+<!-- @@@HueGroup -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$HueGroup[overload1]$$$HueGroup -->
+<h3 class="fn" id="HueGroup"><a name="HueGroup"></a>HueGroup::<span class="name">HueGroup</span>()</h3>
+<p>Creates an empty <a href="huegroup.html">HueGroup</a>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><p><b>See also </b><a href="huegroup.html#discoverGroups">discoverGroups</a>().</p>
+<!-- @@@HueGroup -->
+<!-- $$$HueGroup$$$HueGroupHueBridge* -->
+<h3 class="fn" id="HueGroup-1"><a name="HueGroup-1"></a>HueGroup::<span class="name">HueGroup</span>(<span class="type"><a href="huebridge.html">HueBridge</a></span> *<i>bridge</i>)</h3>
+<p>Creates an empty <a href="huegroup.html">HueGroup</a> with a <a href="huebridge.html">HueBridge</a> reference provided by <i>bridge</i>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><p><b>See also </b><a href="huegroup.html#discoverGroups">discoverGroups</a>().</p>
+<!-- @@@HueGroup -->
+<!-- $$$ID[overload1]$$$ID -->
+<h3 class="fn" id="ID"><a name="ID"></a><code>[override virtual] </code><span class="type">int</span> HueGroup::<span class="name">ID</span>() const</h3>
+<p>Returns an <code>int</code> with the ID of the group.</p>
+<!-- @@@ID -->
+<!-- $$$action[overload1]$$$action -->
+<h3 class="fn" id="action"><a name="action"></a><span class="type"><a href="group-action.html">Group::Action</a></span> HueGroup::<span class="name">action</span>() const</h3>
+<p>Returns a <a href="group-action.html">Group::Action</a> object.</p>
+<!-- @@@action -->
+<!-- $$$discoverGroups[overload1]$$$discoverGroupsHueBridge* -->
+<h3 class="fn" id="discoverGroups"><a name="discoverGroups"></a><code>[static] </code><span class="type">HueGroupList</span> HueGroup::<span class="name">discoverGroups</span>(<span class="type"><a href="huebridge.html">HueBridge</a></span> *<i>bridge</i>)</h3>
+<p>Returns a HueGroupList of groups registered on the bridge. This function is static and is used to generate <a href="huegroup.html">HueGroup</a> objects using the connection to <a href="huebridge.html">HueBridge</a> specified by <i>bridge</i>.</p>
+<!-- @@@discoverGroups -->
+<!-- $$$getLights[overload1]$$$getLightsconstHueLightList& -->
+<h3 class="fn" id="getLights"><a name="getLights"></a><span class="type">HueLightList</span> HueGroup::<span class="name">getLights</span>(const <span class="type">HueLightList</span> &amp;<i>lights</i>) const</h3>
+<p>Returns a HueLightList of <a href="huelight.html">HueLight</a> objects associated with the <a href="huegroup.html">HueGroup</a>. <a href="huelight.html#discoverLights">HueLight::discoverLights</a>() must be called prior to calling this function, and the HueLightList returned must be passed specified by <i>lights</i>.</p>
+<pre class="cpp"><span class="comment">// Create HueBridge</span>
+HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="string">&quot;10.0.1.14&quot;</span>);
+
+<span class="comment">// Link to bridge</span>
+bridge<span class="operator">-</span><span class="operator">&gt;</span>link();
+
+<span class="comment">// Discover lights and groups</span>
+HueLightList<span class="operator">*</span> lights <span class="operator">=</span> <span class="keyword">new</span> HueLightList(HueLight<span class="operator">::</span>discoverLights(bridge));
+HueGroupList<span class="operator">*</span> groups <span class="operator">=</span> <span class="keyword">new</span> HueGroupList(HueGroup<span class="operator">::</span>discoverGroups(bridge));
+
+<span class="comment">//  Get a raw pointer to the &quot;Living Room&quot; group</span>
+HueGroup<span class="operator">*</span> livingRoom <span class="operator">=</span> groups<span class="operator">-</span><span class="operator">&gt;</span>fetchRaw(<span class="string">&quot;Living Room&quot;</span>);
+
+<span class="comment">// Get the lights in &quot;Living Room&quot;</span>
+HueLightList<span class="operator">*</span> livingRoomLights <span class="operator">=</span> <span class="keyword">new</span> HueLightList(livingRoom<span class="operator">-</span><span class="operator">&gt;</span>getLights(lights));
+
+<span class="comment">// Turn off all groups</span>
+<span class="keyword">for</span> (<span class="keyword">auto</span> group : <span class="operator">*</span>groups)
+    group<span class="operator">-</span><span class="operator">&gt;</span>turnOff();
+
+<span class="type">int</span> rbgHue<span class="operator">[</span><span class="number">3</span><span class="operator">]</span> <span class="operator">=</span> {
+        <span class="number">65535</span><span class="operator">,</span>  <span class="comment">// red</span>
+        <span class="number">21845</span><span class="operator">,</span>  <span class="comment">// green</span>
+        <span class="number">43690</span>   <span class="comment">// blue</span>
+};
+
+<span class="comment">// Control lights in &quot;Living Room&quot; individually</span>
+<span class="type">int</span> index <span class="operator">=</span> <span class="number">0</span>;
+<span class="keyword">for</span> (<span class="keyword">auto</span> light : <span class="operator">*</span>livingRoomLights)
+        light<span class="operator">-</span><span class="operator">&gt;</span>setHue(rbgHue<span class="operator">[</span>index<span class="operator">+</span><span class="operator">+</span> <span class="operator">%</span> <span class="number">3</span><span class="operator">]</span>);</pre>
+<p><b>See also </b><a href="huelight.html#discoverLights">HueLight::discoverLights</a>() and <a href="huegroup.html#discoverGroups">HueGroup::discoverGroups</a>().</p>
+<!-- @@@getLights -->
+<!-- $$$groupClass[overload1]$$$groupClass -->
+<h3 class="fn" id="groupClass"><a name="groupClass"></a><span class="type"><a href="group-groupclass.html">Group::GroupClass</a></span> HueGroup::<span class="name">groupClass</span>() const</h3>
+<p>Returns a <a href="group-groupclass.html">Group::GroupClass</a> object.</p>
+<!-- @@@groupClass -->
+<!-- $$$hasValidConstructor[overload1]$$$hasValidConstructor -->
+<h3 class="fn" id="hasValidConstructor"><a name="hasValidConstructor"></a><code>[override virtual] </code><span class="type">bool</span> HueGroup::<span class="name">hasValidConstructor</span>() const</h3>
+<p>Returns <code>true</code> if <a href="huegroup.html">HueGroup</a> was constructed properly.</p>
+<p><b>See also </b><a href="huegroup.html#isValid">isValid</a>().</p>
+<!-- @@@hasValidConstructor -->
+<!-- $$$isValid[overload1]$$$isValid -->
+<h3 class="fn" id="isValid"><a name="isValid"></a><code>[override virtual] </code><span class="type">bool</span> HueGroup::<span class="name">isValid</span>() const</h3>
+<p>Equivalent to <a href="huegroup.html#hasValidConstructor">hasValidConstructor</a>()</p>
+<!-- @@@isValid -->
+<!-- $$$lights[overload1]$$$lights -->
+<h3 class="fn" id="lights"><a name="lights"></a><span class="type"><a href="group-lights.html">Group::Lights</a></span> HueGroup::<span class="name">lights</span>() const</h3>
+<p>Returns a <a href="group-lights.html">Group::Lights</a> object.</p>
+<!-- @@@lights -->
+<!-- $$$linkToLights[overload1]$$$linkToLightsconstHueLightList& -->
+<h3 class="fn" id="linkToLights"><a name="linkToLights"></a><span class="type">void</span> HueGroup::<span class="name">linkToLights</span>(const <span class="type">HueLightList</span> &amp;<i>lights</i>)</h3>
+<!-- @@@linkToLights -->
+<!-- $$$name[overload1]$$$name -->
+<h3 class="fn" id="name"><a name="name"></a><span class="type"><a href="group-name.html">Group::Name</a></span> HueGroup::<span class="name">name</span>() const</h3>
+<p>Returns a <a href="group-name.html">Group::Name</a> object.</p>
+<!-- @@@name -->
+<!-- $$$recycle[overload1]$$$recycle -->
+<h3 class="fn" id="recycle"><a name="recycle"></a><span class="type"><a href="group-recycle.html">Group::Recycle</a></span> HueGroup::<span class="name">recycle</span>() const</h3>
+<p>Returns a <a href="group-recycle.html">Group::Recycle</a> object.</p>
+<!-- @@@recycle -->
+<!-- $$$sensors[overload1]$$$sensors -->
+<h3 class="fn" id="sensors"><a name="sensors"></a><span class="type"><a href="group-sensors.html">Group::Sensors</a></span> HueGroup::<span class="name">sensors</span>() const</h3>
+<p>Returns a <a href="group-sensors.html">Group::Sensors</a> object.</p>
+<!-- @@@sensors -->
+<!-- $$$state[overload1]$$$state -->
+<h3 class="fn" id="state"><a name="state"></a><span class="type"><a href="group-state.html">Group::State</a></span> HueGroup::<span class="name">state</span>() const</h3>
+<p>Returns a <a href="group-state.html">Group::State</a> object.</p>
+<!-- @@@state -->
+<!-- $$$synchronize[overload1]$$$synchronize -->
+<h3 class="fn" id="synchronize"><a name="synchronize"></a><code>[override virtual] </code><span class="type">bool</span> HueGroup::<span class="name">synchronize</span>()</h3>
+<p>Updates <a href="huegroup.html">HueGroup</a> to the lastest state available on <a href="huebridge.html">HueBridge</a>.</p>
+<p><b>Note: </b>only queries an individual <a href="huegroup.html">HueGroup</a> from the bridge. If all groups needs to be updated, it can be faster to delete the HueGroupList and call <a href="huegroup.html#discoverGroups">discoverGroups</a>() again.</p><p><b>See also </b><a href="huegroup.html#discoverGroups">discoverGroups</a>().</p>
+<!-- @@@synchronize -->
+<!-- $$$type[overload1]$$$type -->
+<h3 class="fn" id="type"><a name="type"></a><span class="type"><a href="group-type.html">Group::Type</a></span> HueGroup::<span class="name">type</span>() const</h3>
+<p>Returns a <a href="group-type.html">Group::Type</a> object.</p>
+<!-- @@@type -->
+</div>
+</body>
+</html>
