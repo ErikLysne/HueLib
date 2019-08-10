@@ -100,8 +100,45 @@ lights<span class="operator">-</span><span class="operator">&gt;</span>fetch(<sp
 <tr valign="top" class="odd"><td >setBrightness(const int brightness)</td><td >Sets the brightness of the light.</td><td >1 - 254</td></tr>
 <tr valign="top" class="even"><td >setColorTemp(const int colorTemp)</td><td >Sets the color temperature of the light.</td><td >150 - 500 (corresponds to 6500K - 2000K)</td></tr>
 <tr valign="top" class="odd"><td >setXY(const double x, const double y)</td><td >Sets the X and Y color coordinates in CIE color space.</td><td >0 - 1</td></tr>
-<tr valign="top" class="even"><td >setAlert(const HueAlert alert)</td><td >Sets an alert on the light.</td><td >HueAlert::NoAlert, HueAlert::BreatheSingle or HueAlert::Breathe15sec</td></tr>
-<tr valign="top" class="odd"><td >setEffect(const HueEffect effect);</td><td >Sets an effect on the light.</td><td >HueEffect::NoEffect or HueEffect::ColorLoop</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 3">setAlert(const HueAlert alert)</td><td  rowspan=" 3">Sets an alert on the light.</td><td >HueAlert::NoAlert</td></tr>
+<tr valign="top" class="odd"><td >HueAlert::BreatheSingle</td></tr>
+<tr valign="top" class="even"><td >HueAlert::Breathe15sec</td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 2">setEffect(const HueEffect effect);</td><td  rowspan=" 2">Sets an effect on the light.</td><td >HueEffect::NoEffect</td></tr>
+<tr valign="top" class="even"><td >HueEffect::ColorLoop</td></tr>
+</table></div>
+<p>Data can be retreved from <a href="huelight.html">HueLight</a> by calling the functions in the table below.</p>
+<p><b>Note: </b>The data follows the convension of the Hue API, where some data is nested and some is not. For consistency, all data functions return an object of a data class, where <i>get</i> functions can be called to retreive the data - even when only one <i>get</i> function exists. The exception is <a href="huelight.html#ID">ID</a>() which returns the ID of the light as an <code>int</code>.</p><div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Function</th><th >Description</th><th ><i>get</i> functions</th></tr></thead>
+<tr valign="top" class="odd"><td  rowspan=" 13"><a href="light-state.html">Light::State</a> <a href="huelight.html#state">state</a>()</td><td  rowspan=" 13">Describes the state of the light.</td><td ><code>bool</code> <a href="light-state.html#isOn">Light::State::isOn</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>bool</code> <a href="light-state.html#isReachable">Light::State::isReachable</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>int</code> <a href="light-state.html#getBrightness">Light::State::getBrightness</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>int</code> <a href="light-state.html#getHue">Light::State::getHue</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>int</code> <a href="light-state.html#getSaturation">Light::State::getSaturation</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>int</code> <a href="light-state.html#getColorTemp">Light::State::getColorTemp</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>double</code> <a href="light-state.html#getXValue">Light::State::getXValue</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>double</code> <a href="light-state.html#getYValue">Light::State::getYValue</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>QString</code> <a href="light-state.html#getEffect">Light::State::getEffect</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>QString</code> <a href="light-state.html#getAlert">Light::State::getAlert</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>QString</code> <a href="light-state.html#getColorMode">Light::State::getColorMode</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>QString</code> <a href="light-state.html#getMode">Light::State::getMode</a>()</td></tr>
+<tr valign="top" class="odd"><td ></td></tr>
+<tr valign="top" class="even"><td  rowspan=" 1"><a href="light-state.html">Light::State</a> <a href="huelight.html#name">name</a>()</td><td  rowspan=" 1">Name of the light.</td><td ><code>QString</code> <a href="light-name.html#getName">Light::Name::getName</a>()</td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 1"><a href="light-type.html">Light::Type</a> <a href="huelight.html#type">type</a>()</td><td  rowspan=" 1">Describes the type of light.</td><td ><code>QString</code> <a href="light-type.html#getType">Light::Type::getType</a>()</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 1"><a href="light-uniqueid.html">Light::UniqueID</a> <a href="huelight.html#uniqueID">uniqueID</a>()</td><td  rowspan=" 1">Provides an unique ID for the light.</td><td ><code>QString</code> <a href="light-uniqueid.html#getUniqueID">Light::UniqueID::getUniqueID</a>()</td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 1"><a href="light-softwareversion.html">Light::SoftwareVersion</a> <a href="huelight.html#softwareVersion">softwareVersion</a>()</td><td  rowspan=" 1">Software version on the light.</td><td ><code>QString</code> <a href="light-softwareversion.html#getSoftwareVersion">Light::SoftwareVersion::getSoftwareVersion</a>()</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 3"><a href="light-softwareupdate.html">Light::SoftwareUpdate</a> <a href="huelight.html#softwareUpdate">softwareUpdate</a>()</td><td  rowspan=" 3">Software version on the light.</td><td ><code>QString</code> <a href="light-softwareupdate.html#getState">Light::SoftwareUpdate::getState</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>QString</code> <a href="light-softwareupdate.html#setLastInstall">Light::SoftwareUpdate::setLastInstall</a>()</td></tr>
+<tr valign="top" class="even"><td ></td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 1"><a href="light-softwareconfigid.html">Light::SoftwareConfigID</a> <a href="huelight.html#softwareConfigID">softwareConfigID</a>()</td><td  rowspan=" 1">Provides a software config ID for the light.</td><td ><code>QString</code> <a href="light-softwareconfigid.html#getSoftwareConfigID">Light::SoftwareConfigID::getSoftwareConfigID</a>()</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 1"><a href="light-productname.html">Light::ProductName</a> <a href="huelight.html#productName">productName</a>()</td><td  rowspan=" 1">Name of the light product.</td><td ><code>QString</code> <a href="light-productname.html#getProductName">Light::ProductName::getProductName</a>()</td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 1"><a href="light-manufacturer.html">Light::Manufacturer</a> <a href="huelight.html#manufacturer">manufacturer</a>()</td><td  rowspan=" 1">Manufacturer of the light.</td><td ><code>QString</code> <a href="light-manufacturer.html#getManufacturer">Light::Manufacturer::getManufacturer</a>()</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 1"><a href="light-productid.html">Light::ProductID</a> <a href="huelight.html#productID">productID</a>()</td><td  rowspan=" 1">Provides a product ID for the light.</td><td ><code>QString</code> <a href="light-productid.html#getProductID">Light::ProductID::getProductID</a>()</td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 7"><a href="light-config.html">Light::Config</a> <a href="huelight.html#config">config</a>()</td><td  rowspan=" 7">Configuration of the light.</td><td ><code>QString</code> <a href="light-config.html#getArchetype">Light::Config::getArchetype</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>QString</code> <a href="light-config.html#getFunction">Light::Config::getFunction</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>QString</code> <a href="light-config.html#getDirection">Light::Config::getDirection</a>()</td></tr>
+<tr valign="top" class="even"><td ><a href="light-config-startup.html">Light::Config::Startup</a> <a href="light-config.html#getStartup">Light::Config::getStartup</a>()</td></tr>
+<tr valign="top" class="odd"><td ><code>QString</code> <a href="light-config-startup.html#getMode">Light::Config::Startup::getMode</a>()</td></tr>
+<tr valign="top" class="even"><td ><code>bool</code> <a href="light-config-startup.html#getConfigured">Light::Config::Startup::getConfigured</a>()</td></tr>
 </table></div>
 </div>
 <!-- @@@HueLight -->
@@ -109,57 +146,79 @@ lights<span class="operator">-</span><span class="operator">&gt;</span>fetch(<sp
 <h2>Member Function Documentation</h2>
 <!-- $$$HueLight[overload1]$$$HueLight -->
 <h3 class="fn" id="HueLight"><a name="HueLight"></a>HueLight::<span class="name">HueLight</span>()</h3>
-<p>Default constructs an instance of HueLight.</p><!-- @@@HueLight -->
+<p>Creates an empty <a href="huelight.html">HueLight</a>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><p><b>See also </b><a href="huelight.html#discoverLights">discoverLights</a>().</p>
+<!-- @@@HueLight -->
 <!-- $$$HueLight$$$HueLightHueBridge* -->
 <h3 class="fn" id="HueLight-1"><a name="HueLight-1"></a>HueLight::<span class="name">HueLight</span>(<span class="type"><a href="huebridge.html">HueBridge</a></span> *<i>bridge</i>)</h3>
-<p>Default constructs an instance of HueLight.</p><!-- @@@HueLight -->
+<p>Creates an empty <a href="huelight.html">HueLight</a> with a <a href="huebridge.html">HueBridge</a> reference.</p>
+<p><b>Note: </b>should not be called explicitly.</p><p><b>See also </b><a href="huelight.html#discoverLights">discoverLights</a>().</p>
+<!-- @@@HueLight -->
 <!-- $$$ID[overload1]$$$ID -->
 <h3 class="fn" id="ID"><a name="ID"></a><code>[override virtual] </code><span class="type">int</span> HueLight::<span class="name">ID</span>() const</h3>
+<p>Returns an <code>int</code> with the ID of the light.</p>
 <!-- @@@ID -->
 <!-- $$$config[overload1]$$$config -->
 <h3 class="fn" id="config"><a name="config"></a><span class="type"><a href="light-config.html">Light::Config</a></span> HueLight::<span class="name">config</span>() const</h3>
+<p>Returns a <a href="light-config.html">Light::Config</a> object.</p>
 <!-- @@@config -->
 <!-- $$$discoverLights[overload1]$$$discoverLightsHueBridge* -->
 <h3 class="fn" id="discoverLights"><a name="discoverLights"></a><code>[static] </code><span class="type">HueLightList</span> HueLight::<span class="name">discoverLights</span>(<span class="type"><a href="huebridge.html">HueBridge</a></span> *<i>bridge</i>)</h3>
+<p>Returns a HueLightList of lights connected to the network. This function is static and is used to generate <a href="huelight.html">HueLight</a> objects using the connection to <a href="huebridge.html">HueBridge</a> specified by <i>bridge</i>.</p>
 <!-- @@@discoverLights -->
 <!-- $$$hasValidConstructor[overload1]$$$hasValidConstructor -->
 <h3 class="fn" id="hasValidConstructor"><a name="hasValidConstructor"></a><code>[override virtual] </code><span class="type">bool</span> HueLight::<span class="name">hasValidConstructor</span>() const</h3>
+<p>Returns <code>true</code> if <a href="huelight.html">HueLight</a> was constructed properly.</p>
+<p><b>See also </b><a href="huelight.html#isValid">isValid</a>().</p>
 <!-- @@@hasValidConstructor -->
 <!-- $$$isValid[overload1]$$$isValid -->
 <h3 class="fn" id="isValid"><a name="isValid"></a><code>[override virtual] </code><span class="type">bool</span> HueLight::<span class="name">isValid</span>() const</h3>
+<p>Equivalent to <a href="huelight.html#hasValidConstructor">hasValidConstructor</a>()</p>
 <!-- @@@isValid -->
 <!-- $$$manufacturer[overload1]$$$manufacturer -->
 <h3 class="fn" id="manufacturer"><a name="manufacturer"></a><span class="type"><a href="light-manufacturer.html">Light::Manufacturer</a></span> HueLight::<span class="name">manufacturer</span>() const</h3>
+<p>Returns a <a href="light-manufacturer.html">Light::Manufacturer</a> object.</p>
 <!-- @@@manufacturer -->
 <!-- $$$name[overload1]$$$name -->
 <h3 class="fn" id="name"><a name="name"></a><span class="type"><a href="light-name.html">Light::Name</a></span> HueLight::<span class="name">name</span>() const</h3>
+<p>Returns a <a href="light-name.html">Light::Name</a> object.</p>
 <!-- @@@name -->
 <!-- $$$productID[overload1]$$$productID -->
 <h3 class="fn" id="productID"><a name="productID"></a><span class="type"><a href="light-productid.html">Light::ProductID</a></span> HueLight::<span class="name">productID</span>() const</h3>
+<p>Returns a <a href="light-productid.html">Light::ProductID</a> object.</p>
 <!-- @@@productID -->
 <!-- $$$productName[overload1]$$$productName -->
 <h3 class="fn" id="productName"><a name="productName"></a><span class="type"><a href="light-productname.html">Light::ProductName</a></span> HueLight::<span class="name">productName</span>() const</h3>
+<p>Returns a <a href="light-productname.html">Light::ProductName</a> object.</p>
 <!-- @@@productName -->
 <!-- $$$softwareConfigID[overload1]$$$softwareConfigID -->
 <h3 class="fn" id="softwareConfigID"><a name="softwareConfigID"></a><span class="type"><a href="light-softwareconfigid.html">Light::SoftwareConfigID</a></span> HueLight::<span class="name">softwareConfigID</span>() const</h3>
+<p>Returns a <a href="light-softwareconfigid.html">Light::SoftwareConfigID</a> object.</p>
 <!-- @@@softwareConfigID -->
 <!-- $$$softwareUpdate[overload1]$$$softwareUpdate -->
 <h3 class="fn" id="softwareUpdate"><a name="softwareUpdate"></a><span class="type"><a href="light-softwareupdate.html">Light::SoftwareUpdate</a></span> HueLight::<span class="name">softwareUpdate</span>() const</h3>
+<p>Returns a <a href="light-softwareupdate.html">Light::SoftwareUpdate</a> object.</p>
 <!-- @@@softwareUpdate -->
 <!-- $$$softwareVersion[overload1]$$$softwareVersion -->
 <h3 class="fn" id="softwareVersion"><a name="softwareVersion"></a><span class="type"><a href="light-softwareversion.html">Light::SoftwareVersion</a></span> HueLight::<span class="name">softwareVersion</span>() const</h3>
+<p>Returns a <a href="light-softwareversion.html">Light::SoftwareVersion</a> object.</p>
 <!-- @@@softwareVersion -->
 <!-- $$$state[overload1]$$$state -->
 <h3 class="fn" id="state"><a name="state"></a><span class="type"><a href="light-state.html">Light::State</a></span> HueLight::<span class="name">state</span>() const</h3>
+<p>Returns a <a href="light-state.html">Light::State</a> object.</p>
 <!-- @@@state -->
 <!-- $$$synchronize[overload1]$$$synchronize -->
 <h3 class="fn" id="synchronize"><a name="synchronize"></a><code>[override virtual] </code><span class="type">bool</span> HueLight::<span class="name">synchronize</span>()</h3>
+<p>Updates <a href="huelight.html">HueLight</a> to the lastest state available on <a href="huebridge.html">HueBridge</a>.</p>
+<p><b>Note: </b>only queries an individual <a href="huelight.html">HueLight</a> from the bridge. If all lights needs to be updated, it can be faster to delete the HueLightList and call <a href="huelight.html#discoverLights">discoverLights</a>() again.</p><p><b>See also </b><a href="huelight.html#discoverLights">discoverLights</a>().</p>
 <!-- @@@synchronize -->
 <!-- $$$type[overload1]$$$type -->
 <h3 class="fn" id="type"><a name="type"></a><span class="type"><a href="light-type.html">Light::Type</a></span> HueLight::<span class="name">type</span>() const</h3>
+<p>Returns a <a href="light-type.html">Light::Type</a> object.</p>
 <!-- @@@type -->
 <!-- $$$uniqueID[overload1]$$$uniqueID -->
 <h3 class="fn" id="uniqueID"><a name="uniqueID"></a><span class="type"><a href="light-uniqueid.html">Light::UniqueID</a></span> HueLight::<span class="name">uniqueID</span>() const</h3>
+<p>Returns a <a href="light-uniqueid.html">Light::UniqueID</a> object.</p>
 <!-- @@@uniqueID -->
 </div>
 </body>

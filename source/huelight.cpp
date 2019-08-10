@@ -83,19 +83,139 @@
  *  \li 0 - 1
  *
  * \row
- *  \li \l setAlert(const HueAlert alert)
- *  \li Sets an alert on the light.
- *  \li \l HueAlert::NoAlert,
- *      \l HueAlert::BreatheSingle or
- *      \l HueAlert::Breathe15sec
+ *  \li {1, 3} \l setAlert(const HueAlert alert)
+ *  \li {1, 3} Sets an alert on the light.
+ *  \li \l HueAlert::NoAlert
+ *  \row
+ *  \li \l HueAlert::BreatheSingle
+ *  \row
+ *  \li \l HueAlert::Breathe15sec
  *
  * \row
- *  \li \l setEffect(const HueEffect effect);
- *  \li Sets an effect on the light.
- *  \li \l HueEffect::NoEffect or
- *      \l HueEffect::ColorLoop
+ *  \li {1, 2} \l setEffect(const HueEffect effect);
+ *  \li {1, 2} Sets an effect on the light.
+ *  \li \l HueEffect::NoEffect
+ *  \row
+ *  \li \l HueEffect::ColorLoop
  *
  * \endtable
+ *
+ * Data can be retreved from HueLight by calling the functions in the table below.
+ * \note The data follows the convension of the Hue API, where some data is nested
+ * and some is not. For consistency, all data functions return an object of a data
+ * class, where \e get functions can be called to retreive the data - even when
+ * only one \e get function exists. The exception is \l ID() which returns the ID of
+ * the light as an \c int.
+ *
+ * \table
+ * \header
+ *  \li Function
+ *  \li Description
+ *  \li \e get functions
+ * \row
+ *  \li {1, 13} \l Light::State state()
+ *  \li {1, 13} Describes the state of the light.
+ *  \li \c bool \l Light::State::isOn()
+ *  \row
+ *  \li \c bool \l Light::State::isReachable()
+ *  \row
+ *  \li \c int \l Light::State::getBrightness()
+ *  \row
+ *  \li \c int \l Light::State::getHue()
+ *  \row
+ *  \li \c int \l Light::State::getSaturation()
+ *  \row
+ *  \li \c int \l Light::State::getColorTemp()
+ *  \row
+ *  \li \c double \l Light::State::getXValue()
+ *  \row
+ *  \li \c double \l Light::State::getYValue()
+ *  \row
+ *  \li \c QString \l Light::State::getEffect()
+ *  \row
+ *  \li \c QString \l Light::State::getAlert()
+ *  \row
+ *  \li \c QString \l Light::State::getColorMode()
+ *  \row
+ *  \li \c QString \l Light::State::getMode()
+ *  \row
+ *  \li
+ *
+ * \row
+ *  \li {1, 1} \l Light::State name()
+ *  \li {1, 1} Name of the light.
+ *  \li \c QString \l Light::Name::getName()
+ *
+ * \row
+ *  \li {1, 1} \l Light::Type type()
+ *  \li {1, 1} Describes the type of light.
+ *  \li \c QString \l Light::Type::getType()
+ *
+ * \row
+ *  \li {1, 1} \l Light::UniqueID uniqueID()
+ *  \li {1, 1} Provides an unique ID for the light.
+ *  \li \c QString \l Light::UniqueID::getUniqueID()
+ *
+ * \row
+ *  \li {1, 1} \l Light::SoftwareVersion softwareVersion()
+ *  \li {1, 1} Software version on the light.
+ *  \li \c QString \l Light::SoftwareVersion::getSoftwareVersion()
+ *
+ * \row
+ *  \li {1, 3} \l Light::SoftwareUpdate softwareUpdate()
+ *  \li {1, 3} Software version on the light.
+ *  \li \c QString \l Light::SoftwareUpdate::getState()
+ *  \row
+ *  \li \c QString \l Light::SoftwareUpdate::setLastInstall()
+ *  \row
+ *  \li
+ *
+ * \row
+ *  \li {1, 1} \l Light::SoftwareConfigID softwareConfigID()
+ *  \li {1, 1} Provides a software config ID for the light.
+ *  \li \c QString \l Light::SoftwareConfigID::getSoftwareConfigID()
+ *
+ * \row
+ *  \li {1, 1} \l Light::ProductName productName()
+ *  \li {1, 1} Name of the light product.
+ *  \li \c QString \l Light::ProductName::getProductName()
+ *
+ * \row
+ *  \li {1, 1} \l Light::Manufacturer manufacturer()
+ *  \li {1, 1} Manufacturer of the light.
+ *  \li \c QString \l Light::Manufacturer::getManufacturer()
+ *
+ * \row
+ *  \li {1, 1} \l Light::ProductID productID()
+ *  \li {1, 1} Provides a product ID for the light.
+ *  \li \c QString \l Light::ProductID::getProductID()
+ *
+ * \row
+ *  \li {1, 7} \l Light::Config config()
+ *  \li {1, 7} Configuration of the light.
+ *  \li \c QString \l Light::Config::getArchetype()
+ *  \row
+ *  \li \c QString \l Light::Config::getFunction()
+ *  \row
+ *  \li \c QString \l Light::Config::getDirection()
+ *  \row
+ *  \li \l Light::Config::Startup \l Light::Config::getStartup()
+ *  \row
+ *  \li \c QString \l Light::Config::Startup::getMode()
+ *  \row
+ *  \li \c bool \l Light::Config::Startup::getConfigured()
+ * \endtable
+ *
+ */
+
+/*!
+ * \fn HueLight::HueLight()
+ *
+ * Creates an empty HueLight.
+ *
+ * \note should not be called explicitly.
+ *
+ * \sa discoverLights()
  *
  */
 HueLight::HueLight()
@@ -117,6 +237,16 @@ HueLight::HueLight()
 
 }
 
+/*!
+ * \fn HueLight(HueBridge* bridge)
+ *
+ * Creates an empty HueLight with a \l HueBridge reference.
+ *
+ * \note should not be called explicitly.
+ *
+ * \sa discoverLights()
+ *
+ */
 HueLight::HueLight(HueBridge* bridge)
     : HueAbstractObject(bridge)
     , m_ID()
@@ -208,6 +338,14 @@ HueLight HueLight::operator=(const HueLight &rhs)
     return *this;
 }
 
+/*!
+ * \fn HueLightList HueLight::discoverLights(HueBridge* bridge)
+ *
+ * Returns a \l HueLightList of lights connected to the network.
+ * This function is static and is used to generate HueLight objects
+ * using the connection to \l HueBridge specified by \a bridge.
+ *
+ */
 HueLightList HueLight::discoverLights(HueBridge* bridge)
 {
     if (bridge == nullptr)
@@ -242,59 +380,196 @@ HueLightList HueLight::discoverLights(HueBridge* bridge)
     return HueLightList(std::move(lights));
 }
 
+/*!
+ * \fn Light::State HueLight::state() const
+ *
+ * Returns a \l Light::State object.
+ *
+ */
 Light::State HueLight::state() const
 {
     return m_state;
 }
 
+/*!
+ * \fn Light::Name HueLight::name() const
+ *
+ * Returns a \l Light::Name object.
+ *
+ */
 Light::Name HueLight::name() const
 {
     return m_name;
 }
 
+/*!
+ * \fn Light::Type HueLight::type() const
+ *
+ * Returns a \l Light::Type object.
+ *
+ */
 Light::Type HueLight::type() const
 {
     return m_type;
 }
 
+/*!
+ * \fn Light::UniqueID HueLight::uniqueID() const
+ *
+ * Returns a \l Light::UniqueID object.
+ *
+ */
 Light::UniqueID HueLight::uniqueID() const
 {
     return m_uniqueID;
 }
 
+/*!
+ * \fn Light::SoftwareVersion HueLight::softwareVersion() const
+ *
+ * Returns a \l Light::SoftwareVersion object.
+ *
+ */
 Light::SoftwareVersion HueLight::softwareVersion() const
 {
     return m_softwareVersion;
 }
 
+/*!
+ * \fn Light::SoftwareUpdate HueLight::softwareUpdate() const
+ *
+ * Returns a \l Light::SoftwareUpdate object.
+ *
+ */
 Light::SoftwareUpdate HueLight::softwareUpdate() const
 {
     return m_softwareUpdate;
 }
 
+/*!
+ * \fn Light::SoftwareConfigID HueLight::softwareConfigID() const
+ *
+ * Returns a \l Light::SoftwareConfigID object.
+ *
+ */
 Light::SoftwareConfigID HueLight::softwareConfigID() const
 {
     return m_softwareConfigID;
 }
 
+/*!
+ * \fn Light::ProductName HueLight::productName() const
+ *
+ * Returns a \l Light::ProductName object.
+ *
+ */
 Light::ProductName HueLight::productName() const
 {
     return m_productName;
 }
 
+/*!
+ * \fn Light::Manufacturer HueLight::manufacturer() const
+ *
+ * Returns a \l Light::Manufacturer object.
+ *
+ */
 Light::Manufacturer HueLight::manufacturer() const
 {
     return m_manufacturer;
 }
 
+/*!
+ * \fn Light::ProductID HueLight::productID() const
+ *
+ * Returns a \l Light::ProductID object.
+ *
+ */
 Light::ProductID HueLight::productID() const
 {
     return m_productID;
 }
 
+/*!
+ * \fn Light::Config HueLight::config() const
+ *
+ * Returns a \l Light::Config object.
+ *
+ */
 Light::Config HueLight::config() const
 {
     return m_config;
+}
+
+/*!
+ * \fn bool HueLight::hasValidConstructor() const
+ *
+ * Returns \c true if HueLight was constructed properly.
+ *
+ * \sa isValid()
+ *
+ */
+bool HueLight::hasValidConstructor() const
+{
+    return m_validConstructor;
+}
+
+/*!
+ * \fn bool HueLight::isValid() const
+ *
+ * Equivalent to \l hasValidConstructor()
+ *
+ */
+bool HueLight::isValid() const
+{
+    return hasValidConstructor();
+}
+
+/*!
+ * \fn int HueLight::ID() const
+ *
+ * Returns an \c int with the ID of the light.
+ *
+ */
+int HueLight::ID() const
+{
+    return m_ID;
+}
+
+/*!
+ * \fn bool HueLight::synchronize()
+ *
+ * Updates HueLight to the lastest state available on \l HueBridge.
+ *
+ * \note only queries an individual HueLight from the bridge.
+ * If all lights needs to be updated, it can be faster to delete the
+ * \l HueLightList and call \l discoverLights() again.
+ *
+ * \sa discoverLights()
+ *
+ */
+bool HueLight::synchronize()
+{
+    HueRequest syncRequest = makeGetRequest();
+    HueReply syncReply;
+
+    bool replyValid = sendRequest(syncRequest, syncReply);
+
+    if (replyValid) {
+        QJsonObject json = syncReply.getJson();
+        std::shared_ptr<HueLight> synchronizedLight = std::make_shared<HueLight>(getBridge());
+
+        if (constructHueLight(m_ID, json, synchronizedLight)) {
+            if (synchronizedLight->hasValidConstructor()) {
+                *this = *synchronizedLight.get();
+
+                emit synchronized();
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 bool HueLight::constructHueLight(int ID, QJsonObject json, std::shared_ptr<HueLight>& light)
@@ -346,45 +621,6 @@ bool HueLight::constructHueLight(int ID, QJsonObject json, std::shared_ptr<HueLi
     light.reset(newLight);
 
     return true;
-}
-
-bool HueLight::hasValidConstructor() const
-{
-    return m_validConstructor;
-}
-
-bool HueLight::isValid() const
-{
-    return hasValidConstructor();
-}
-
-int HueLight::ID() const
-{
-    return m_ID;
-}
-
-bool HueLight::synchronize()
-{
-    HueRequest syncRequest = makeGetRequest();
-    HueReply syncReply;
-
-    bool replyValid = sendRequest(syncRequest, syncReply);
-
-    if (replyValid) {
-        QJsonObject json = syncReply.getJson();
-        std::shared_ptr<HueLight> synchronizedLight = std::make_shared<HueLight>(getBridge());
-
-        if (constructHueLight(m_ID, json, synchronizedLight)) {
-            if (synchronizedLight->hasValidConstructor()) {
-                *this = *synchronizedLight.get();
-
-                emit synchronized();
-                return true;
-            }
-        }
-    }
-
-    return false;
 }
 
 HueRequest HueLight::makePutRequest(QJsonObject json)
