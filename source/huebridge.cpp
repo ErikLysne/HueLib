@@ -167,7 +167,6 @@ QString HueBridge::link(QString appName, QString deviceName)
 
         if (!firstLine.isNull()) {
             m_username = firstLine;
-            qDebug() << firstLine;
             return firstLine;
         }
     }

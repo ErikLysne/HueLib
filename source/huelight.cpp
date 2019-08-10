@@ -4,6 +4,100 @@
 #include "huerequest.h"
 #include "huereply.h"
 
+/*!
+ * \class HueLight
+ * \ingroup HueLib
+ * \brief The HueLight class is used to interface with a single Hue light.
+ *
+ * A HueLight object mirrors the state of a single Hue light connected to the network.
+ * HueLight objects cannot be constructed directly because the constructor of HueLight
+ * is private. Instead, a list of HueLight objects (a \l HueLightList) is returned
+ * by the static function \l discoverLights(). A \l HueBridge object must be constructed
+ * before any HueLight objects can be constructed.
+ *
+ * The following minimum working example turns off all lights on the network, then turns
+ * on the light with \e ID 1 and enables the color loop effect.
+ *
+ * \code
+ *  // Create HueBridge
+ *  HueBridge* bridge = new HueBridge("10.0.1.14");
+ *
+ *  // Link to bridge
+ *  bridge->link();
+ *
+ *  // Discover lights on the network
+ *  HueLightList* lights = new HueLightList(HueLight::discoverLights(bridge));
+ *
+ *  // Turn off all lights
+ *  for (auto light : *lights)
+ *      light->turnOff();
+ *
+ *  // Turn on light 1 and set effect to color loop
+ *  lights->fetch(1)->turnOn();
+ *  lights->fetch(1)->setEffect(HueLight::HueEffect::ColorLoop);
+ * \endcode
+ *
+ * As can be seen from the example above, lights can be changed by directly calling
+ * \e set functions on the HueLight objects. Below is a list of \e set functions that
+ * work with HueLight objects.
+ *
+ * \table
+ * \header
+ *  \li Function
+ *  \li Description
+ *  \li Range
+ * \row
+ *  \li \l turnOn(const bool on = true)
+ *  \li Turns the light on.
+ *  \li \c true or \c false
+ *
+ * \row
+ *  \li \l turnOff(const bool off = true)
+ *  \li Turns the light off.
+ *  \li \c true or \c false
+ *
+ * \row
+ *  \li \l setHue(const int hue)
+ *  \li Sets the hue of the light.
+ *  \li 0 - 65535
+ *
+ * \row
+ *  \li \l setSaturation(const int saturation)
+ *  \li Sets the saturation of the light.
+ *  \li 0 - 254
+ *
+ * \row
+ *  \li \l setBrightness(const int brightness)
+ *  \li Sets the brightness of the light.
+ *  \li 1 - 254
+ *
+ * \row
+ *  \li \l setColorTemp(const int colorTemp)
+ *  \li Sets the color temperature of the light.
+ *  \li 150 - 500
+ *      (corresponds to 6500K - 2000K)
+ *
+ * \row
+ *  \li \l setXY(const double x, const double y)
+ *  \li Sets the X and Y color coordinates in CIE color space.
+ *  \li 0 - 1
+ *
+ * \row
+ *  \li \l setAlert(const HueAlert alert)
+ *  \li Sets an alert on the light.
+ *  \li \l HueAlert::NoAlert,
+ *      \l HueAlert::BreatheSingle or
+ *      \l HueAlert::Breathe15sec
+ *
+ * \row
+ *  \li \l setEffect(const HueEffect effect);
+ *  \li Sets an effect on the light.
+ *  \li \l HueEffect::NoEffect or
+ *      \l HueEffect::ColorLoop
+ *
+ * \endtable
+ *
+ */
 HueLight::HueLight()
     : HueAbstractObject(nullptr)
     , m_ID()

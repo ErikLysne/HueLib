@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- huelight.cpp -->
+  <title>HueLight Class | Qt </title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<body>
+<li>HueLight</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#reimplemented-public-functions">Reimplemented Public Functions</a></li>
+<li class="level1"><a href="#static-public-members">Static Public Members</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">HueLight Class</h1>
+<!-- $$$HueLight-brief -->
+<p>The <a href="huelight.html">HueLight</a> class is used to interface with a single Hue light. <a href="#details">More...</a></p>
+<!-- @@@HueLight -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> HueAbstractObject</td></tr></table></div><ul>
+<li><a href="huelight-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#HueLight">HueLight</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#HueLight-1">HueLight</a></b>(HueBridge *<i>bridge</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::Config </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#config">config</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::Manufacturer </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#manufacturer">manufacturer</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::Name </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#name">name</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::ProductID </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#productID">productID</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::ProductName </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#productName">productName</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::SoftwareConfigID </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#softwareConfigID">softwareConfigID</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::SoftwareUpdate </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#softwareUpdate">softwareUpdate</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::SoftwareVersion </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#softwareVersion">softwareVersion</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::State </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#state">state</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::Type </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#type">type</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Light::UniqueID </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#uniqueID">uniqueID</a></b>() const</td></tr>
+</table></div>
+<a name="reimplemented-public-functions"></a>
+<h2 id="reimplemented-public-functions">Reimplemented Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> virtual int </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#ID">ID</a></b>() const override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#hasValidConstructor">hasValidConstructor</a></b>() const override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#isValid">isValid</a></b>() const override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#synchronize">synchronize</a></b>() override</td></tr>
+</table></div>
+<ul>
+<li class="fn">14 public functions inherited from <a href="hueabstractobject.html#public-functions">HueAbstractObject</a></li>
+</ul>
+<a name="static-public-members"></a>
+<h2 id="static-public-members">Static Public Members</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> HueLightList </td><td class="memItemRight bottomAlign"><b><a href="huelight.html#discoverLights">discoverLights</a></b>(HueBridge *<i>bridge</i>)</td></tr>
+</table></div>
+<h3>Additional Inherited Members</h3>
+<ul>
+<li class="fn">2 signals inherited from <a href="hueabstractobject.html#signals">HueAbstractObject</a></li>
+<li class="fn">14 protected functions inherited from <a href="hueabstractobject.html#protected-functions">HueAbstractObject</a></li>
+<li class="fn">1 static protected member inherited from <a href="hueabstractobject.html#static-protected-members">HueAbstractObject</a></li>
+</ul>
+<a name="details"></a>
+<!-- $$$HueLight-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>The <a href="huelight.html">HueLight</a> class is used to interface with a single Hue light.</p>
+<p>A <a href="huelight.html">HueLight</a> object mirrors the state of a single Hue light connected to the network. <a href="huelight.html">HueLight</a> objects cannot be constructed directly because the constructor of <a href="huelight.html">HueLight</a> is private. Instead, a list of <a href="huelight.html">HueLight</a> objects (a HueLightList) is returned by the static function <a href="huelight.html#discoverLights">discoverLights</a>(). A <a href="huebridge.html">HueBridge</a> object must be constructed before any <a href="huelight.html">HueLight</a> objects can be constructed.</p>
+<p>The following minimum working example turns off all lights on the network, then turns on the light with <i>ID</i> 1 and enables the color loop effect.</p>
+<pre class="cpp"><span class="comment">// Create HueBridge</span>
+HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="string">&quot;10.0.1.14&quot;</span>);
+
+<span class="comment">// Link to bridge</span>
+bridge<span class="operator">-</span><span class="operator">&gt;</span>link();
+
+<span class="comment">// Discover lights on the network</span>
+HueLightList<span class="operator">*</span> lights <span class="operator">=</span> <span class="keyword">new</span> HueLightList(HueLight<span class="operator">::</span>discoverLights(bridge));
+
+<span class="comment">// Turn off all lights</span>
+<span class="keyword">for</span> (<span class="keyword">auto</span> light : <span class="operator">*</span>lights)
+    light<span class="operator">-</span><span class="operator">&gt;</span>turnOff();
+
+<span class="comment">// Turn on light 1 and set effect to color loop</span>
+lights<span class="operator">-</span><span class="operator">&gt;</span>fetch(<span class="number">1</span>)<span class="operator">-</span><span class="operator">&gt;</span>turnOn();
+lights<span class="operator">-</span><span class="operator">&gt;</span>fetch(<span class="number">1</span>)<span class="operator">-</span><span class="operator">&gt;</span>setEffect(HueLight<span class="operator">::</span>HueEffect<span class="operator">::</span>ColorLoop);</pre>
+<p>As can be seen from the example above, lights can be changed by directly calling <i>set</i> functions on the <a href="huelight.html">HueLight</a> objects. Below is a list of <i>set</i> functions that work with <a href="huelight.html">HueLight</a> objects.</p>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Function</th><th >Description</th><th >Range</th></tr></thead>
+<tr valign="top" class="odd"><td >turnOn(const bool on = true)</td><td >Turns the light on.</td><td ><code>true</code> or <code>false</code></td></tr>
+<tr valign="top" class="even"><td >turnOff(const bool off = true)</td><td >Turns the light off.</td><td ><code>true</code> or <code>false</code></td></tr>
+<tr valign="top" class="odd"><td >setHue(const int hue)</td><td >Sets the hue of the light.</td><td >0 - 65535</td></tr>
+<tr valign="top" class="even"><td >setSaturation(const int saturation)</td><td >Sets the saturation of the light.</td><td >0 - 254</td></tr>
+<tr valign="top" class="odd"><td >setBrightness(const int brightness)</td><td >Sets the brightness of the light.</td><td >1 - 254</td></tr>
+<tr valign="top" class="even"><td >setColorTemp(const int colorTemp)</td><td >Sets the color temperature of the light.</td><td >150 - 500 (corresponds to 6500K - 2000K)</td></tr>
+<tr valign="top" class="odd"><td >setXY(const double x, const double y)</td><td >Sets the X and Y color coordinates in CIE color space.</td><td >0 - 1</td></tr>
+<tr valign="top" class="even"><td >setAlert(const HueAlert alert)</td><td >Sets an alert on the light.</td><td >HueAlert::NoAlert, HueAlert::BreatheSingle or HueAlert::Breathe15sec</td></tr>
+<tr valign="top" class="odd"><td >setEffect(const HueEffect effect);</td><td >Sets an effect on the light.</td><td >HueEffect::NoEffect or HueEffect::ColorLoop</td></tr>
+</table></div>
+</div>
+<!-- @@@HueLight -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$HueLight[overload1]$$$HueLight -->
+<h3 class="fn" id="HueLight"><a name="HueLight"></a>HueLight::<span class="name">HueLight</span>()</h3>
+<p>Default constructs an instance of HueLight.</p><!-- @@@HueLight -->
+<!-- $$$HueLight$$$HueLightHueBridge* -->
+<h3 class="fn" id="HueLight-1"><a name="HueLight-1"></a>HueLight::<span class="name">HueLight</span>(<span class="type"><a href="huebridge.html">HueBridge</a></span> *<i>bridge</i>)</h3>
+<p>Default constructs an instance of HueLight.</p><!-- @@@HueLight -->
+<!-- $$$ID[overload1]$$$ID -->
+<h3 class="fn" id="ID"><a name="ID"></a><code>[override virtual] </code><span class="type">int</span> HueLight::<span class="name">ID</span>() const</h3>
+<!-- @@@ID -->
+<!-- $$$config[overload1]$$$config -->
+<h3 class="fn" id="config"><a name="config"></a><span class="type"><a href="light-config.html">Light::Config</a></span> HueLight::<span class="name">config</span>() const</h3>
+<!-- @@@config -->
+<!-- $$$discoverLights[overload1]$$$discoverLightsHueBridge* -->
+<h3 class="fn" id="discoverLights"><a name="discoverLights"></a><code>[static] </code><span class="type">HueLightList</span> HueLight::<span class="name">discoverLights</span>(<span class="type"><a href="huebridge.html">HueBridge</a></span> *<i>bridge</i>)</h3>
+<!-- @@@discoverLights -->
+<!-- $$$hasValidConstructor[overload1]$$$hasValidConstructor -->
+<h3 class="fn" id="hasValidConstructor"><a name="hasValidConstructor"></a><code>[override virtual] </code><span class="type">bool</span> HueLight::<span class="name">hasValidConstructor</span>() const</h3>
+<!-- @@@hasValidConstructor -->
+<!-- $$$isValid[overload1]$$$isValid -->
+<h3 class="fn" id="isValid"><a name="isValid"></a><code>[override virtual] </code><span class="type">bool</span> HueLight::<span class="name">isValid</span>() const</h3>
+<!-- @@@isValid -->
+<!-- $$$manufacturer[overload1]$$$manufacturer -->
+<h3 class="fn" id="manufacturer"><a name="manufacturer"></a><span class="type"><a href="light-manufacturer.html">Light::Manufacturer</a></span> HueLight::<span class="name">manufacturer</span>() const</h3>
+<!-- @@@manufacturer -->
+<!-- $$$name[overload1]$$$name -->
+<h3 class="fn" id="name"><a name="name"></a><span class="type"><a href="light-name.html">Light::Name</a></span> HueLight::<span class="name">name</span>() const</h3>
+<!-- @@@name -->
+<!-- $$$productID[overload1]$$$productID -->
+<h3 class="fn" id="productID"><a name="productID"></a><span class="type"><a href="light-productid.html">Light::ProductID</a></span> HueLight::<span class="name">productID</span>() const</h3>
+<!-- @@@productID -->
+<!-- $$$productName[overload1]$$$productName -->
+<h3 class="fn" id="productName"><a name="productName"></a><span class="type"><a href="light-productname.html">Light::ProductName</a></span> HueLight::<span class="name">productName</span>() const</h3>
+<!-- @@@productName -->
+<!-- $$$softwareConfigID[overload1]$$$softwareConfigID -->
+<h3 class="fn" id="softwareConfigID"><a name="softwareConfigID"></a><span class="type"><a href="light-softwareconfigid.html">Light::SoftwareConfigID</a></span> HueLight::<span class="name">softwareConfigID</span>() const</h3>
+<!-- @@@softwareConfigID -->
+<!-- $$$softwareUpdate[overload1]$$$softwareUpdate -->
+<h3 class="fn" id="softwareUpdate"><a name="softwareUpdate"></a><span class="type"><a href="light-softwareupdate.html">Light::SoftwareUpdate</a></span> HueLight::<span class="name">softwareUpdate</span>() const</h3>
+<!-- @@@softwareUpdate -->
+<!-- $$$softwareVersion[overload1]$$$softwareVersion -->
+<h3 class="fn" id="softwareVersion"><a name="softwareVersion"></a><span class="type"><a href="light-softwareversion.html">Light::SoftwareVersion</a></span> HueLight::<span class="name">softwareVersion</span>() const</h3>
+<!-- @@@softwareVersion -->
+<!-- $$$state[overload1]$$$state -->
+<h3 class="fn" id="state"><a name="state"></a><span class="type"><a href="light-state.html">Light::State</a></span> HueLight::<span class="name">state</span>() const</h3>
+<!-- @@@state -->
+<!-- $$$synchronize[overload1]$$$synchronize -->
+<h3 class="fn" id="synchronize"><a name="synchronize"></a><code>[override virtual] </code><span class="type">bool</span> HueLight::<span class="name">synchronize</span>()</h3>
+<!-- @@@synchronize -->
+<!-- $$$type[overload1]$$$type -->
+<h3 class="fn" id="type"><a name="type"></a><span class="type"><a href="light-type.html">Light::Type</a></span> HueLight::<span class="name">type</span>() const</h3>
+<!-- @@@type -->
+<!-- $$$uniqueID[overload1]$$$uniqueID -->
+<h3 class="fn" id="uniqueID"><a name="uniqueID"></a><span class="type"><a href="light-uniqueid.html">Light::UniqueID</a></span> HueLight::<span class="name">uniqueID</span>() const</h3>
+<!-- @@@uniqueID -->
+</div>
+</body>
+</html>
