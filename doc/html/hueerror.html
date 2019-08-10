@@ -20,7 +20,7 @@
 <div class="sidebar-content" id="sidebar-content"></div></div>
 <h1 class="title">HueError Class</h1>
 <!-- $$$HueError-brief -->
-<p>Contains the details of an error received from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>. <a href="#details">More...</a></p>
+<p>Contains the details of an error received from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>(). <a href="#details">More...</a></p>
 <!-- @@@HueError -->
 <ul>
 <li><a href="hueerror-members.html">List of all members, including inherited members</a></li>
@@ -44,8 +44,8 @@
 <!-- $$$HueError-description -->
 <div class="descr">
 <h2 id="details">Detailed Description</h2>
-<p>Contains the details of an error received from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>.</p>
-<p><a href="hueerror.html">HueError</a> contains the <i>type</i>, <i>address</i> and <i>description</i> of an error returned from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>. <i>type</i> is an ID of the error and is an <code>int</code>. The easiest way to test for specific errors is by comparison with <i>type</i>. <i>address</i> contains the path extention to the resouce that produced the error and is a <code>QString</code>. <i>description</i> provides a readable description of what caused the error and is a <code>QString</code>.</p>
+<p>Contains the details of an error received from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>().</p>
+<p><a href="hueerror.html">HueError</a> holds the <i>type</i>, <i>address</i> and <i>description</i> of an error returned from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>(). <i>type</i> is an ID of the error and is an <code>int</code>. The easiest way to test for specific errors is by comparison with <i>type</i>. <i>address</i> contains the path extention to the resouce that produced the error and is a <i>QString</i>. <i>description</i> provides a readable description of what caused the error and is a <i>QString</i>.</p>
 <p>A list of errors can be found in <a href="https://developers.meethue.com/develop/hue-api/error-messages/">https://developers.meethue.com/develop/hue-api/error-messages/</a>.</p>
 </div>
 <!-- @@@HueError -->
@@ -89,8 +89,8 @@
 <!-- @@@setType -->
 <!-- $$$operator QString[overload1]$$$operator QString -->
 <h3 class="fn" id="operator-QString"><a name="operator-QString"></a>HueError::<span class="name">operator QString</span>() const</h3>
-<p>Overloads casting to <code>QString</code>.</p>
-<p>Convenient for e.g&#x2e; printing an error string to <i>qDebug</i>.</p>
+<p>Overloads <i>QString()</i> casting.</p>
+<p>Convenient for e.g&#x2e; printing an error string to <i>qDebug()</i>.</p>
 <pre class="cpp">HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="string">&quot;10.0.1.14&quot;</span>);
 bridge<span class="operator">-</span><span class="operator">&gt;</span>link();
 

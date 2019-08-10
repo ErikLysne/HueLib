@@ -222,7 +222,7 @@
             <function threadsafety="unspecified" name="isValid" fullname="HueAbstractObject::isValid" href="hueabstractobject.html#isValid" status="active" access="public" location="hueabstractobject.h" filepath="/home/erik/Dev/huelib/source/hueabstractobject.h" lineno="43" virtual="pure" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="bool" signature="bool isValid() const = 0"/>
             <function threadsafety="unspecified" name="ID" fullname="HueAbstractObject::ID" href="hueabstractobject.html#ID" status="active" access="public" location="hueabstractobject.h" filepath="/home/erik/Dev/huelib/source/hueabstractobject.h" lineno="44" virtual="pure" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="int" signature="int ID() const = 0"/>
         </class>
-        <class threadsafety="unspecified" name="HueBridge" href="huebridge.html" status="active" access="public" location="huebridge.h" filepath="/home/erik/Dev/huelib/source/huebridge.h" lineno="14" brief="Represents the physical bridge connected to the network">
+        <class threadsafety="unspecified" name="HueBridge" href="huebridge.html" status="active" access="public" location="huebridge.h" filepath="/home/erik/Dev/huelib/source/huebridge.h" lineno="14" groups="HueLib" brief="Represents the physical bridge connected to the network">
             <function threadsafety="unspecified" name="HueBridge" fullname="HueBridge::HueBridge" href="huebridge.html#HueBridge" status="active" access="public" location="huebridge.h" filepath="/home/erik/Dev/huelib/source/huebridge.h" lineno="26" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="" signature="HueBridge(QString ip, QString username, QNetworkAccessManager *nam, QObject *parent)">
                 <parameter left="QString" right="" name="ip" default=""/>
                 <parameter left="QString" right="" name="username" default="&quot;&quot;"/>
@@ -280,7 +280,7 @@
                 <value name="Unknown" value="4"/>
             </enum>
         </class>
-        <class threadsafety="unspecified" name="HueError" href="hueerror.html" status="active" access="public" location="hueerror.h" filepath="/home/erik/Dev/huelib/source/hueerror.h" lineno="6" brief="Contains the details of an error received from HueBridge::sendRequest">
+        <class threadsafety="unspecified" name="HueError" href="hueerror.html" status="active" access="public" location="hueerror.h" filepath="/home/erik/Dev/huelib/source/hueerror.h" lineno="6" groups="HueLib" brief="Contains the details of an error received from HueBridge::sendRequest()">
             <function threadsafety="unspecified" name="operator=" fullname="HueError::operator=" href="hueerror.html#operator-eq" status="active" access="public" location="hueerror.h" filepath="/home/erik/Dev/huelib/source/hueerror.h" lineno="12" virtual="non" meta="copy-assign" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="HueError" signature="HueError operator=(const HueError &amp;rhs)">
                 <parameter left="const HueError &amp;" right="" name="rhs" default=""/>
             </function>
@@ -511,13 +511,13 @@
         <function threadsafety="unspecified" name="fetch" status="internal" access="private" location="hueobjectlist.h" filepath="/home/erik/Dev/huelib/source/hueobjectlist.h" lineno="132" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="std::shared_ptr&lt;HueObject&gt;" signature="std::shared_ptr&lt;HueObject&gt; fetch(int ID) const">
             <parameter left="int" right="" name="ID" default=""/>
         </function>
-        <class threadsafety="unspecified" name="HueReply" href="huereply.html" status="internal" access="private" location="huereply.h" filepath="/home/erik/Dev/huelib/source/huereply.h" lineno="9">
+        <class threadsafety="unspecified" name="HueReply" href="huereply.html" status="active" access="public" location="huereply.h" filepath="/home/erik/Dev/huelib/source/huereply.h" lineno="9" groups="HueLib" brief="Contains the details of reply received from HueBridge::sendRequest()">
             <function threadsafety="unspecified" name="operator=" fullname="HueReply::operator=" href="huereply.html#operator-eq" status="active" access="public" location="huereply.h" filepath="/home/erik/Dev/huelib/source/huereply.h" lineno="16" virtual="non" meta="copy-assign" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="HueReply" signature="HueReply operator=(const HueReply &amp;rhs)">
                 <parameter left="const HueReply &amp;" right="" name="rhs" default=""/>
             </function>
             <function threadsafety="unspecified" name="HueReply" fullname="HueReply::HueReply" href="huereply.html#HueReply" status="active" access="public" location="huereply.h" filepath="/home/erik/Dev/huelib/source/huereply.h" lineno="12" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="" signature="HueReply()"/>
-            <function threadsafety="unspecified" name="HueReply" fullname="HueReply::HueReply" href="huereply.html#HueReply-1" status="active" access="public" location="huereply.h" filepath="/home/erik/Dev/huelib/source/huereply.h" lineno="13" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="" signature="HueReply(bool isValid, bool timedOut, QJsonObject json, int httpStatus, HueError error)">
-                <parameter left="bool" right="" name="isValid" default=""/>
+            <function threadsafety="unspecified" name="HueReply" fullname="HueReply::HueReply" href="huereply.html#HueReply-1" status="active" access="public" location="huereply.h" filepath="/home/erik/Dev/huelib/source/huereply.h" lineno="13" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="" signature="HueReply(bool replyValid, bool timedOut, QJsonObject json, int httpStatus, HueError error)">
+                <parameter left="bool" right="" name="replyValid" default=""/>
                 <parameter left="bool" right="" name="timedOut" default=""/>
                 <parameter left="QJsonObject" right="" name="json" default=""/>
                 <parameter left="int" right="" name="httpStatus" default=""/>
@@ -549,7 +549,7 @@
             <function threadsafety="unspecified" name="getHttpStatus" fullname="HueReply::getHttpStatus" href="huereply.html#getHttpStatus" status="active" access="public" location="huereply.h" filepath="/home/erik/Dev/huelib/source/huereply.h" lineno="22" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="int" signature="int getHttpStatus() const"/>
             <function threadsafety="unspecified" name="operator QString" fullname="HueReply::operator QString" href="huereply.html#operator-QString" status="active" access="public" location="huereply.h" filepath="/home/erik/Dev/huelib/source/huereply.h" lineno="31" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="" signature="operator QString() const"/>
         </class>
-        <class threadsafety="unspecified" name="HueRequest" href="huerequest.html" status="internal" access="private" location="huerequest.h" filepath="/home/erik/Dev/huelib/source/huerequest.h" lineno="7">
+        <class threadsafety="unspecified" name="HueRequest" href="huerequest.html" status="active" access="public" location="huerequest.h" filepath="/home/erik/Dev/huelib/source/huerequest.h" lineno="7" groups="HueLib" brief="Contains the details of request sent to HueBridge::sendRequest()">
             <function threadsafety="unspecified" name="operator=" fullname="HueRequest::operator=" href="huerequest.html#operator-eq" status="active" access="public" location="huerequest.h" filepath="/home/erik/Dev/huelib/source/huerequest.h" lineno="18" virtual="non" meta="copy-assign" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="HueRequest" signature="HueRequest operator=(const HueRequest &amp;rhs)">
                 <parameter left="const HueRequest &amp;" right="" name="rhs" default=""/>
             </function>
@@ -565,9 +565,9 @@
             <function threadsafety="unspecified" name="getJson" fullname="HueRequest::getJson" href="huerequest.html#getJson" status="active" access="public" location="huerequest.h" filepath="/home/erik/Dev/huelib/source/huerequest.h" lineno="21" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="QJsonObject" signature="QJsonObject getJson() const"/>
             <function threadsafety="unspecified" name="getUrlPath" fullname="HueRequest::getUrlPath" href="huerequest.html#getUrlPath" status="active" access="public" location="huerequest.h" filepath="/home/erik/Dev/huelib/source/huerequest.h" lineno="20" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="QString" signature="QString getUrlPath() const"/>
             <enum threadsafety="unspecified" name="Method" fullname="HueRequest::Method" href="huerequest.html#Method-enum" status="active" access="public" location="huerequest.h" filepath="/home/erik/Dev/huelib/source/huerequest.h" lineno="10">
-                <value name="get" value="0"/>
-                <value name="put" value="1"/>
-                <value name="post" value="2"/>
+                <value name="Get" value="0"/>
+                <value name="Put" value="1"/>
+                <value name="Post" value="2"/>
             </enum>
         </class>
         <class threadsafety="unspecified" name="HueSynchronizer" href="huesynchronizer.html" status="internal" access="private" location="huesynchronizer.h" filepath="/home/erik/Dev/huelib/source/huesynchronizer.h" lineno="10">
@@ -913,5 +913,6 @@
                 <function threadsafety="unspecified" name="getUniqueID" fullname="Light::UniqueID::getUniqueID" href="light-uniqueid.html#getUniqueID" status="active" access="public" location="huetypes.h" filepath="/home/erik/Dev/huelib/source/huetypes.h" lineno="94" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="QString" signature="QString getUniqueID() const"/>
             </class>
         </namespace>
+        <group name="HueLib" href="huelib.html" status="active" seen="true" title="HueLib" members="HueBridge,HueError,HueReply,HueRequest"/>
     </namespace>
 </INDEX>

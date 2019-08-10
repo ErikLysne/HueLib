@@ -103,7 +103,7 @@ HueGroupList HueGroup::discoverGroups(HueBridge *bridge)
 
     std::shared_ptr<GroupVector> groups = std::make_shared<GroupVector>();
 
-    HueRequest request("groups", QJsonObject(), HueRequest::get);
+    HueRequest request("groups", QJsonObject(), HueRequest::Get);
     HueReply reply = bridge->sendRequest(request, nullptr);
 
     if (!reply.isValid() || reply.timedOut() || reply.containsError()) {
@@ -264,7 +264,7 @@ bool HueGroup::synchronize()
 HueRequest HueGroup::makePutRequest(QJsonObject json)
 {
     QString urlPath = "groups/" + QString::number(m_ID) + "/action";
-    HueRequest::Method method = HueRequest::put;
+    HueRequest::Method method = HueRequest::Put;
 
     return HueRequest(urlPath, json, method);
 }
@@ -272,7 +272,7 @@ HueRequest HueGroup::makePutRequest(QJsonObject json)
 HueRequest HueGroup::makeGetRequest()
 {
     QString urlPath = "groups/" + QString::number(m_ID);
-    HueRequest::Method method = HueRequest::get;
+    HueRequest::Method method = HueRequest::Get;
 
     return HueRequest(urlPath, QJsonObject(), method);
 }

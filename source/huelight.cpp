@@ -121,7 +121,7 @@ HueLightList HueLight::discoverLights(HueBridge* bridge)
 
     std::shared_ptr<LightVector> lights = std::make_shared<LightVector>();
 
-    HueRequest request("lights", QJsonObject(), HueRequest::get);
+    HueRequest request("lights", QJsonObject(), HueRequest::Get);
     HueReply reply = bridge->sendRequest(request, nullptr);
 
     if (!reply.isValid() || reply.timedOut() || reply.containsError()) {
@@ -296,7 +296,7 @@ bool HueLight::synchronize()
 HueRequest HueLight::makePutRequest(QJsonObject json)
 {
     QString urlPath = "lights/" + QString::number(m_ID) + "/state";
-    HueRequest::Method method = HueRequest::put;
+    HueRequest::Method method = HueRequest::Put;
 
     return HueRequest(urlPath, json, method);
 }
@@ -304,7 +304,7 @@ HueRequest HueLight::makePutRequest(QJsonObject json)
 HueRequest HueLight::makeGetRequest()
 {
     QString urlPath = "lights/" + QString::number(m_ID);
-    HueRequest::Method method = HueRequest::get;
+    HueRequest::Method method = HueRequest::Get;
 
     return HueRequest(urlPath, QJsonObject(), method);
 }

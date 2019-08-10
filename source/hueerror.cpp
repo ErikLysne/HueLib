@@ -2,13 +2,14 @@
 
 /*!
  * \class HueError
- * \brief Contains the details of an error received from \l HueBridge::sendRequest.
+ * \ingroup HueLib
+ * \brief Contains the details of an error received from \l HueBridge::sendRequest().
  *
- * HueError contains the \e type, \e address and \e description of an error returned from
- * \l HueBridge::sendRequest. \e type is an ID of the error and is an \c int. The easiest way
+ * HueError holds the \e type, \e address and \e description of an error returned from
+ * \l HueBridge::sendRequest(). \e type is an ID of the error and is an \c int. The easiest way
  * to test for specific errors is by comparison with \e type. \e address contains the path extention
- * to the resouce that produced the error and is a \c QString. \e description provides a readable
- * description of what caused the error and is a \c QString.
+ * to the resouce that produced the error and is a \e QString. \e description provides a readable
+ * description of what caused the error and is a \e QString.
  *
  * A list of errors can be found in \l https://developers.meethue.com/develop/hue-api/error-messages/.
  *
@@ -144,9 +145,9 @@ void HueError::setDescription(const QString description)
 /*!
  * \fn HueError::operator QString() const
  *
- * Overloads casting to \c QString.
+ * Overloads \e QString() casting.
  *
- * Convenient for e.g. printing an error string to \e qDebug.
+ * Convenient for e.g. printing an error string to \e qDebug().
  *
  * \code
  *  HueBridge* bridge = new HueBridge("10.0.1.14");

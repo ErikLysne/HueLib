@@ -38,7 +38,8 @@ SOURCES += \
         huerequest.cpp \
         huesynchronizer.cpp \
         huetypes.cpp \
-        hueerror.cpp
+        hueerror.cpp \
+    huelib.cpp
 
 HEADERS += \
         Models/abstracttreemodel.h \

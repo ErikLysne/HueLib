@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- huerequest.cpp -->
+  <title>HueRequest Class | Qt </title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<body>
+<li>HueRequest</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-types">Public Types</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">HueRequest Class</h1>
+<!-- $$$HueRequest-brief -->
+<p>Contains the details of request sent to <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>(). <a href="#details">More...</a></p>
+<!-- @@@HueRequest -->
+<ul>
+<li><a href="huerequest-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-types"></a>
+<h2 id="public-types">Public Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="huerequest.html#Method-enum">Method</a></b> { Get, Put, Post }</td></tr>
+</table></div>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huerequest.html#HueRequest">HueRequest</a></b>(QString <i>urlPath</i>, QJsonObject <i>json</i>, Method <i>method</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huerequest.html#HueRequest-1">HueRequest</a></b>(const HueRequest &amp;<i>rhs</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QJsonObject </td><td class="memItemRight bottomAlign"><b><a href="huerequest.html#getJson">getJson</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Method </td><td class="memItemRight bottomAlign"><b><a href="huerequest.html#getMethod">getMethod</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="huerequest.html#getUrlPath">getUrlPath</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> HueRequest </td><td class="memItemRight bottomAlign"><b><a href="huerequest.html#operator-eq">operator=</a></b>(const HueRequest &amp;<i>rhs</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$HueRequest-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Contains the details of request sent to <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>().</p>
+<p><a href="huerequest.html">HueRequest</a> holds the <i>URL</i> <i>path</i> <i>extention</i>, <i>JSON</i> and <i>method</i> sent to <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>().</p>
+<p>The <i>URL</i> <i>path</i> <i>extention</i> will be appended to the base URL which contains the IP address and username of the bridge. It determines which resource to address and which property to retrieve/modify. Is a <i>QString</i>.</p>
+<p><i>JSON</i> is the body of the request. It specifies modifications on the bridge.</p>
+<p><a href="huerequest.html#Method-enum">Method</a> is either <i>GET</i>, <i>PUT</i> or <i>POST</i>.</p>
+</div>
+<!-- @@@HueRequest -->
+<div class="types">
+<h2>Member Type Documentation</h2>
+<!-- $$$Method$$$Get$$$Put$$$Post -->
+<h3 class="fn" id="Method-enum"><a name="Method-enum"></a>enum HueRequest::<span class="name">Method</span></h3>
+<p>This enum defines which method should be used when calling <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>().</p>
+<div class="table"><table class="valuelist"><tr valign="top" class="odd"><th class="tblConst">Constant</th><th class="tblval">Value</th><th class="tbldscr">Description</th></tr>
+<tr><td class="topAlign"><code>HueRequest::Get</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">Send a <i>GET</i> request.</td></tr>
+<tr><td class="topAlign"><code>HueRequest::Put</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">Send a <i>PUT</i> request.</td></tr>
+<tr><td class="topAlign"><code>HueRequest::Post</code></td><td class="topAlign tblval"><code>2</code></td><td class="topAlign">Send a <i>POST</i> request.</td></tr>
+</table></div>
+<p><b>See also </b><a href="huerequest.html#getMethod">getMethod</a>().</p>
+<!-- @@@Method -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$HueRequest[overload1]$$$HueRequestQStringQJsonObjectMethod -->
+<h3 class="fn" id="HueRequest"><a name="HueRequest"></a>HueRequest::<span class="name">HueRequest</span>(<span class="type">QString</span> <i>urlPath</i>, <span class="type">QJsonObject</span> <i>json</i>, <span class="type"><a href="huerequest.html#Method-enum">Method</a></span> <i>method</i>)</h3>
+<p>Constructs a <a href="huerequest.html">HueRequest</a> with contents specified by <i>urlPath</i>, <i>json</i> and <i>method</i>.</p>
+<!-- @@@HueRequest -->
+<!-- $$$HueRequest$$$HueRequestconstHueRequest& -->
+<h3 class="fn" id="HueRequest-1"><a name="HueRequest-1"></a>HueRequest::<span class="name">HueRequest</span>(const <span class="type"><a href="huerequest.html#HueRequest">HueRequest</a></span> &amp;<i>rhs</i>)</h3>
+<p>Copy constructor - constructs a copy of <i>rhs</i>.</p>
+<!-- @@@HueRequest -->
+<!-- $$$getJson[overload1]$$$getJson -->
+<h3 class="fn" id="getJson"><a name="getJson"></a><span class="type">QJsonObject</span> HueRequest::<span class="name">getJson</span>() const</h3>
+<p>Returns JSON from request as a <i>QJsonObject</i>.</p>
+<p><b>See also </b><a href="huerequest.html#getUrlPath">getUrlPath</a>() and <a href="huerequest.html#getMethod">getMethod</a>().</p>
+<!-- @@@getJson -->
+<!-- $$$getMethod[overload1]$$$getMethod -->
+<h3 class="fn" id="getMethod"><a name="getMethod"></a><span class="type"><a href="huerequest.html#Method-enum">Method</a></span> HueRequest::<span class="name">getMethod</span>() const</h3>
+<p>Returns method from request as a <i>HueRequest::Method</i>.</p>
+<p><b>See also </b><a href="huerequest.html#getUrlPath">getUrlPath</a>() and <a href="huerequest.html#getJson">getJson</a>().</p>
+<!-- @@@getMethod -->
+<!-- $$$getUrlPath[overload1]$$$getUrlPath -->
+<h3 class="fn" id="getUrlPath"><a name="getUrlPath"></a><span class="type">QString</span> HueRequest::<span class="name">getUrlPath</span>() const</h3>
+<p>Returns URL path extention of request as a <i>QString</i>.</p>
+<p><b>See also </b><a href="huerequest.html#getJson">getJson</a>() and <a href="huerequest.html#getMethod">getMethod</a>().</p>
+<!-- @@@getUrlPath -->
+<!-- $$$operator=[overload1]$$$operator=constHueRequest& -->
+<h3 class="fn" id="operator-eq"><a name="operator-eq"></a><span class="type"><a href="huerequest.html#HueRequest">HueRequest</a></span> HueRequest::<span class="name">operator=</span>(const <span class="type"><a href="huerequest.html#HueRequest">HueRequest</a></span> &amp;<i>rhs</i>)</h3>
+<p>Copy assignment operator - assigns a copy of <i>rhs</i>.</p>
+<!-- @@@operator= -->
+</div>
+</body>
+</html>

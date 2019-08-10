@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- huereply.cpp -->
+  <title>HueReply Class | Qt </title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<body>
+<li>HueReply</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">HueReply Class</h1>
+<!-- $$$HueReply-brief -->
+<p>Contains the details of reply received from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>(). <a href="#details">More...</a></p>
+<!-- @@@HueReply -->
+<ul>
+<li><a href="huereply-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#HueReply">HueReply</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#HueReply-1">HueReply</a></b>(bool <i>replyValid</i>, bool <i>timedOut</i>, QJsonObject <i>json</i>, int <i>httpStatus</i>, HueError <i>error</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#HueReply-2">HueReply</a></b>(const HueReply &amp;<i>rhs</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#containsError">containsError</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> HueError </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#getError">getError</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#getHttpStatus">getHttpStatus</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QJsonObject </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#getJson">getJson</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#isValid">isValid</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#isValid-1">isValid</a></b>(const bool <i>replyValid</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#setError">setError</a></b>(const HueError <i>error</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#setHttpStatus">setHttpStatus</a></b>(const int <i>httpStatus</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#setJson">setJson</a></b>(const QJsonObject <i>json</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#timedOut">timedOut</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#timedOut-1">timedOut</a></b>(const bool <i>timedOut</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#operator-QString">operator QString</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> HueReply </td><td class="memItemRight bottomAlign"><b><a href="huereply.html#operator-eq">operator=</a></b>(const HueReply &amp;<i>rhs</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$HueReply-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Contains the details of reply received from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>().</p>
+<p><a href="huereply.html">HueReply</a> holds the <i>JSON</i>, <i>HTTP</i> <i>status</i>, and <i>error</i> returned from <a href="huebridge.html#sendRequest">HueBridge::sendRequest</a>(). Also holds booleans specifying if the reply is <i>valid</i> and if it <i>timed</i> <i>out</i>.</p>
+<p>In case a <i>GET</i> request was sent, JSON contains the raw JSON reply. If a <i>PUT</i> or <i>POST</i> request was sent successfully, or <i>GET/</i> <i>PUT/</i> <i>POST</i> request returned with a JSON error, JSON contains the object contained within the <i>success/</i> <i>error</i> reply (i.e&#x2e; JSON is stripped of the outer <i>success</i> / <i>error</i> brackets). This is becasue <i>success</i> and <i>error</i> JSON are returned as JSON <b>arrays</b> while replies to <i>GET</i> requests are returned as JSON <b>objects</b>. JSON is always a <i>QJsonObject</i>.</p>
+<p><i>HTTP</i> <i>status</i> is the HTTP status of the reply. If the status is not 200, the reply is not valid.</p>
+<p><b>Note: </b>replies with 200 status can still contain JSON errors. Instead of testing for 200, use <a href="huereply.html#isValid">isValid</a>(). <i>HTTP</i> <i>status</i> is an int.</p><p><i>error</i> contans details about any errors in the reply, and is a <a href="hueerror.html">HueError</a> object.</p>
+</div>
+<!-- @@@HueReply -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$HueReply[overload1]$$$HueReply -->
+<h3 class="fn" id="HueReply"><a name="HueReply"></a>HueReply::<span class="name">HueReply</span>()</h3>
+<p>Constructs an empty <a href="huereply.html">HueReply</a>.</p>
+<!-- @@@HueReply -->
+<!-- $$$HueReply$$$HueReplyboolboolQJsonObjectintHueError -->
+<h3 class="fn" id="HueReply-1"><a name="HueReply-1"></a>HueReply::<span class="name">HueReply</span>(<span class="type">bool</span> <i>replyValid</i>, <span class="type">bool</span> <i>timedOut</i>, <span class="type">QJsonObject</span> <i>json</i>, <span class="type">int</span> <i>httpStatus</i>, <span class="type"><a href="hueerror.html">HueError</a></span> <i>error</i>)</h3>
+<p>Constructs a <a href="huereply.html">HueReply</a> with contents specified by <i>replyValid</i>, <i>timedOut</i>, <i>json</i>, <i>httpStatus</i> and <i>error</i>.</p>
+<!-- @@@HueReply -->
+<!-- $$$HueReply$$$HueReplyconstHueReply& -->
+<h3 class="fn" id="HueReply-2"><a name="HueReply-2"></a>HueReply::<span class="name">HueReply</span>(const <span class="type"><a href="huereply.html#HueReply">HueReply</a></span> &amp;<i>rhs</i>)</h3>
+<p>Copy constructor - constructs a copy of <i>rhs</i>.</p>
+<!-- @@@HueReply -->
+<!-- $$$containsError[overload1]$$$containsError -->
+<h3 class="fn" id="containsError"><a name="containsError"></a><span class="type">bool</span> HueReply::<span class="name">containsError</span>() const</h3>
+<p>Returns <code>true</code> if reply contains an error.</p>
+<p><b>See also </b><a href="huereply.html#timedOut">timedOut</a>() and containsError().</p>
+<!-- @@@containsError -->
+<!-- $$$getError[overload1]$$$getError -->
+<h3 class="fn" id="getError"><a name="getError"></a><span class="type"><a href="hueerror.html">HueError</a></span> HueReply::<span class="name">getError</span>() const</h3>
+<p>Returns error from reply as <a href="hueerror.html">HueError</a>.</p>
+<p><b>See also </b><a href="huereply.html#getJson">getJson</a>() and <a href="huereply.html#getHttpStatus">getHttpStatus</a>().</p>
+<!-- @@@getError -->
+<!-- $$$getHttpStatus[overload1]$$$getHttpStatus -->
+<h3 class="fn" id="getHttpStatus"><a name="getHttpStatus"></a><span class="type">int</span> HueReply::<span class="name">getHttpStatus</span>() const</h3>
+<p>Returns HTTP status from reply as an <code>int</code>.</p>
+<p><b>See also </b><a href="huereply.html#getJson">getJson</a>() and <a href="huereply.html#getError">getError</a>().</p>
+<!-- @@@getHttpStatus -->
+<!-- $$$getJson[overload1]$$$getJson -->
+<h3 class="fn" id="getJson"><a name="getJson"></a><span class="type">QJsonObject</span> HueReply::<span class="name">getJson</span>() const</h3>
+<p>Returns JSON from reply as a <i>QJsonObject</i>.</p>
+<p><b>See also </b><a href="huereply.html#getHttpStatus">getHttpStatus</a>() and <a href="huereply.html#getError">getError</a>().</p>
+<!-- @@@getJson -->
+<!-- $$$isValid[overload1]$$$isValid -->
+<h3 class="fn" id="isValid"><a name="isValid"></a><span class="type">bool</span> HueReply::<span class="name">isValid</span>() const</h3>
+<p>Returns <code>true</code> if reply is valid. A reply is valid if it does not contain any errors and did not timeout.</p>
+<p><b>See also </b><a href="huereply.html#timedOut">timedOut</a>() and <a href="huereply.html#containsError">containsError</a>().</p>
+<!-- @@@isValid -->
+<!-- $$$isValid$$$isValidconstbool -->
+<h3 class="fn" id="isValid-1"><a name="isValid-1"></a><span class="type">void</span> HueReply::<span class="name">isValid</span>(const <span class="type">bool</span> <i>replyValid</i>)</h3>
+<p>Sets validity of the reply as specified by <i>replyValid</i>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><!-- @@@isValid -->
+<!-- $$$setError[overload1]$$$setErrorconstHueError -->
+<h3 class="fn" id="setError"><a name="setError"></a><span class="type">void</span> HueReply::<span class="name">setError</span>(const <span class="type"><a href="hueerror.html">HueError</a></span> <i>error</i>)</h3>
+<p>Sets error of the reply as specified by <i>error</i>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><!-- @@@setError -->
+<!-- $$$setHttpStatus[overload1]$$$setHttpStatusconstint -->
+<h3 class="fn" id="setHttpStatus"><a name="setHttpStatus"></a><span class="type">void</span> HueReply::<span class="name">setHttpStatus</span>(const <span class="type">int</span> <i>httpStatus</i>)</h3>
+<p>Sets HTTP status of the reply as specified by <i>httpStatus</i>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><!-- @@@setHttpStatus -->
+<!-- $$$setJson[overload1]$$$setJsonconstQJsonObject -->
+<h3 class="fn" id="setJson"><a name="setJson"></a><span class="type">void</span> HueReply::<span class="name">setJson</span>(const <span class="type">QJsonObject</span> <i>json</i>)</h3>
+<p>Sets JSON of the reply as specified by <i>json</i>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><!-- @@@setJson -->
+<!-- $$$timedOut[overload1]$$$timedOut -->
+<h3 class="fn" id="timedOut"><a name="timedOut"></a><span class="type">bool</span> HueReply::<span class="name">timedOut</span>() const</h3>
+<p>Returns <code>true</code> if reply timed out.</p>
+<p><b>See also </b><a href="huereply.html#isValid">isValid</a>() and <a href="huereply.html#containsError">containsError</a>().</p>
+<!-- @@@timedOut -->
+<!-- $$$timedOut$$$timedOutconstbool -->
+<h3 class="fn" id="timedOut-1"><a name="timedOut-1"></a><span class="type">void</span> HueReply::<span class="name">timedOut</span>(const <span class="type">bool</span> <i>timedOut</i>)</h3>
+<p>Sets timed out of the reply as specified by <i>timedOut</i>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><!-- @@@timedOut -->
+<!-- $$$operator QString[overload1]$$$operator QString -->
+<h3 class="fn" id="operator-QString"><a name="operator-QString"></a>HueReply::<span class="name">operator QString</span>() const</h3>
+<p>Overloads <i>QString()</i> casting.</p>
+<p>Convenient for e.g&#x2e; printing the contents of <a href="huereply.html">HueReply</a> <i>qDebug()</i>.</p>
+<pre class="cpp">HueBridge<span class="operator">*</span> bridge <span class="operator">=</span> <span class="keyword">new</span> HueBridge(<span class="string">&quot;10.0.1.14&quot;</span>);
+bridge<span class="operator">-</span><span class="operator">&gt;</span>link();
+
+bridge<span class="operator">-</span><span class="operator">&gt;</span>testConnection();
+
+qDebug() <span class="operator">&lt;</span><span class="operator">&lt;</span> bridge<span class="operator">-</span><span class="operator">&gt;</span>getLastReply();</pre>
+<!-- @@@operator QString -->
+<!-- $$$operator=[overload1]$$$operator=constHueReply& -->
+<h3 class="fn" id="operator-eq"><a name="operator-eq"></a><span class="type"><a href="huereply.html#HueReply">HueReply</a></span> HueReply::<span class="name">operator=</span>(const <span class="type"><a href="huereply.html#HueReply">HueReply</a></span> &amp;<i>rhs</i>)</h3>
+<p>Copy assignment operator - assigns a copy of <i>rhs</i>.</p>
+<!-- @@@operator= -->
+</div>
+</body>
+</html>
