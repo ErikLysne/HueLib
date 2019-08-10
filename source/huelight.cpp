@@ -240,7 +240,8 @@ HueLight::HueLight()
 /*!
  * \fn HueLight(HueBridge* bridge)
  *
- * Creates an empty HueLight with a \l HueBridge reference.
+ * Creates an empty HueLight with a \l HueBridge reference
+ * provided by \a bridge.
  *
  * \note should not be called explicitly.
  *
