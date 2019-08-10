@@ -142,7 +142,7 @@
  *  \li
  *
  * \row
- *  \li {1, 1} \l Light::State name()
+ *  \li {1, 1} \l Light::Name name()
  *  \li {1, 1} Name of the light.
  *  \li \c QString \l Light::Name::getName()
  *
