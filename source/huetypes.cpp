@@ -1134,7 +1134,30 @@ void Light::Config::setStartup(const Startup startup)
  *
  */
 
+/*!
+ * \namespace Group
+ * \ingroup HueLib
+ * \inmodule HueLib
+ * \brief Contains data classes for \l HueGroup.
+ *
+ */
+
 // ---------- ACTION ----------
+
+/*!
+ * \class Group::Action
+ * \ingroup HueLib
+ * \inmodule HueLib
+ * \brief Describes the action of a \l HueGroup.
+ *
+ */
+
+/*!
+ * \fn Group::Action::Action()
+ *
+ * Constructs an empty Action object.
+ *
+ */
 Group::Action::Action()
     : m_on(false)
     , m_brightness(0)
@@ -1150,6 +1173,13 @@ Group::Action::Action()
 
 }
 
+/*!
+ * \fn Group::Action::Action(const QJsonValue json)
+ *
+ * Constructs an Action object by parsing JSON specified
+ * by \a json.
+ *
+ */
 Group::Action::Action(const QJsonValue json)
 {
     QJsonObject actionJson = json.toObject();
@@ -1182,113 +1212,259 @@ Group::Action::Action(const QJsonValue json)
     }
 }
 
+/*!
+ * \fn bool Group::Action::isOn() const
+ *
+ * Returns \c true if group is on.
+ *
+ */
 bool Group::Action::isOn() const
 {
     return m_on;
 }
 
+/*!
+ * \fn int Group::Action::getBrightness() const
+ *
+ * Returns brightness as an \c int.
+ *
+ */
 int Group::Action::getBrightness() const
 {
     return m_brightness;
 }
 
+/*!
+ * \fn int Group::Action::getHue() const
+ *
+ * Returns hue as an \c int.
+ *
+ */
 int Group::Action::getHue() const
 {
     return m_hue;
 }
 
+/*!
+ * \fn int Group::Action::getSaturation() const
+ *
+ * Returns saturation as an \c int.
+ *
+ */
 int Group::Action::getSaturation() const
 {
     return m_saturation;
 }
 
+/*!
+ * \fn int Group::Action::getColorTemp() const
+ *
+ * Returns color temperature as an \c int.
+ *
+ */
 int Group::Action::getColorTemp() const
 {
     return m_colorTemp;
 }
 
+/*!
+ * \fn double Group::Action::getXValue() const
+ *
+ * Returns X coordinate in CIE color space
+ * as a \c double.
+ *
+ */
 double Group::Action::getXValue() const
 {
     return m_xValue;
 }
 
+/*!
+ * \fn double Group::Action::getYValue() const
+ *
+ * Returns Y coordinate in CIE color space
+ * as a \c double.
+ *
+ */
 double Group::Action::getYValue() const
 {
     return m_yValue;
 }
 
+/*!
+ * \fn QString Group::Action::getEffect() const
+ *
+ * Returns effect as a \e QString.
+ *
+ */
 QString Group::Action::getEffect() const
 {
     return m_effect;
 }
 
+/*!
+ * \fn QString Group::Action::getAlert() const
+ *
+ * Returns alert as a \e QString.
+ *
+ */
 QString Group::Action::getAlert() const
 {
     return m_alert;
 }
 
+/*!
+ * \fn QString Group::Action::getColorMode() const
+ *
+ * Returns color mode as a \e QString.
+ *
+ */
 QString Group::Action::getColorMode() const
 {
     return m_colorMode;
 }
 
+/*!
+ * \fn void Group::Action::setOn(const bool on)
+ *
+ * Sets on as specified by \a on.
+ *
+ */
 void Group::Action::setOn(const bool on)
 {
     m_on = on;
 }
 
+/*!
+ * \fn void Group::Action::setBrightness(const int brightness)
+ *
+ * Sets brightness as specified by \a brightness.
+ *
+ */
 void Group::Action::setBrightness(const int brightness)
 {
     m_brightness = brightness;
 }
 
+/*!
+ * \fn void Group::Action::setHue(const int hue)
+ *
+ * Sets hue as specified by \a hue.
+ *
+ */
 void Group::Action::setHue(const int hue)
 {
     m_hue = hue;
 }
 
+/*!
+ * \fn void Group::Action::setSaturation(const int saturation)
+ *
+ * Sets saturation as specified by \a saturation.
+ *
+ */
 void Group::Action::setSaturation(const int saturation)
 {
     m_saturation = saturation;
 }
 
+/*!
+ * \fn void Group::Action::setColorTemp(const int colorTemp)
+ *
+ * Sets color temperature as specified by \a colorTemp.
+ *
+ */
 void Group::Action::setColorTemp(const int colorTemp)
 {
     m_colorTemp = colorTemp;
 }
 
+/*!
+ * \fn void Group::Action::setXValue(const double xValue)
+ *
+ * Sets X coordinate in CIE color space
+ * as specified by \a xValue.
+ *
+ */
 void Group::Action::setXValue(const double xValue)
 {
     m_xValue = xValue;
 }
 
+/*!
+ * \fn void Group::Action::setYValue(const double yValue)
+ *
+ * Sets Y coordinate in CIE color space
+ * as specified by \a yValue.
+ *
+ */
 void Group::Action::setYValue(const double yValue)
 {
     m_yValue = yValue;
 }
 
+/*!
+ * \fn void Group::Action::setEffect(const QString effect)
+ *
+ * Sets effect as specified by \a effect.
+ *
+ */
 void Group::Action::setEffect(const QString effect)
 {
     m_effect = effect;
 }
 
+/*!
+ * \fn void Group::Action::setAlert(const QString alert)
+ *
+ * Sets alert as specified by \a alert.
+ *
+ */
 void Group::Action::setAlert(const QString alert)
 {
     m_alert = alert;
 }
 
+/*!
+ * \fn void Group::Action::setColorMode(const QString colorMode)
+ *
+ * Sets color mode as specified by \a colorMode.
+ *
+ */
 void Group::Action::setColorMode(const QString colorMode)
 {
     m_colorMode = colorMode;
 }
 
 // ---------- LIGHTS ----------
+
+/*!
+ * \class Group::Lights
+ * \ingroup HueLib
+ * \inmodule HueLib
+ * \brief Describes the lights in a \l HueGroup.
+ *
+ */
+
+/*!
+ * \fn Group::Lights::Lights()
+ *
+ * Constructs an empty Light object.
+ *
+ */
 Group::Lights::Lights()
     : m_lights()
 {
 
 }
 
+/*!
+ * \fn Group::Lights::Lights(const QJsonValue json)
+ *
+ * Constructs a Light object by parsing JSON specified
+ * by \a json.
+ *
+ */
 Group::Lights::Lights(const QJsonValue json)
     : m_lights()
 {
@@ -1298,25 +1474,59 @@ Group::Lights::Lights(const QJsonValue json)
     }
 }
 
+/*!
+ * \fn QList<QString> Group::Lights::getLights() const
+ *
+ * Returns lights as a \e QList of \e QString.
+ *
+ */
 QList<QString> Group::Lights::getLights() const
 {
     return m_lights;
 }
 
+/*!
+ * \fn void Group::Lights::setLights(const QList<QString> lights)
+ *
+ * Sets lights as specified by \a lights.
+ *
+ */
 void Group::Lights::setLights(const QList<QString> lights)
 {
     m_lights = lights;
 }
 
 // ---------- SENSORS ----------
+
+/*!
+ * \class Group::Sensors
+ * \ingroup HueLib
+ * \inmodule HueLib
+ * \brief Describes the sensors in a \l HueGroup.
+ *
+ */
+
+/*!
+ * \fn Group::Sensors::Sensors()
+ *
+ * Constructs an empty Sensors object.
+ *
+ */
 Group::Sensors::Sensors()
     : m_sensors()
 {
 
 }
 
-Group::Sensors::Sensors(const QJsonValue json) :
-    m_sensors()
+/*!
+ * \fn Group::Sensors::Sensors(const QJsonValue json)
+ *
+ * Constructs a Sensors object by parsing JSON specified
+ * by \a json.
+ *
+ */
+Group::Sensors::Sensors(const QJsonValue json)
+    : m_sensors()
 {
     QJsonArray sensorsJson = json.toArray();
     for (auto iter = sensorsJson.begin(); iter != sensorsJson.end(); ++iter) {
@@ -1324,17 +1534,44 @@ Group::Sensors::Sensors(const QJsonValue json) :
     }
 }
 
+/*!
+ * \fn QList<QString> Group::Sensors::getSensors() const
+ *
+ * Returns sensors as a \e QList of \e QString.
+ *
+ */
 QList<QString> Group::Sensors::getSensors() const
 {
     return m_sensors;
 }
 
+/*!
+ * \fn void Group::Sensors::setSensors(const QList<QString> sensors)
+ *
+ * Sets sensors as specified by \a sensors.
+ *
+ */
 void Group::Sensors::setSensors(const QList<QString> sensors)
 {
     m_sensors = sensors;
 }
 
 // ---------- STATE ----------
+
+/*!
+ * \class Group::State
+ * \ingroup HueLib
+ * \inmodule HueLib
+ * \brief Describes the state of a \l HueGroup.
+ *
+ */
+
+/*!
+ * \fn Group::State::State()
+ *
+ * Constructs an empty State object.
+ *
+ */
 Group::State::State()
     : m_allOn(false)
     , m_anyOn(false)
@@ -1342,6 +1579,13 @@ Group::State::State()
 
 }
 
+/*!
+ * \fn Group::State::State(const QJsonValue json)
+ *
+ * Constructs a State object by parsing JSON specified
+ * by \a json.
+ *
+ */
 Group::State::State(const QJsonValue json)
 {
     QJsonObject stateJson = json.toObject();
@@ -1355,109 +1599,268 @@ Group::State::State(const QJsonValue json)
     }
 }
 
+/*!
+ * \fn bool Group::State::getAllOn() const
+ *
+ * Returns \c true if all are on.
+ *
+ */
 bool Group::State::getAllOn() const
 {
     return m_allOn;
 }
 
+/*!
+ * \fn boolbool Group::State::getAnyOn() const
+ *
+ * Returns \c true if any are on.
+ *
+ */
 bool Group::State::getAnyOn() const
 {
     return m_anyOn;
 }
 
+/*!
+ * \fn void Group::State::setAllOn(const bool allOn)
+ *
+ * Sets all on as specified by \a allOn.
+ *
+ */
 void Group::State::setAllOn(const bool allOn)
 {
     m_allOn = allOn;
 }
 
+/*!
+ * \fn void Group::State::setAnyOn(const bool anyOn)
+ *
+ * Sets any on as specified by \a anyOn.
+ *
+ */
 void Group::State::setAnyOn(const bool anyOn)
 {
     m_anyOn = anyOn;
 }
 
 // ---------- NAME ----------
+
+/*!
+ * \class Group::Name
+ * \ingroup HueLib
+ * \inmodule HueLib
+ * \brief Describes the name of a \l HueGroup.
+ *
+ */
+
+/*!
+ * \fn Group::Name::Name()
+ *
+ * Constructs an empty Name object.
+ *
+ */
 Group::Name::Name()
     : m_name("")
 {
 
 }
 
+/*!
+ * \fn Group::Name::Name(const QJsonValue json)
+ *
+ * Constructs a Name object by parsing JSON specified
+ * by \a json.
+ *
+ */
 Group::Name::Name(const QJsonValue json)
 {
     m_name = json.toString();
 }
 
+/*!
+ * \fn QString Group::Name::getName() const
+ *
+ * Returns name as a \e QString.
+ *
+ */
 QString Group::Name::getName() const
 {
     return m_name;
 }
 
+/*!
+ * \fn void Group::Name::setName(const QString name)
+ *
+ * Sets name as specified by \a name.
+ *
+ */
 void Group::Name::setName(const QString name)
 {
     m_name = name;
 }
 
 // ---------- TYPE ----------
+
+/*!
+ * \class Group::Type
+ * \ingroup HueLib
+ * \inmodule HueLib
+ * \brief Describes the type of a \l HueGroup.
+ *
+ */
+
+/*!
+ * \fn Group::Type::Type()
+ *
+ * Constructs an empty Type object.
+ *
+ */
 Group::Type::Type()
     : m_type("")
 {
 
 }
 
+/*!
+ * \fn Group::Type::Type(const QJsonValue json)
+ *
+ * Constructs a Type object by parsing JSON specified
+ * by \a json.
+ *
+ */
 Group::Type::Type(const QJsonValue json)
 {
     m_type = json.toString();
 }
 
+/*!
+ * \fn QString Group::Type::getType() const
+ *
+ * Returns type as a \e QString.
+ *
+ */
 QString Group::Type::getType() const
 {
     return m_type;
 }
 
+/*!
+ * \fn void Group::Type::setType(const QString type)
+ *
+ * Sets type as specified by \a type.
+ *
+ */
 void Group::Type::setType(const QString type)
 {
     m_type = type;
 }
 
 // ---------- GROUP CLASS ----------
+/*!
+ * \class Group::GroupClass
+ * \ingroup HueLib
+ * \inmodule HueLib
+ * \brief Describes the class of a \l HueGroup.
+ *
+ */
+
+/*!
+ * \fn Group::GroupClass::GroupClass()
+ *
+ * Constructs an empty GroupClass object.
+ *
+ */
 Group::GroupClass::GroupClass()
     : m_groupClass("")
 {
 
 }
 
+/*!
+ * \fn Group::GroupClass::GroupClass(const QJsonValue json)
+ *
+ * Constructs a GroupClass object by parsing JSON specified
+ * by \a json.
+ *
+ */
 Group::GroupClass::GroupClass(const QJsonValue json)
 {
     m_groupClass = json.toString();
 }
 
+/*!
+ * \fn QString Group::GroupClass::getGroupClass() const
+ *
+ * Returns class as a \e QString.
+ *
+ */
 QString Group::GroupClass::getGroupClass() const
 {
     return m_groupClass;
 }
 
+/*!
+ * \fn void Group::GroupClass::setGroupClass(const QString groupClass)
+ *
+ * Sets class as specified by \a groupClass.
+ *
+ */
 void Group::GroupClass::setGroupClass(const QString groupClass)
 {
     m_groupClass = groupClass;
 }
 
 // ---------- Recycle ----------
+
+/*!
+ * \class Group::Recycle
+ * \ingroup HueLib
+ * \inmodule HueLib
+ * \brief Describes the recycle of a \l HueGroup.
+ *
+ */
+
+/*!
+ * \fn Group::Recycle::Recycle()
+ *
+ * Constructs an empty Recycle object.
+ *
+ */
 Group::Recycle::Recycle()
     : m_recycle(false)
 {
 
 }
 
+/*!
+ * \fn Group::Recycle::Recycle(const QJsonValue json)
+ *
+ * Constructs an empty Recycle object by parsing JSON specified
+ * by \a json.
+ *
+ */
 Group::Recycle::Recycle(const QJsonValue json)
 {
     m_recycle = json.toBool();
 }
 
+/*!
+ * \fn bool Group::Recycle::getRecycle() const
+ *
+ * Returns \c true if group will recycle.
+ *
+ */
 bool Group::Recycle::getRecycle() const
 {
     return m_recycle;
 }
 
+/*!
+ * \fn void Group::Recycle::setRecycle(const bool recycle)
+ *
+ * Sets recycle on as specified by \a recycle.
+ *
+ */
 void Group::Recycle::setRecycle(const bool recycle)
 {
     m_recycle = recycle;
