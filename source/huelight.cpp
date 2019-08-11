@@ -643,32 +643,38 @@ HueRequest HueLight::makeGetRequest()
 void HueLight::updateOn(const bool on)
 {
     m_state.setOn(on);
+    emit valueUpdated();
 }
 
 void HueLight::updateHue(const int hue)
 {
     m_state.setHue(hue);
+    emit valueUpdated();
 }
 
 void HueLight::updateSaturation(const int saturation)
 {
     m_state.setSaturation(saturation);
+    emit valueUpdated();
 }
 
 void HueLight::updateBrightness(const int brightness)
 {
     m_state.setBrightness(brightness);
+    emit valueUpdated();
 }
 
 void HueLight::updateColorTemp(const int colorTemp)
 {
     m_state.setColorTemp(colorTemp);
+    emit valueUpdated();
 }
 
 void HueLight::updateXY(const double x, const double y)
 {
     m_state.setXValue(x);
     m_state.setYValue(y);
+    emit valueUpdated();
 }
 
 void HueLight::updateAlert(const HueAlert alert)
@@ -686,6 +692,7 @@ void HueLight::updateAlert(const HueAlert alert)
         break;
     }
     m_state.setAlert(alertString);
+    emit valueUpdated();
 }
 
 void HueLight::updateEffect(const HueEffect effect)
@@ -700,4 +707,5 @@ void HueLight::updateEffect(const HueEffect effect)
         break;
     }
     m_state.setEffect(effectString);
+    emit valueUpdated();
 }
