@@ -94,17 +94,17 @@ lights<span class="operator">-</span><span class="operator">&gt;</span>fetch(<sp
 <p>As can be seen from the example above, lights can be changed by directly calling <i>set</i> functions on the <a href="huelight.html">HueLight</a> objects. Below is a list of <i>set</i> functions that work with <a href="huelight.html">HueLight</a> objects.</p>
 <div class="table"><table class="generic">
  <thead><tr class="qt-style"><th >Function</th><th >Description</th><th >Range</th></tr></thead>
-<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#turnOn">turnOn</a>(const bool on = true)</td><td >Turns the light on.</td><td ><code>true</code> or <code>false</code></td></tr>
-<tr valign="top" class="even"><td ><a href="hueabstractobject.html#turnOff">turnOff</a>(const bool off = true)</td><td >Turns the light off.</td><td ><code>true</code> or <code>false</code></td></tr>
-<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#setHue">setHue</a>(const int hue)</td><td >Sets the hue of the light.</td><td >0 - 65535</td></tr>
-<tr valign="top" class="even"><td ><a href="hueabstractobject.html#setSaturation">setSaturation</a>(const int saturation)</td><td >Sets the saturation of the light.</td><td >0 - 254</td></tr>
-<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#setBrightness">setBrightness</a>(const int brightness)</td><td >Sets the brightness of the light.</td><td >1 - 254</td></tr>
-<tr valign="top" class="even"><td ><a href="hueabstractobject.html#setColorTemp">setColorTemp</a>(const int colorTemp)</td><td >Sets the color temperature of the light.</td><td >150 - 500 (corresponds to 6500K - 2000K)</td></tr>
-<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#setXY">setXY</a>(const double x, const double y)</td><td >Sets the X and Y color coordinates in CIE color space.</td><td >0 - 1</td></tr>
-<tr valign="top" class="even"><td  rowspan=" 3"><a href="hueabstractobject.html#setAlert">setAlert</a>(const HueAlert alert)</td><td  rowspan=" 3">Sets an alert on the light.</td><td ><a href="hueabstractobject.html#HueAlert-enum">NoAlert</a></td></tr>
+<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#turnOn">HueAbstractObject::turnOn</a>(const bool on = true)</td><td >Turns the light on.</td><td ><code>true</code> or <code>false</code></td></tr>
+<tr valign="top" class="even"><td ><a href="hueabstractobject.html#turnOff">HueAbstractObject::turnOff</a>(const bool off = true)</td><td >Turns the light off.</td><td ><code>true</code> or <code>false</code></td></tr>
+<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#setHue">HueAbstractObject::setHue</a>(const int hue)</td><td >Sets the hue of the light.</td><td >0 - 65535</td></tr>
+<tr valign="top" class="even"><td ><a href="hueabstractobject.html#setSaturation">HueAbstractObject::setSaturation</a>(const int saturation)</td><td >Sets the saturation of the light.</td><td >0 - 254</td></tr>
+<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#setBrightness">HueAbstractObject::setBrightness</a>(const int brightness)</td><td >Sets the brightness of the light.</td><td >1 - 254</td></tr>
+<tr valign="top" class="even"><td ><a href="hueabstractobject.html#setColorTemp">HueAbstractObject::setColorTemp</a>(const int colorTemp)</td><td >Sets the color temperature of the light.</td><td >150 - 500 (corresponds to 6500K - 2000K)</td></tr>
+<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#setXY">HueAbstractObject::setXY</a>(const double x, const double y)</td><td >Sets the X and Y color coordinates in CIE color space.</td><td >0 - 1</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 3"><a href="hueabstractobject.html#setAlert">HueAbstractObject::setAlert</a>(const HueAlert alert)</td><td  rowspan=" 3">Sets an alert on the light.</td><td ><a href="hueabstractobject.html#HueAlert-enum">NoAlert</a></td></tr>
 <tr valign="top" class="odd"><td ><a href="hueabstractobject.html#HueAlert-enum">BreatheSingle</a></td></tr>
 <tr valign="top" class="even"><td ><a href="hueabstractobject.html#HueAlert-enum">Breathe15Sec</a></td></tr>
-<tr valign="top" class="odd"><td  rowspan=" 2"><a href="hueabstractobject.html#setEffect">setEffect</a>(const HueEffect effect);</td><td  rowspan=" 2">Sets an effect on the light.</td><td ><a href="hueabstractobject.html#HueEffect-enum">NoEffect</a></td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 2"><a href="hueabstractobject.html#setEffect">HueAbstractObject::setEffect</a>(const HueEffect effect);</td><td  rowspan=" 2">Sets an effect on the light.</td><td ><a href="hueabstractobject.html#HueEffect-enum">NoEffect</a></td></tr>
 <tr valign="top" class="even"><td ><a href="hueabstractobject.html#HueEffect-enum">ColorLoop</a></td></tr>
 </table></div>
 <p>Data can be retreved from <a href="huelight.html">HueLight</a> by calling the functions in the table below.</p>

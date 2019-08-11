@@ -48,43 +48,43 @@
  *  \li Description
  *  \li Range
  * \row
- *  \li \l turnOn(const bool on = true)
+ *  \li \l HueAbstractObject::turnOn(const bool on = true)
  *  \li Turns the light on.
  *  \li \c true or \c false
  *
  * \row
- *  \li \l turnOff(const bool off = true)
+ *  \li \l HueAbstractObject::turnOff(const bool off = true)
  *  \li Turns the light off.
  *  \li \c true or \c false
  *
  * \row
- *  \li \l setHue(const int hue)
+ *  \li \l HueAbstractObject::setHue(const int hue)
  *  \li Sets the hue of the light.
  *  \li 0 - 65535
  *
  * \row
- *  \li \l setSaturation(const int saturation)
+ *  \li \l HueAbstractObject::setSaturation(const int saturation)
  *  \li Sets the saturation of the light.
  *  \li 0 - 254
  *
  * \row
- *  \li \l setBrightness(const int brightness)
+ *  \li \l HueAbstractObject::setBrightness(const int brightness)
  *  \li Sets the brightness of the light.
  *  \li 1 - 254
  *
  * \row
- *  \li \l setColorTemp(const int colorTemp)
+ *  \li \l HueAbstractObject::setColorTemp(const int colorTemp)
  *  \li Sets the color temperature of the light.
  *  \li 150 - 500
  *      (corresponds to 6500K - 2000K)
  *
  * \row
- *  \li \l setXY(const double x, const double y)
+ *  \li \l HueAbstractObject::setXY(const double x, const double y)
  *  \li Sets the X and Y color coordinates in CIE color space.
  *  \li 0 - 1
  *
  * \row
- *  \li {1, 3} \l setAlert(const HueAlert alert)
+ *  \li {1, 3} \l HueAbstractObject::setAlert(const HueAlert alert)
  *  \li {1, 3} Sets an alert on the light.
  *  \li \l NoAlert
  *  \row
@@ -93,7 +93,7 @@
  *  \li \l Breathe15Sec
  *
  * \row
- *  \li {1, 2} \l setEffect(const HueEffect effect);
+ *  \li {1, 2} \l HueAbstractObject::setEffect(const HueEffect effect);
  *  \li {1, 2} Sets an effect on the light.
  *  \li \l NoEffect
  *  \row
