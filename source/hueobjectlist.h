@@ -5,8 +5,6 @@
 #include <memory>
 #include <vector>
 
-#include <QtDebug>
-
 template <typename HueObject>
 class HueObjectList
 {

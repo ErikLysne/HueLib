@@ -16,7 +16,6 @@ public:
 
     static HueGroupList discoverGroups(HueBridge* bridge);
 
-    void linkToLights(const HueLightList& lights);
     HueLightList getLights(const HueLightList& lights) const;
 
     Group::Action action() const;

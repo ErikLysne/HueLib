@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- huetypes.cpp -->
+  <title>Config Class | Qt </title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<body>
+<li>Config</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-types">Public Types</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">Config Class</h1>
+<span class="small-subtitle">(<a href="light-config.html">Light::Config</a>)<br/></span>
+<!-- $$$Config-brief -->
+<p>Describes the config of a <a href="huelight.html">HueLight</a>. <a href="#details">More...</a></p>
+<!-- @@@Config -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> <span class="preprocessor">#include &lt;Config&gt;</span>
+</td></tr></table></div><ul>
+<li><a href="light-config-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-types"></a>
+<h2 id="public-types">Public Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="light-config-startup.html">Startup</a></b></td></tr>
+</table></div>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#Config">Config</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#Config-1">Config</a></b>(const QJsonValue <i>json</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#getArchetype">getArchetype</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#getDirection">getDirection</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#getFunction">getFunction</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Startup </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#getStartup">getStartup</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#setArchetype">setArchetype</a></b>(const QString <i>archetype</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#setDirection">setDirection</a></b>(const QString <i>direction</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#setFunction">setFunction</a></b>(const QString <i>function</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="light-config.html#setStartup">setStartup</a></b>(const Startup <i>startup</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$Config-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Describes the config of a <a href="huelight.html">HueLight</a>.</p>
+</div>
+<!-- @@@Config -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$Config[overload1]$$$Config -->
+<h3 class="fn" id="Config"><a name="Config"></a>Config::<span class="name">Config</span>()</h3>
+<p>Constructs an empty Config object.</p>
+<!-- @@@Config -->
+<!-- $$$Config$$$ConfigconstQJsonValue -->
+<h3 class="fn" id="Config-1"><a name="Config-1"></a>Config::<span class="name">Config</span>(const <span class="type">QJsonValue</span> <i>json</i>)</h3>
+<p>Constructs a Config object by parsing JSON specified by <i>json</i>.</p>
+<!-- @@@Config -->
+<!-- $$$getArchetype[overload1]$$$getArchetype -->
+<h3 class="fn" id="getArchetype"><a name="getArchetype"></a><span class="type">QString</span> Config::<span class="name">getArchetype</span>() const</h3>
+<p>Returns archetype as a <i>QString</i>.</p>
+<!-- @@@getArchetype -->
+<!-- $$$getDirection[overload1]$$$getDirection -->
+<h3 class="fn" id="getDirection"><a name="getDirection"></a><span class="type">QString</span> Config::<span class="name">getDirection</span>() const</h3>
+<p>Returns direction as a <i>QString</i>.</p>
+<!-- @@@getDirection -->
+<!-- $$$getFunction[overload1]$$$getFunction -->
+<h3 class="fn" id="getFunction"><a name="getFunction"></a><span class="type">QString</span> Config::<span class="name">getFunction</span>() const</h3>
+<p>Returns function as a <i>QString</i>.</p>
+<!-- @@@getFunction -->
+<!-- $$$getStartup[overload1]$$$getStartup -->
+<h3 class="fn" id="getStartup"><a name="getStartup"></a><span class="type"><a href="light-config-startup.html">Startup</a></span> Config::<span class="name">getStartup</span>() const</h3>
+<p>Returns startup as a <a href="light-config-startup.html">Startup</a> object.</p>
+<!-- @@@getStartup -->
+<!-- $$$setArchetype[overload1]$$$setArchetypeconstQString -->
+<h3 class="fn" id="setArchetype"><a name="setArchetype"></a><span class="type">void</span> Config::<span class="name">setArchetype</span>(const <span class="type">QString</span> <i>archetype</i>)</h3>
+<p>Sets archetype as specified by <i>archetype</i>.</p>
+<!-- @@@setArchetype -->
+<!-- $$$setDirection[overload1]$$$setDirectionconstQString -->
+<h3 class="fn" id="setDirection"><a name="setDirection"></a><span class="type">void</span> Config::<span class="name">setDirection</span>(const <span class="type">QString</span> <i>direction</i>)</h3>
+<p>Sets direction as specified by <i>direction</i>.</p>
+<!-- @@@setDirection -->
+<!-- $$$setFunction[overload1]$$$setFunctionconstQString -->
+<h3 class="fn" id="setFunction"><a name="setFunction"></a><span class="type">void</span> Config::<span class="name">setFunction</span>(const <span class="type">QString</span> <i>function</i>)</h3>
+<p>Sets function as specified by <i>function</i>.</p>
+<!-- @@@setFunction -->
+<!-- $$$setStartup[overload1]$$$setStartupconstStartup -->
+<h3 class="fn" id="setStartup"><a name="setStartup"></a><span class="type">void</span> Config::<span class="name">setStartup</span>(const <span class="type"><a href="light-config-startup.html">Startup</a></span> <i>startup</i>)</h3>
+<p>Sets startup as specified by <i>startup</i>.</p>
+<!-- @@@setStartup -->
+</div>
+</body>
+</html>
