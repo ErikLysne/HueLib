@@ -85,18 +85,18 @@
  * \row
  *  \li {1, 3} \l setAlert(const HueAlert alert)
  *  \li {1, 3} Sets an alert on the light.
- *  \li \l HueAlert::NoAlert
+ *  \li \l NoAlert
  *  \row
- *  \li \l HueAlert::BreatheSingle
+ *  \li \l BreatheSingle
  *  \row
- *  \li \l HueAlert::Breathe15sec
+ *  \li \l Breathe15Sec
  *
  * \row
  *  \li {1, 2} \l setEffect(const HueEffect effect);
  *  \li {1, 2} Sets an effect on the light.
- *  \li \l HueEffect::NoEffect
+ *  \li \l NoEffect
  *  \row
- *  \li \l HueEffect::ColorLoop
+ *  \li \l ColorLoop
  *
  * \endtable
  *

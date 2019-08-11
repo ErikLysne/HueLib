@@ -50,32 +50,32 @@
  *  \li Range
  * \row
  *  \li \l turnOn(const bool on = true)
- *  \li Turns the light on.
+ *  \li Turns the group on.
  *  \li \c true or \c false
  *
  * \row
  *  \li \l turnOff(const bool off = true)
- *  \li Turns the light off.
+ *  \li Turns the group off.
  *  \li \c true or \c false
  *
  * \row
  *  \li \l setHue(const int hue)
- *  \li Sets the hue of the light.
+ *  \li Sets the hue of the group.
  *  \li 0 - 65535
  *
  * \row
  *  \li \l setSaturation(const int saturation)
- *  \li Sets the saturation of the light.
+ *  \li Sets the saturation of the group.
  *  \li 0 - 254
  *
  * \row
  *  \li \l setBrightness(const int brightness)
- *  \li Sets the brightness of the light.
+ *  \li Sets the brightness of the group.
  *  \li 1 - 254
  *
  * \row
  *  \li \l setColorTemp(const int colorTemp)
- *  \li Sets the color temperature of the light.
+ *  \li Sets the color temperature of the group.
  *  \li 150 - 500
  *      (corresponds to 6500K - 2000K)
  *
@@ -86,19 +86,19 @@
  *
  * \row
  *  \li {1, 3} \l setAlert(const HueAlert alert)
- *  \li {1, 3} Sets an alert on the light.
- *  \li \l HueAlert::NoAlert
+ *  \li {1, 3} Sets an alert on the group.
+ *  \li \l NoAlert
  *  \row
- *  \li \l HueAlert::BreatheSingle
+ *  \li \l BreatheSingle
  *  \row
- *  \li \l HueAlert::Breathe15sec
+ *  \li \l Breathe15Sec
  *
  * \row
  *  \li {1, 2} \l setEffect(const HueEffect effect);
- *  \li {1, 2} Sets an effect on the light.
- *  \li \l HueEffect::NoEffect
+ *  \li {1, 2} Sets an effect on the group.
+ *  \li \l NoEffect
  *  \row
- *  \li \l HueEffect::ColorLoop
+ *  \li \l ColorLoop
  *
  * \endtable
  *

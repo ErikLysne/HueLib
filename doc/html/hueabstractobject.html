@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- hueabstractobject.cpp -->
+  <title>HueAbstractObject Class | Qt </title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<body>
+<li>HueAbstractObject</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-types">Public Types</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#protected-functions">Protected Functions</a></li>
+<li class="level1"><a href="#static-protected-members">Static Protected Members</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">HueAbstractObject Class</h1>
+<!-- $$$HueAbstractObject-brief -->
+<p><a href="hueabstractobject.html">HueAbstractObject</a> is the abstract base class for <a href="huelight.html">HueLight</a> and <a href="huegroup.html">HueGroup</a>. <a href="#details">More...</a></p>
+<!-- @@@HueAbstractObject -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="huegroup.html">HueGroup</a> and <a href="huelight.html">HueLight</a></p>
+</td></tr></table></div><ul>
+<li><a href="hueabstractobject-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-types"></a>
+<h2 id="public-types">Public Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#HueAlert-enum">HueAlert</a></b> { NoAlert, BreatheSingle, Breathe15Sec }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#HueEffect-enum">HueEffect</a></b> { NoEffect, ColorLoop }</td></tr>
+</table></div>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#HueAbstractObject">HueAbstractObject</a></b>(HueBridge *<i>bridge</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#dtor.HueAbstractObject">~HueAbstractObject</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual int </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#ID">ID</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#enablePeriodicSync">enablePeriodicSync</a></b>(const bool <i>periodicSyncOn</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#hasValidConstructor">hasValidConstructor</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#isValid">isValid</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#setAlert">setAlert</a></b>(const HueAlert <i>alert</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#setBrightness">setBrightness</a></b>(const int <i>brightness</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#setColorTemp">setColorTemp</a></b>(const int <i>colorTemp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#setEffect">setEffect</a></b>(const HueEffect <i>effect</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#setHue">setHue</a></b>(const int <i>hue</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#setSaturation">setSaturation</a></b>(const int <i>saturation</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#setXY">setXY</a></b>(const double <i>x</i>, const double <i>y</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#synchronize">synchronize</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#turnOff">turnOff</a></b>(const bool <i>off</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#turnOn">turnOn</a></b>(const bool <i>on</i> = true)</td></tr>
+</table></div>
+<a name="signals"></a>
+<h2 id="signals">Signals</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#synchronized">synchronized</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#valueUpdated">valueUpdated</a></b>()</td></tr>
+</table></div>
+<a name="protected-functions"></a>
+<h2 id="protected-functions">Protected Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> HueBridge *</td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#getBridge">getBridge</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual HueRequest </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#makeGetRequest">makeGetRequest</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual HueRequest </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#makePutRequest">makePutRequest</a></b>(QJsonObject <i>json</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#sendRequest">sendRequest</a></b>(HueRequest <i>request</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#sendRequest-1">sendRequest</a></b>(HueRequest <i>request</i>, HueReply &amp;<i>reply</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#setBridge">setBridge</a></b>(HueBridge *<i>bridge</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#updateAlert">updateAlert</a></b>(const HueAlert <i>alert</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#updateBrightness">updateBrightness</a></b>(const int <i>brightness</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#updateColorTemp">updateColorTemp</a></b>(const int <i>colorTemp</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#updateEffect">updateEffect</a></b>(const HueEffect <i>effect</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#updateHue">updateHue</a></b>(const int <i>hue</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#updateOn">updateOn</a></b>(const bool <i>on</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#updateSaturation">updateSaturation</a></b>(const int <i>saturation</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#updateXY">updateXY</a></b>(const double <i>x</i>, const double <i>y</i>) = 0</td></tr>
+</table></div>
+<a name="static-protected-members"></a>
+<h2 id="static-protected-members">Static Protected Members</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> QMap&lt;int, QJsonObject&gt; </td><td class="memItemRight bottomAlign"><b><a href="hueabstractobject.html#parseJson">parseJson</a></b>(QJsonObject <i>json</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$HueAbstractObject-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p><a href="hueabstractobject.html">HueAbstractObject</a> is the abstract base class for <a href="huelight.html">HueLight</a> and <a href="huegroup.html">HueGroup</a>.</p>
+<p><a href="hueabstractobject.html">HueAbstractObject</a> specifies the common interface for <a href="huelight.html">HueLight</a> and <a href="huegroup.html">HueGroup</a>. The class implements a series of public <i>set</i> functions that changes properties of the derived class objects by sending requests to <a href="huebridge.html">HueBridge</a>. The <i>set</i> functions call corresponding <i>update</i> functions which are pure virtual and must be overloaded by the derived classes.</p>
+</div>
+<!-- @@@HueAbstractObject -->
+<div class="types">
+<h2>Member Type Documentation</h2>
+<!-- $$$HueAlert$$$NoAlert$$$BreatheSingle$$$Breathe15Sec -->
+<h3 class="fn" id="HueAlert-enum"><a name="HueAlert-enum"></a>enum HueAbstractObject::<span class="name">HueAlert</span></h3>
+<p>This enum defines the legal values of <a href="hueabstractobject.html#setAlert">setAlert</a>().</p>
+<div class="table"><table class="valuelist"><tr valign="top" class="odd"><th class="tblConst">Constant</th><th class="tblval">Value</th><th class="tbldscr">Description</th></tr>
+<tr><td class="topAlign"><code>HueAbstractObject::NoAlert</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">No alert (normal operation).</td></tr>
+<tr><td class="topAlign"><code>HueAbstractObject::BreatheSingle</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">Performs a single breathe cycle.</td></tr>
+<tr><td class="topAlign"><code>HueAbstractObject::Breathe15Sec</code></td><td class="topAlign tblval"><code>2</code></td><td class="topAlign">Performs breathe cycles for 15 sec.</td></tr>
+</table></div>
+<!-- @@@HueAlert -->
+<!-- $$$HueEffect$$$NoEffect$$$ColorLoop -->
+<h3 class="fn" id="HueEffect-enum"><a name="HueEffect-enum"></a>enum HueAbstractObject::<span class="name">HueEffect</span></h3>
+<p>This enum defines the legal values of <a href="hueabstractobject.html#setEffect">setEffect</a>().</p>
+<div class="table"><table class="valuelist"><tr valign="top" class="odd"><th class="tblConst">Constant</th><th class="tblval">Value</th><th class="tbldscr">Description</th></tr>
+<tr><td class="topAlign"><code>HueAbstractObject::NoEffect</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">No alert (normal operation).</td></tr>
+<tr><td class="topAlign"><code>HueAbstractObject::ColorLoop</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">Hue continuously changes value.</td></tr>
+</table></div>
+<!-- @@@HueEffect -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$HueAbstractObject[overload1]$$$HueAbstractObjectHueBridge* -->
+<h3 class="fn" id="HueAbstractObject"><a name="HueAbstractObject"></a>HueAbstractObject::<span class="name">HueAbstractObject</span>(<span class="type"><a href="huebridge.html">HueBridge</a></span> *<i>bridge</i>)</h3>
+<p>Default constructs an instance of HueAbstractObject.</p><!-- @@@HueAbstractObject -->
+<!-- $$$~HueAbstractObject[overload1]$$$~HueAbstractObject -->
+<h3 class="fn" id="dtor.HueAbstractObject"><a name="dtor.HueAbstractObject"></a><code>[virtual] </code>HueAbstractObject::<span class="name">~HueAbstractObject</span>()</h3>
+<p>Destroys the instance of HueAbstractObject. The destructor is virtual.</p><!-- @@@~HueAbstractObject -->
+<!-- $$$ID[overload1]$$$ID -->
+<h3 class="fn" id="ID"><a name="ID"></a><code>[pure virtual] </code><span class="type">int</span> HueAbstractObject::<span class="name">ID</span>() const</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should return the ID of the object.</p>
+<!-- @@@ID -->
+<!-- $$$enablePeriodicSync[overload1]$$$enablePeriodicSyncconstbool -->
+<h3 class="fn" id="enablePeriodicSync"><a name="enablePeriodicSync"></a><span class="type">void</span> HueAbstractObject::<span class="name">enablePeriodicSync</span>(const <span class="type">bool</span> <i>periodicSyncOn</i> = true)</h3>
+<p>Enables or disables periodic synchronization with bridge as specified by <i>periodicSyncOn</i>. The synchronization interval can be set by the static function HueSynchronizer::setSyncInterval().</p>
+<p><b>See also </b>HueSynchronizer.</p>
+<!-- @@@enablePeriodicSync -->
+<!-- $$$getBridge[overload1]$$$getBridge -->
+<h3 class="fn" id="getBridge"><a name="getBridge"></a><code>[protected] </code><span class="type"><a href="huebridge.html">HueBridge</a></span> *HueAbstractObject::<span class="name">getBridge</span>() const</h3>
+<p><b>Note: </b>should not be called explicitly.</p><p>Returns a reference to the <a href="huebridge.html">HueBridge</a> associated with the object.</p>
+<!-- @@@getBridge -->
+<!-- $$$hasValidConstructor[overload1]$$$hasValidConstructor -->
+<h3 class="fn" id="hasValidConstructor"><a name="hasValidConstructor"></a><code>[pure virtual] </code><span class="type">bool</span> HueAbstractObject::<span class="name">hasValidConstructor</span>() const</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should return true if object has valid constructor.</p>
+<!-- @@@hasValidConstructor -->
+<!-- $$$isValid[overload1]$$$isValid -->
+<h3 class="fn" id="isValid"><a name="isValid"></a><code>[pure virtual] </code><span class="type">bool</span> HueAbstractObject::<span class="name">isValid</span>() const</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Equivalent to <a href="hueabstractobject.html#hasValidConstructor">hasValidConstructor</a>().</p>
+<p>Should return true if object has valid constructor.</p>
+<!-- @@@isValid -->
+<!-- $$$makeGetRequest[overload1]$$$makeGetRequest -->
+<h3 class="fn" id="makeGetRequest"><a name="makeGetRequest"></a><code>[pure virtual protected] </code><span class="type"><a href="huerequest.html">HueRequest</a></span> HueAbstractObject::<span class="name">makeGetRequest</span>()</h3>
+<!-- @@@makeGetRequest -->
+<!-- $$$makePutRequest[overload1]$$$makePutRequestQJsonObject -->
+<h3 class="fn" id="makePutRequest"><a name="makePutRequest"></a><code>[pure virtual protected] </code><span class="type"><a href="huerequest.html">HueRequest</a></span> HueAbstractObject::<span class="name">makePutRequest</span>(<span class="type">QJsonObject</span> <i>json</i>)</h3>
+<!-- @@@makePutRequest -->
+<!-- $$$parseJson[overload1]$$$parseJsonQJsonObject -->
+<h3 class="fn" id="parseJson"><a name="parseJson"></a><code>[static protected] </code><span class="type">QMap</span>&lt;<span class="type">int</span>, <span class="type">QJsonObject</span>&gt; HueAbstractObject::<span class="name">parseJson</span>(<span class="type">QJsonObject</span> <i>json</i>)</h3>
+<p>Parses the JSON specivied by <i>json</i> received when calling <i>discover</i> functions implemented on the derived classes.</p>
+<p>Returns a <i>QMap</i> where the key is an <code>int</code> with the ID and the value is a <i>QJsonObject</i> containing the JSON for the object with the corresponding ID.</p>
+<p><b>Note: </b>should not be called explicitly.</p><p><b>See also </b><a href="huelight.html#discoverLights">HueLight::discoverLights</a>() and <a href="huegroup.html#discoverGroups">HueGroup::discoverGroups</a>().</p>
+<!-- @@@parseJson -->
+<!-- $$$sendRequest[overload1]$$$sendRequestHueRequest -->
+<h3 class="fn" id="sendRequest"><a name="sendRequest"></a><code>[protected] </code><span class="type">bool</span> HueAbstractObject::<span class="name">sendRequest</span>(<span class="type"><a href="huerequest.html">HueRequest</a></span> <i>request</i>)</h3>
+<p>Sends the request specified by <i>request</i> to the bridge.</p>
+<p>Returns <code>true</code> if the reply is valid, does not contain an error in the returned JSON, and did not timeout.</p>
+<p><b>Note: </b>should not be called explicitly.</p><p><b>See also </b><a href="huerequest.html">HueRequest</a> and <a href="hueabstractobject.html#sendRequest-1">sendRequest</a>(HueRequest request, HueReply&amp; reply).</p>
+<!-- @@@sendRequest -->
+<!-- $$$sendRequest$$$sendRequestHueRequestHueReply& -->
+<h3 class="fn" id="sendRequest-1"><a name="sendRequest-1"></a><code>[protected] </code><span class="type">bool</span> HueAbstractObject::<span class="name">sendRequest</span>(<span class="type"><a href="huerequest.html">HueRequest</a></span> <i>request</i>, <span class="type"><a href="huereply.html">HueReply</a></span> &amp;<i>reply</i>)</h3>
+<p>Sends the request specified by <i>request</i> to the bridge.</p>
+<p>Returns <code>true</code> if the reply is valid, does not contain an error in the returned JSON, and did not timeout. <i>reply</i> is updated with the reply.</p>
+<p><b>Note: </b>should not be called explicitly.</p><p><b>See also </b><a href="huerequest.html">HueRequest</a>, <a href="huereply.html">HueReply</a>, and <a href="hueabstractobject.html#sendRequest">sendRequest</a>().</p>
+<!-- @@@sendRequest -->
+<!-- $$$setAlert[overload1]$$$setAlertconstHueAlert -->
+<h3 class="fn" id="setAlert"><a name="setAlert"></a><span class="type">bool</span> HueAbstractObject::<span class="name">setAlert</span>(const <span class="type"><a href="hueabstractobject.html#HueAlert-enum">HueAlert</a></span> <i>alert</i>)</h3>
+<p>Sets alert as specified by <i>alert</i>.</p>
+<p>Returns true if update was successful.</p>
+<p><b>See also </b><a href="hueabstractobject.html#HueAlert-enum">HueAlert</a>.</p>
+<!-- @@@setAlert -->
+<!-- $$$setBridge[overload1]$$$setBridgeHueBridge* -->
+<h3 class="fn" id="setBridge"><a name="setBridge"></a><code>[protected] </code><span class="type">void</span> HueAbstractObject::<span class="name">setBridge</span>(<span class="type"><a href="huebridge.html">HueBridge</a></span> *<i>bridge</i>)</h3>
+<p>Sets the <a href="huebridge.html">HueBridge</a> as specified by <i>bridge</i>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><!-- @@@setBridge -->
+<!-- $$$setBrightness[overload1]$$$setBrightnessconstint -->
+<h3 class="fn" id="setBrightness"><a name="setBrightness"></a><span class="type">bool</span> HueAbstractObject::<span class="name">setBrightness</span>(const <span class="type">int</span> <i>brightness</i>)</h3>
+<p>Sets the brightness as specified by <i>brightness</i>.</p>
+<p>Range for <i>brightness</i> is 1 - 254.</p>
+<p>Returns true if update was successful.</p>
+<!-- @@@setBrightness -->
+<!-- $$$setColorTemp[overload1]$$$setColorTempconstint -->
+<h3 class="fn" id="setColorTemp"><a name="setColorTemp"></a><span class="type">bool</span> HueAbstractObject::<span class="name">setColorTemp</span>(const <span class="type">int</span> <i>colorTemp</i>)</h3>
+<p>Sets the color temperature as specified by <i>colorTemp</i>.</p>
+<p>Range for <i>colorTemp</i> is 150 - 500 which corresponds to 6500K - 2000K.</p>
+<p>Returns true if update was successful.</p>
+<!-- @@@setColorTemp -->
+<!-- $$$setEffect[overload1]$$$setEffectconstHueEffect -->
+<h3 class="fn" id="setEffect"><a name="setEffect"></a><span class="type">bool</span> HueAbstractObject::<span class="name">setEffect</span>(const <span class="type"><a href="hueabstractobject.html#HueEffect-enum">HueEffect</a></span> <i>effect</i>)</h3>
+<p>Sets effect as specified by <i>effect</i>.</p>
+<p>Returns true if update was successful.</p>
+<p><b>See also </b><a href="hueabstractobject.html#HueEffect-enum">HueEffect</a>.</p>
+<!-- @@@setEffect -->
+<!-- $$$setHue[overload1]$$$setHueconstint -->
+<h3 class="fn" id="setHue"><a name="setHue"></a><span class="type">bool</span> HueAbstractObject::<span class="name">setHue</span>(const <span class="type">int</span> <i>hue</i>)</h3>
+<p>Sets the hue as specified by <i>hue</i>.</p>
+<p>Range for <i>hue</i> is 0 - 65535.</p>
+<p>Returns true if update was successful.</p>
+<p><b>See also </b><a href="hueabstractobject.html#setSaturation">setSaturation</a>().</p>
+<!-- @@@setHue -->
+<!-- $$$setSaturation[overload1]$$$setSaturationconstint -->
+<h3 class="fn" id="setSaturation"><a name="setSaturation"></a><span class="type">bool</span> HueAbstractObject::<span class="name">setSaturation</span>(const <span class="type">int</span> <i>saturation</i>)</h3>
+<p>Sets the saturation as specified by <i>saturation</i>.</p>
+<p>Range for <i>saturation</i> is 0 - 254.</p>
+<p>Returns true if update was successful.</p>
+<p><b>See also </b><a href="hueabstractobject.html#setHue">setHue</a>().</p>
+<!-- @@@setSaturation -->
+<!-- $$$setXY[overload1]$$$setXYconstdoubleconstdouble -->
+<h3 class="fn" id="setXY"><a name="setXY"></a><span class="type">bool</span> HueAbstractObject::<span class="name">setXY</span>(const <span class="type">double</span> <i>x</i>, const <span class="type">double</span> <i>y</i>)</h3>
+<p>Sets the X and Y color coordinates in CIE color space as specified by <i>x</i> and <i>y</i>.</p>
+<p>Range for <i>x</i> and <i>y</i> is 0.0 - 1.0&#x2e;</p>
+<p>Returns true if update was successful.</p>
+<!-- @@@setXY -->
+<!-- $$$synchronize[overload1]$$$synchronize -->
+<h3 class="fn" id="synchronize"><a name="synchronize"></a><code>[pure virtual] </code><span class="type">bool</span> HueAbstractObject::<span class="name">synchronize</span>()</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Synchronizes the object.</p>
+<p>Should return true if synchronization was successful.</p>
+<!-- @@@synchronize -->
+<!-- $$$synchronized[overload1]$$$synchronized -->
+<h3 class="fn" id="synchronized"><a name="synchronized"></a><code>[signal] </code><span class="type">void</span> HueAbstractObject::<span class="name">synchronized</span>()</h3>
+<!-- @@@synchronized -->
+<!-- $$$turnOff[overload1]$$$turnOffconstbool -->
+<h3 class="fn" id="turnOff"><a name="turnOff"></a><span class="type">bool</span> HueAbstractObject::<span class="name">turnOff</span>(const <span class="type">bool</span> <i>off</i> = true)</h3>
+<p>Turns the light off or on when <i>off</i> is <code>true</code> or <code>false</code> respectively.</p>
+<p>Returns true if update was successful.</p>
+<p><b>See also </b><a href="hueabstractobject.html#turnOn">turnOn</a>().</p>
+<!-- @@@turnOff -->
+<!-- $$$turnOn[overload1]$$$turnOnconstbool -->
+<h3 class="fn" id="turnOn"><a name="turnOn"></a><span class="type">bool</span> HueAbstractObject::<span class="name">turnOn</span>(const <span class="type">bool</span> <i>on</i> = true)</h3>
+<p>Turns the light on or off when <i>on</i> is <code>true</code> or <code>false</code> respectively.</p>
+<p>Returns true if update was successful.</p>
+<p><b>See also </b><a href="hueabstractobject.html#turnOff">turnOff</a>().</p>
+<!-- @@@turnOn -->
+<!-- $$$updateAlert[overload1]$$$updateAlertconstHueAlert -->
+<h3 class="fn" id="updateAlert"><a name="updateAlert"></a><code>[pure virtual protected] </code><span class="type">void</span> HueAbstractObject::<span class="name">updateAlert</span>(const <span class="type"><a href="hueabstractobject.html#HueAlert-enum">HueAlert</a></span> <i>alert</i>)</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should set <i>alert</i> property of object as specified by <i>alert</i>.</p>
+<!-- @@@updateAlert -->
+<!-- $$$updateBrightness[overload1]$$$updateBrightnessconstint -->
+<h3 class="fn" id="updateBrightness"><a name="updateBrightness"></a><code>[pure virtual protected] </code><span class="type">void</span> HueAbstractObject::<span class="name">updateBrightness</span>(const <span class="type">int</span> <i>brightness</i>)</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should set <i>brightness</i> property of object as specified by <i>brightness</i>.</p>
+<!-- @@@updateBrightness -->
+<!-- $$$updateColorTemp[overload1]$$$updateColorTempconstint -->
+<h3 class="fn" id="updateColorTemp"><a name="updateColorTemp"></a><code>[pure virtual protected] </code><span class="type">void</span> HueAbstractObject::<span class="name">updateColorTemp</span>(const <span class="type">int</span> <i>colorTemp</i>)</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should set <i>colorTemp</i> property of object as specified by <i>colorTemp</i>.</p>
+<!-- @@@updateColorTemp -->
+<!-- $$$updateEffect[overload1]$$$updateEffectconstHueEffect -->
+<h3 class="fn" id="updateEffect"><a name="updateEffect"></a><code>[pure virtual protected] </code><span class="type">void</span> HueAbstractObject::<span class="name">updateEffect</span>(const <span class="type"><a href="hueabstractobject.html#HueEffect-enum">HueEffect</a></span> <i>effect</i>)</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should set <i>effect</i> property of object as specified by <i>effect</i>.</p>
+<!-- @@@updateEffect -->
+<!-- $$$updateHue[overload1]$$$updateHueconstint -->
+<h3 class="fn" id="updateHue"><a name="updateHue"></a><code>[pure virtual protected] </code><span class="type">void</span> HueAbstractObject::<span class="name">updateHue</span>(const <span class="type">int</span> <i>hue</i>)</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should set <i>hue</i> property of object as specified by <i>hue</i>.</p>
+<!-- @@@updateHue -->
+<!-- $$$updateOn[overload1]$$$updateOnconstbool -->
+<h3 class="fn" id="updateOn"><a name="updateOn"></a><code>[pure virtual protected] </code><span class="type">void</span> HueAbstractObject::<span class="name">updateOn</span>(const <span class="type">bool</span> <i>on</i>)</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should set <i>on</i> property of object as specified by <i>on</i>.</p>
+<!-- @@@updateOn -->
+<!-- $$$updateSaturation[overload1]$$$updateSaturationconstint -->
+<h3 class="fn" id="updateSaturation"><a name="updateSaturation"></a><code>[pure virtual protected] </code><span class="type">void</span> HueAbstractObject::<span class="name">updateSaturation</span>(const <span class="type">int</span> <i>saturation</i>)</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should set <i>saturation</i> property of object as specified by <i>saturation</i>.</p>
+<!-- @@@updateSaturation -->
+<!-- $$$updateXY[overload1]$$$updateXYconstdoubleconstdouble -->
+<h3 class="fn" id="updateXY"><a name="updateXY"></a><code>[pure virtual protected] </code><span class="type">void</span> HueAbstractObject::<span class="name">updateXY</span>(const <span class="type">double</span> <i>x</i>, const <span class="type">double</span> <i>y</i>)</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should set <i>x</i> and <i>y</i> properties of object as specified by <i>x</i> and <i>y</i>.</p>
+<!-- @@@updateXY -->
+<!-- $$$valueUpdated[overload1]$$$valueUpdated -->
+<h3 class="fn" id="valueUpdated"><a name="valueUpdated"></a><code>[signal] </code><span class="type">void</span> HueAbstractObject::<span class="name">valueUpdated</span>()</h3>
+<!-- @@@valueUpdated -->
+</div>
+</body>
+</html>

@@ -25,7 +25,7 @@
 <p>The <a href="huelight.html">HueLight</a> class is used to interface with a single Hue light. <a href="#details">More...</a></p>
 <!-- @@@HueLight -->
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> HueAbstractObject</td></tr></table></div><ul>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <a href="hueabstractobject.html">HueAbstractObject</a></td></tr></table></div><ul>
 <li><a href="huelight-members.html">List of all members, including inherited members</a></li>
 </ul>
 <a name="public-functions"></a>
@@ -93,18 +93,18 @@ lights<span class="operator">-</span><span class="operator">&gt;</span>fetch(<sp
 <p>As can be seen from the example above, lights can be changed by directly calling <i>set</i> functions on the <a href="huelight.html">HueLight</a> objects. Below is a list of <i>set</i> functions that work with <a href="huelight.html">HueLight</a> objects.</p>
 <div class="table"><table class="generic">
  <thead><tr class="qt-style"><th >Function</th><th >Description</th><th >Range</th></tr></thead>
-<tr valign="top" class="odd"><td >turnOn(const bool on = true)</td><td >Turns the light on.</td><td ><code>true</code> or <code>false</code></td></tr>
-<tr valign="top" class="even"><td >turnOff(const bool off = true)</td><td >Turns the light off.</td><td ><code>true</code> or <code>false</code></td></tr>
-<tr valign="top" class="odd"><td >setHue(const int hue)</td><td >Sets the hue of the light.</td><td >0 - 65535</td></tr>
-<tr valign="top" class="even"><td >setSaturation(const int saturation)</td><td >Sets the saturation of the light.</td><td >0 - 254</td></tr>
-<tr valign="top" class="odd"><td >setBrightness(const int brightness)</td><td >Sets the brightness of the light.</td><td >1 - 254</td></tr>
-<tr valign="top" class="even"><td >setColorTemp(const int colorTemp)</td><td >Sets the color temperature of the light.</td><td >150 - 500 (corresponds to 6500K - 2000K)</td></tr>
-<tr valign="top" class="odd"><td >setXY(const double x, const double y)</td><td >Sets the X and Y color coordinates in CIE color space.</td><td >0 - 1</td></tr>
-<tr valign="top" class="even"><td  rowspan=" 3">setAlert(const HueAlert alert)</td><td  rowspan=" 3">Sets an alert on the light.</td><td >HueAlert::NoAlert</td></tr>
-<tr valign="top" class="odd"><td >HueAlert::BreatheSingle</td></tr>
-<tr valign="top" class="even"><td >HueAlert::Breathe15sec</td></tr>
-<tr valign="top" class="odd"><td  rowspan=" 2">setEffect(const HueEffect effect);</td><td  rowspan=" 2">Sets an effect on the light.</td><td >HueEffect::NoEffect</td></tr>
-<tr valign="top" class="even"><td >HueEffect::ColorLoop</td></tr>
+<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#turnOn">turnOn</a>(const bool on = true)</td><td >Turns the light on.</td><td ><code>true</code> or <code>false</code></td></tr>
+<tr valign="top" class="even"><td ><a href="hueabstractobject.html#turnOff">turnOff</a>(const bool off = true)</td><td >Turns the light off.</td><td ><code>true</code> or <code>false</code></td></tr>
+<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#setHue">setHue</a>(const int hue)</td><td >Sets the hue of the light.</td><td >0 - 65535</td></tr>
+<tr valign="top" class="even"><td ><a href="hueabstractobject.html#setSaturation">setSaturation</a>(const int saturation)</td><td >Sets the saturation of the light.</td><td >0 - 254</td></tr>
+<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#setBrightness">setBrightness</a>(const int brightness)</td><td >Sets the brightness of the light.</td><td >1 - 254</td></tr>
+<tr valign="top" class="even"><td ><a href="hueabstractobject.html#setColorTemp">setColorTemp</a>(const int colorTemp)</td><td >Sets the color temperature of the light.</td><td >150 - 500 (corresponds to 6500K - 2000K)</td></tr>
+<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#setXY">setXY</a>(const double x, const double y)</td><td >Sets the X and Y color coordinates in CIE color space.</td><td >0 - 1</td></tr>
+<tr valign="top" class="even"><td  rowspan=" 3"><a href="hueabstractobject.html#setAlert">setAlert</a>(const HueAlert alert)</td><td  rowspan=" 3">Sets an alert on the light.</td><td ><a href="hueabstractobject.html#HueAlert-enum">NoAlert</a></td></tr>
+<tr valign="top" class="odd"><td ><a href="hueabstractobject.html#HueAlert-enum">BreatheSingle</a></td></tr>
+<tr valign="top" class="even"><td ><a href="hueabstractobject.html#HueAlert-enum">Breathe15Sec</a></td></tr>
+<tr valign="top" class="odd"><td  rowspan=" 2"><a href="hueabstractobject.html#setEffect">setEffect</a>(const HueEffect effect);</td><td  rowspan=" 2">Sets an effect on the light.</td><td ><a href="hueabstractobject.html#HueEffect-enum">NoEffect</a></td></tr>
+<tr valign="top" class="even"><td ><a href="hueabstractobject.html#HueEffect-enum">ColorLoop</a></td></tr>
 </table></div>
 <p>Data can be retreved from <a href="huelight.html">HueLight</a> by calling the functions in the table below.</p>
 <p><b>Note: </b>The data follows the convension of the Hue API, where some data is nested and some is not. For consistency, all data functions return an object of a data class, where <i>get</i> functions can be called to retreive the data - even when only one <i>get</i> function exists. The exception is <a href="huelight.html#ID">ID</a>() which returns the ID of the light as an <code>int</code>.</p><div class="table"><table class="generic">
@@ -156,6 +156,7 @@ lights<span class="operator">-</span><span class="operator">&gt;</span>fetch(<sp
 <!-- @@@HueLight -->
 <!-- $$$ID[overload1]$$$ID -->
 <h3 class="fn" id="ID"><a name="ID"></a><code>[override virtual] </code><span class="type">int</span> HueLight::<span class="name">ID</span>() const</h3>
+<p>Reimplemented from <a href="hueabstractobject.html#ID">HueAbstractObject::ID</a>().</p>
 <p>Returns an <code>int</code> with the ID of the light.</p>
 <!-- @@@ID -->
 <!-- $$$config[overload1]$$$config -->
@@ -168,11 +169,13 @@ lights<span class="operator">-</span><span class="operator">&gt;</span>fetch(<sp
 <!-- @@@discoverLights -->
 <!-- $$$hasValidConstructor[overload1]$$$hasValidConstructor -->
 <h3 class="fn" id="hasValidConstructor"><a name="hasValidConstructor"></a><code>[override virtual] </code><span class="type">bool</span> HueLight::<span class="name">hasValidConstructor</span>() const</h3>
+<p>Reimplemented from <a href="hueabstractobject.html#hasValidConstructor">HueAbstractObject::hasValidConstructor</a>().</p>
 <p>Returns <code>true</code> if <a href="huelight.html">HueLight</a> was constructed properly.</p>
 <p><b>See also </b><a href="huelight.html#isValid">isValid</a>().</p>
 <!-- @@@hasValidConstructor -->
 <!-- $$$isValid[overload1]$$$isValid -->
 <h3 class="fn" id="isValid"><a name="isValid"></a><code>[override virtual] </code><span class="type">bool</span> HueLight::<span class="name">isValid</span>() const</h3>
+<p>Reimplemented from <a href="hueabstractobject.html#isValid">HueAbstractObject::isValid</a>().</p>
 <p>Equivalent to <a href="huelight.html#hasValidConstructor">hasValidConstructor</a>()</p>
 <!-- @@@isValid -->
 <!-- $$$manufacturer[overload1]$$$manufacturer -->
@@ -209,6 +212,7 @@ lights<span class="operator">-</span><span class="operator">&gt;</span>fetch(<sp
 <!-- @@@state -->
 <!-- $$$synchronize[overload1]$$$synchronize -->
 <h3 class="fn" id="synchronize"><a name="synchronize"></a><code>[override virtual] </code><span class="type">bool</span> HueLight::<span class="name">synchronize</span>()</h3>
+<p>Reimplemented from <a href="hueabstractobject.html#synchronize">HueAbstractObject::synchronize</a>().</p>
 <p>Updates <a href="huelight.html">HueLight</a> to the lastest state available on <a href="huebridge.html">HueBridge</a>.</p>
 <p><b>Note: </b>only queries an individual <a href="huelight.html">HueLight</a> from the bridge. If all lights needs to be updated, it can be faster to delete the HueLightList and call <a href="huelight.html#discoverLights">discoverLights</a>() again.</p><p><b>See also </b><a href="huelight.html#discoverLights">discoverLights</a>().</p>
 <!-- @@@synchronize -->

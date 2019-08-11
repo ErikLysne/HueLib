@@ -127,7 +127,7 @@
             <function threadsafety="unspecified" name="columnCount" fullname="TreeItem::columnCount" href="treeitem.html#columnCount" status="active" access="public" location="treeitem.h" filepath="/home/erik/Dev/huelib/source/Models/treeitem.h" lineno="17" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="int" signature="int columnCount() const"/>
             <function threadsafety="unspecified" name="row" fullname="TreeItem::row" href="treeitem.html#row" status="active" access="public" location="treeitem.h" filepath="/home/erik/Dev/huelib/source/Models/treeitem.h" lineno="19" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="int" signature="int row() const"/>
         </class>
-        <class threadsafety="unspecified" name="HueAbstractObject" href="hueabstractobject.html" status="internal" access="private" location="hueabstractobject.h" filepath="/home/erik/Dev/huelib/source/hueabstractobject.h" lineno="12">
+        <class threadsafety="unspecified" name="HueAbstractObject" href="hueabstractobject.html" status="active" access="public" location="hueabstractobject.h" filepath="/home/erik/Dev/huelib/source/hueabstractobject.h" lineno="12" groups="HueLib" brief="The abstract base class for HueLight and HueGroup">
             <function threadsafety="unspecified" name="HueAbstractObject" fullname="HueAbstractObject::HueAbstractObject" href="hueabstractobject.html#HueAbstractObject" status="active" access="public" location="hueabstractobject.h" filepath="/home/erik/Dev/huelib/source/hueabstractobject.h" lineno="27" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" override="false" type="" signature="HueAbstractObject(HueBridge *bridge)">
                 <parameter left="HueBridge *" right="" name="bridge" default=""/>
             </function>
@@ -913,6 +913,6 @@
                 <function threadsafety="unspecified" name="getUniqueID" fullname="Light::UniqueID::getUniqueID" href="light-uniqueid.html#getUniqueID" status="active" access="public" location="huetypes.h" filepath="/home/erik/Dev/huelib/source/huetypes.h" lineno="94" virtual="non" meta="plain" const="true" static="false" overload="false" delete="false" default="false" final="false" override="false" type="QString" signature="QString getUniqueID() const"/>
             </class>
         </namespace>
-        <group name="HueLib" href="huelib.html" status="active" seen="true" title="HueLib" members="HueBridge,HueError,HueGroup,HueLight,HueReply,HueRequest"/>
+        <group name="HueLib" href="huelib.html" status="active" seen="true" title="HueLib" members="HueAbstractObject,HueBridge,HueError,HueGroup,HueLight,HueReply,HueRequest"/>
     </namespace>
 </INDEX>
