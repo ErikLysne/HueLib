@@ -27,7 +27,8 @@
 <p><a href="hueabstractobject.html">HueAbstractObject</a> is the abstract base class for <a href="huelight.html">HueLight</a> and <a href="huegroup.html">HueGroup</a>. <a href="#details">More...</a></p>
 <!-- @@@HueAbstractObject -->
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="huegroup.html">HueGroup</a> and <a href="huelight.html">HueLight</a></p>
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> <span class="preprocessor">#include &lt;HueAbstractObject&gt;</span>
+</td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="huegroup.html">HueGroup</a> and <a href="huelight.html">HueLight</a></p>
 </td></tr></table></div><ul>
 <li><a href="hueabstractobject-members.html">List of all members, including inherited members</a></li>
 </ul>
@@ -118,10 +119,12 @@
 <h2>Member Function Documentation</h2>
 <!-- $$$HueAbstractObject[overload1]$$$HueAbstractObjectHueBridge* -->
 <h3 class="fn" id="HueAbstractObject"><a name="HueAbstractObject"></a>HueAbstractObject::<span class="name">HueAbstractObject</span>(<span class="type"><a href="huebridge.html">HueBridge</a></span> *<i>bridge</i>)</h3>
-<p>Default constructs an instance of HueAbstractObject.</p><!-- @@@HueAbstractObject -->
+<p>Base constructor for derived clases. Sets parent to <code>nullptr</code> and bridge specified by <i>bridge</i>.</p>
+<p><b>Note: </b>should not be called explicitly.</p><!-- @@@HueAbstractObject -->
 <!-- $$$~HueAbstractObject[overload1]$$$~HueAbstractObject -->
 <h3 class="fn" id="dtor.HueAbstractObject"><a name="dtor.HueAbstractObject"></a><code>[virtual] </code>HueAbstractObject::<span class="name">~HueAbstractObject</span>()</h3>
-<p>Destroys the instance of HueAbstractObject. The destructor is virtual.</p><!-- @@@~HueAbstractObject -->
+<p>Virtual destructor.</p>
+<!-- @@@~HueAbstractObject -->
 <!-- $$$ID[overload1]$$$ID -->
 <h3 class="fn" id="ID"><a name="ID"></a><code>[pure virtual] </code><span class="type">int</span> HueAbstractObject::<span class="name">ID</span>() const</h3>
 <p>Pure virtual function. Must be overloaded.</p>
@@ -149,13 +152,17 @@
 <!-- @@@isValid -->
 <!-- $$$makeGetRequest[overload1]$$$makeGetRequest -->
 <h3 class="fn" id="makeGetRequest"><a name="makeGetRequest"></a><code>[pure virtual protected] </code><span class="type"><a href="huerequest.html">HueRequest</a></span> HueAbstractObject::<span class="name">makeGetRequest</span>()</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should return a <a href="huerequest.html">HueRequest</a> with <a href="huerequest.html#Method-enum">HueRequest::Method</a> set to <a href="huerequest.html#Method-enum">HueRequest::Get</a>.</p>
 <!-- @@@makeGetRequest -->
 <!-- $$$makePutRequest[overload1]$$$makePutRequestQJsonObject -->
 <h3 class="fn" id="makePutRequest"><a name="makePutRequest"></a><code>[pure virtual protected] </code><span class="type"><a href="huerequest.html">HueRequest</a></span> HueAbstractObject::<span class="name">makePutRequest</span>(<span class="type">QJsonObject</span> <i>json</i>)</h3>
+<p>Pure virtual function. Must be overloaded.</p>
+<p>Should return a <a href="huerequest.html">HueRequest</a> with <a href="huerequest.html#Method-enum">HueRequest::Method</a> set to <a href="huerequest.html#Method-enum">HueRequest::Put</a> and JSON specified by <i>json</i>.</p>
 <!-- @@@makePutRequest -->
 <!-- $$$parseJson[overload1]$$$parseJsonQJsonObject -->
 <h3 class="fn" id="parseJson"><a name="parseJson"></a><code>[static protected] </code><span class="type">QMap</span>&lt;<span class="type">int</span>, <span class="type">QJsonObject</span>&gt; HueAbstractObject::<span class="name">parseJson</span>(<span class="type">QJsonObject</span> <i>json</i>)</h3>
-<p>Parses the JSON specivied by <i>json</i> received when calling <i>discover</i> functions implemented on the derived classes.</p>
+<p>Parses the JSON specified by <i>json</i> received when calling <i>discover</i> functions implemented on the derived classes.</p>
 <p>Returns a <i>QMap</i> where the key is an <code>int</code> with the ID and the value is a <i>QJsonObject</i> containing the JSON for the object with the corresponding ID.</p>
 <p><b>Note: </b>should not be called explicitly.</p><p><b>See also </b><a href="huelight.html#discoverLights">HueLight::discoverLights</a>() and <a href="huegroup.html#discoverGroups">HueGroup::discoverGroups</a>().</p>
 <!-- @@@parseJson -->
@@ -227,6 +234,8 @@
 <!-- @@@synchronize -->
 <!-- $$$synchronized[overload1]$$$synchronized -->
 <h3 class="fn" id="synchronized"><a name="synchronized"></a><code>[signal] </code><span class="type">void</span> HueAbstractObject::<span class="name">synchronized</span>()</h3>
+<p>Signal should be emitted from object of derived class after object has been successfully synchronized.</p>
+<p><b>See also </b><a href="huelight.html#synchronize">HueLight::synchronize</a>() and <a href="huegroup.html#synchronize">HueGroup::synchronize</a>().</p>
 <!-- @@@synchronized -->
 <!-- $$$turnOff[overload1]$$$turnOffconstbool -->
 <h3 class="fn" id="turnOff"><a name="turnOff"></a><span class="type">bool</span> HueAbstractObject::<span class="name">turnOff</span>(const <span class="type">bool</span> <i>off</i> = true)</h3>
@@ -282,6 +291,7 @@
 <!-- @@@updateXY -->
 <!-- $$$valueUpdated[overload1]$$$valueUpdated -->
 <h3 class="fn" id="valueUpdated"><a name="valueUpdated"></a><code>[signal] </code><span class="type">void</span> HueAbstractObject::<span class="name">valueUpdated</span>()</h3>
+<p>Signal should be emitted from object of derived class after object has been updated.</p>
 <!-- @@@valueUpdated -->
 </div>
 </body>

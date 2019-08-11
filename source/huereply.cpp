@@ -3,6 +3,7 @@
 /*!
  * \class HueReply
  * \ingroup HueLib
+ * \inmodule HueLib
  * \brief Contains the details of reply received from \l HueBridge::sendRequest().
  *
  * HueReply holds the \e JSON, \e HTTP \e status, and \e error returned from \l HueBridge::sendRequest().

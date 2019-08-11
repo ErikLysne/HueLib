@@ -9,7 +9,8 @@
 /*!
  * \class HueGroup
  * \ingroup HueLib
- * \brief The HueLight class is used to interface with a group of Hue lights.
+ * \inmodule HueLib
+ * \brief The HueGroup class is used to interface with a group of Hue lights.
  *
  * A HueGroup object mirrors the state of a Hue group registered on the network.
  * HueGroup objects cannot be constructed directly because the constructor of HueGroup

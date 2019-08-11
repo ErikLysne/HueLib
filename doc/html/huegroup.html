@@ -22,10 +22,11 @@
 <div class="sidebar-content" id="sidebar-content"></div></div>
 <h1 class="title">HueGroup Class</h1>
 <!-- $$$HueGroup-brief -->
-<p>The <a href="huelight.html">HueLight</a> class is used to interface with a group of Hue lights. <a href="#details">More...</a></p>
+<p>The <a href="huegroup.html">HueGroup</a> class is used to interface with a group of Hue lights. <a href="#details">More...</a></p>
 <!-- @@@HueGroup -->
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <a href="hueabstractobject.html">HueAbstractObject</a></td></tr></table></div><ul>
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> <span class="preprocessor">#include &lt;HueGroup&gt;</span>
+</td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <a href="hueabstractobject.html">HueAbstractObject</a></td></tr></table></div><ul>
 <li><a href="huegroup-members.html">List of all members, including inherited members</a></li>
 </ul>
 <a name="public-functions"></a>
@@ -70,7 +71,7 @@
 <!-- $$$HueGroup-description -->
 <div class="descr">
 <h2 id="details">Detailed Description</h2>
-<p>The <a href="huelight.html">HueLight</a> class is used to interface with a group of Hue lights.</p>
+<p>The <a href="huegroup.html">HueGroup</a> class is used to interface with a group of Hue lights.</p>
 <p>A <a href="huegroup.html">HueGroup</a> object mirrors the state of a Hue group registered on the network. <a href="huegroup.html">HueGroup</a> objects cannot be constructed directly because the constructor of <a href="huegroup.html">HueGroup</a> is private. Instead, a list of <a href="huegroup.html">HueGroup</a> objects (a HueGroupList) is returned by the static function <a href="huegroup.html#discoverGroups">discoverGroups</a>(). A <a href="huebridge.html">HueBridge</a> object must be constructed before any <a href="huelight.html">HueLight</a> objects can be constructed.</p>
 <p>The following minimum working example turns off all groups on the network, then turns on the group named &quot;Living Room&quot; and enables the color loop effect.</p>
 <pre class="cpp"><span class="comment">// Create HueBridge</span>

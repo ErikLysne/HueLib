@@ -3,6 +3,7 @@
 /*!
  * \class HueError
  * \ingroup HueLib
+ * \inmodule HueLib
  * \brief Contains the details of an error received from \l HueBridge::sendRequest().
  *
  * HueError holds the \e type, \e address and \e description of an error returned from

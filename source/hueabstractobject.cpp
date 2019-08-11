@@ -11,6 +11,7 @@
 /*!
  * \class HueAbstractObject
  * \ingroup HueLib
+ * \inmodule HueLib
  * \brief HueAbstractObject is the abstract base class for \l HueLight and \l HueGroup.
  *
  * HueAbstractObject specifies the common interface for \l HueLight and \l HueGroup.
@@ -45,6 +46,15 @@
  *      Hue continuously changes value.
  */
 
+/*!
+ * \fn HueAbstractObject::HueAbstractObject(HueBridge* bridge)
+ *
+ * Base constructor for derived clases. Sets parent to \c nullptr
+ * and bridge specified by \a bridge.
+ *
+ * \note should not be called explicitly.
+ *
+ */
 HueAbstractObject::HueAbstractObject(HueBridge* bridge)
     : QObject(nullptr)
     , m_bridge(bridge)
@@ -331,7 +341,7 @@ void HueAbstractObject::enablePeriodicSync(const bool periodicSyncOn)
 /*!
  * \fn QMap<int, QJsonObject> HueAbstractObject::parseJson(QJsonObject json)
  *
- * Parses the JSON specivied by \a json received when calling \e discover functions
+ * Parses the JSON specified by \a json received when calling \e discover functions
  * implemented on the derived classes.
  *
  * Returns a \e QMap where the key is an \c int with the ID and the value
@@ -430,6 +440,32 @@ HueBridge* HueAbstractObject::getBridge() const
 }
 
 /*!
+ * \fn virtual ~HueAbstractObject()
+ *
+ * Virtual destructor.
+ *
+ */
+
+/*!
+ * \fn virtual HueRequest HueAbstractObject::makePutRequest(QJsonObject json)
+ *
+ * Pure virtual function. Must be overloaded.
+ *
+ * Should return a \l HueRequest with \l HueRequest::Method set to \l HueRequest::Put
+ * and JSON specified by \a json.
+ *
+ */
+
+/*!
+ * \fn virtual HueRequest HueAbstractObject::makeGetRequest()
+ *
+ * Pure virtual function. Must be overloaded.
+ *
+ * Should return a \l HueRequest with \l HueRequest::Method set to \l HueRequest::Get.
+ *
+ */
+
+/*!
  * \fn virtual bool HueAbstractObject::hasValidConstructor() const
  *
  * Pure virtual function. Must be overloaded.
@@ -519,7 +555,7 @@ HueBridge* HueAbstractObject::getBridge() const
  *
  * Pure virtual function. Must be overloaded.
  *
- * Should set \e x and \e y properties of object as specified by \a x and \e y.
+ * Should set \e x and \e y properties of object as specified by \a x and \a y.
  *
  */
 
@@ -542,10 +578,19 @@ HueBridge* HueAbstractObject::getBridge() const
  */
 
 /*!
- * \fn virtual void HueAbstractObject::updateEffect(const HueEffect effect)
+ * \fn void HueAbstractObject::synchronized()
  *
- * Pure virtual function. Must be overloaded.
+ * Signal should be emitted from object of derived class after object has been
+ * successfully synchronized.
  *
- * Should set \e effect property of object as specified by \a effect.
+ * \sa HueLight::synchronize(), HueGroup::synchronize()
+ *
+ */
+
+/*!
+ * \fn void HueAbstractObject::valueUpdated()
+ *
+ * Signal should be emitted from object of derived class after object has been
+ * updated.
  *
  */

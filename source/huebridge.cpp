@@ -14,6 +14,7 @@
 /*!
  * \class HueBridge
  * \ingroup HueLib
+ * \inmodule HueLib
  * \brief The HueBridge class represents the physical bridge connected to the network.
  *
  * The Hue bridge is the link between Hue lights and the devices and applications that interface

@@ -3,6 +3,7 @@
 /*!
  * \class HueRequest
  * \ingroup HueLib
+ * \inmodule HueLib
  * \brief Contains the details of request sent to \l HueBridge::sendRequest().
  *
  * HueRequest holds the \e URL \e path \e extention, \e JSON and \e method sent to

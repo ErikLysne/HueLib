@@ -7,6 +7,7 @@
 /*!
  * \class HueLight
  * \ingroup HueLib
+ * \inmodule HueLib
  * \brief The HueLight class is used to interface with a single Hue light.
  *
  * A HueLight object mirrors the state of a single Hue light connected to the network.
